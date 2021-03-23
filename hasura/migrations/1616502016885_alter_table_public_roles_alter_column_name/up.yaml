@@ -1,0 +1,5 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: ALTER TABLE "public"."roles" ADD CONSTRAINT "roles_name_key" UNIQUE ("name");
+  type: run_sql

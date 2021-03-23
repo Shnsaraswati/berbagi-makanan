@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.otentikasi.HalamanDaftar"
+    android:background="@color/myblue">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btndaftar"
+        android:layout_width="276dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/custom_button"
+        android:text="DAFTAR"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/DaftarPassword"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="@+id/DaftarPassword"
+        app:layout_constraintTop_toBottomOf="@+id/DaftarPassword" />
+
+    <EditText
+        android:id="@+id/DaftarPassword"
+        android:layout_width="313dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_password"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Kata Sandi"
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/DaftarAlamat"
+        app:layout_constraintStart_toStartOf="@+id/DaftarAlamat"
+        app:layout_constraintTop_toBottomOf="@+id/DaftarAlamat" />
+
+    <EditText
+        android:id="@+id/DaftarnNoHP"
+        android:layout_width="313dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_phone"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Nomer Hp"
+        android:inputType="phone"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView4"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/myblue2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/myToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/myblue2"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:title="PENDAFTARAN"
+            app:titleTextColor="@color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="142dp"
+        android:layout_height="146dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:srcCompat="@drawable/ic_account" />
+
+    <EditText
+        android:id="@+id/DaftarNama"
+        android:layout_width="313dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_person"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Nama"
+        android:inputType="textPersonName"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/DaftarnNoHP"
+        app:layout_constraintStart_toStartOf="@+id/DaftarnNoHP"
+        app:layout_constraintTop_toBottomOf="@+id/DaftarnNoHP" />
+
+    <EditText
+        android:id="@+id/DaftarTanggalLahir"
+        android:layout_width="313dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_date"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Tanggal Lahir"
+        android:inputType="date"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/DaftarNama"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/DaftarNama"
+        app:layout_constraintTop_toBottomOf="@+id/DaftarNama" />
+
+    <EditText
+        android:id="@+id/DaftarAlamat"
+        android:layout_width="313dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_location"
+        android:drawablePadding="12dp"
+        android:hint="Alamat"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/DaftarTanggalLahir"
+        app:layout_constraintStart_toStartOf="@+id/DaftarTanggalLahir"
+        app:layout_constraintTop_toBottomOf="@+id/DaftarTanggalLahir" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

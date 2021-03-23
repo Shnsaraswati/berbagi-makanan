@@ -1,0 +1,12 @@
+version: 2
+tables:
+- table:
+    schema: public
+    name: roles
+- table:
+    schema: public
+    name: users
+  object_relationships:
+  - name: role
+    using:
+      foreign_key_constraint_on: role_id

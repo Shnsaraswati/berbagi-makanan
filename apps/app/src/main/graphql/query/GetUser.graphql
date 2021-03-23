@@ -1,0 +1,10 @@
+query GetUser($phonenumber: String!) {
+  users(where: {_and: [{phone_number: {_eq: $phonenumber}}]}) {
+    id
+    name
+    address
+    phone_number
+    password
+    birth_date
+  }
+}

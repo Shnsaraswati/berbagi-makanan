@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ApplikasiBerbagiMakanan">
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.otentikasi.HalamanLupaKataSandi"></activity>
+        <activity android:name=".view.otentikasi.HalamanPendaftaranBerhasil" />
+        <activity android:name=".view.otentikasi.HalamanVerifikasi" />
+        <activity android:name=".view.otentikasi.HalamanDaftar" />
+        <activity android:name=".view.otentikasi.HalamanLogin" />
+
+        <activity android:name=".view.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
