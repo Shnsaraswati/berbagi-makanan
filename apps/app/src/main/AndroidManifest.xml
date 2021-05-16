@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.shnsaraswati.applikasiberbagimakanan">
+    package="com.shnsaraswati.applikasiberbagimakanan" >
 
     <application
         android:allowBackup="true"
@@ -8,14 +8,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ApplikasiBerbagiMakanan">
-        <activity android:name=".view.otentikasi.HalamanLupaKataSandi"></activity>
+        android:theme="@style/Theme.ApplikasiBerbagiMakanan" >
+        <activity android:name=".HalamanEditAkun" >
+        </activity>
+        <activity android:name=".HalamanAkun" />
+        <activity android:name=".HalamanKataSandiBaru" />
+        <activity android:name=".view.otentikasi.HalamanLupaKataSandi" />
         <activity android:name=".view.otentikasi.HalamanPendaftaranBerhasil" />
         <activity android:name=".view.otentikasi.HalamanVerifikasi" />
         <activity android:name=".view.otentikasi.HalamanDaftar" />
         <activity android:name=".view.otentikasi.HalamanLogin" />
-
-        <activity android:name=".view.SplashScreen">
+        <activity android:name=".view.MainActivity" />
+        <activity android:name=".view.SplashScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

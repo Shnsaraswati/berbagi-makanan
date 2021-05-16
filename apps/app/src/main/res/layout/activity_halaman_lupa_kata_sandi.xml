@@ -8,15 +8,98 @@
     android:background="@color/myblue">
 
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:text="Tidak Punya Akun ?"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toStartOf="@+id/txtlinkdaftar3"
+        app:layout_constraintStart_toStartOf="@+id/btnkirimkodeverifikasi"
+        app:layout_constraintTop_toBottomOf="@+id/btnkirimkodeverifikasi" />
+
+    <TextView
+        android:id="@+id/txtlinkdaftar3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Daftar Sekarang"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView6"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnkirimkodeverifikasi"
+        android:layout_width="276dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_button"
+        android:text="KIRIM KODE VERIFIKASI"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/lupasandinohp"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="@+id/lupasandinohp"
+        app:layout_constraintTop_toBottomOf="@+id/lupasandinohp" />
+
+    <EditText
+        android:id="@+id/lupasandinohp"
+        android:layout_width="313dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_phone"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Nomer Hp"
+        android:inputType="phone"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="147dp"
-        android:layout_height="132dp"
+        android:layout_width="133dp"
+        android:layout_height="126dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="117dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_password" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="LUPA KATA SANDI ?"
+        android:textAllCaps="true"
+        android:textColor="@color/mygreen"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageView6"
+        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="239dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/txt1"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

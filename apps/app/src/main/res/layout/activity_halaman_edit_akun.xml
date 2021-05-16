@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HalamanEditAkun"
+    android:background="@color/myblue">
+
+  <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/appBarLayouteditakun"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/myblue2"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Toolbareditakun"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/myblue2"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="EDIT AKUN"
+        app:titleTextColor="@color/white" />
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <ImageView
+      android:id="@+id/editfotoakun"
+      android:layout_width="142dp"
+      android:layout_height="146dp"
+      android:layout_marginTop="10dp"
+      app:layout_constraintEnd_toEndOf="@+id/appBarLayouteditakun"
+      app:layout_constraintStart_toStartOf="@+id/appBarLayouteditakun"
+      app:layout_constraintTop_toBottomOf="@+id/appBarLayouteditakun"
+      app:srcCompat="@drawable/ic_account" />
+
+  <EditText
+      android:id="@+id/editnohp"
+      android:layout_width="313dp"
+      android:layout_height="50dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      android:background="@drawable/custom_input"
+      android:drawableStart="@drawable/ic_phone"
+      android:drawableEnd="@drawable/ic_edit"
+      android:drawablePadding="12dp"
+      android:ems="10"
+      android:hint="Nomer Hp"
+      android:inputType="phone"
+      android:paddingStart="12dp"
+      android:paddingEnd="12dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/editfotoakun" />
+
+  <EditText
+      android:id="@+id/editnama"
+      android:layout_width="313dp"
+      android:layout_height="50dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="8dp"
+      android:background="@drawable/custom_input"
+      android:drawableStart="@drawable/ic_person"
+      android:drawableEnd="@drawable/ic_edit"
+      android:drawablePadding="12dp"
+      android:ems="10"
+      android:hint="Nama"
+      android:inputType="textPersonName"
+      android:paddingStart="12dp"
+      android:paddingEnd="12dp"
+      app:layout_constraintEnd_toEndOf="@+id/editnohp"
+      app:layout_constraintStart_toStartOf="@+id/editnohp"
+      app:layout_constraintTop_toBottomOf="@+id/editnohp" />
+
+  <EditText
+      android:id="@+id/edittanggallahir"
+      android:layout_width="313dp"
+      android:layout_height="50dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="8dp"
+      android:background="@drawable/custom_input"
+      android:drawableStart="@drawable/ic_date"
+      android:drawableEnd="@drawable/ic_edit"
+      android:drawablePadding="12dp"
+      android:ems="10"
+      android:hint="Tanggal Lahir"
+      android:inputType="date"
+      android:paddingStart="12dp"
+      android:paddingEnd="12dp"
+      app:layout_constraintEnd_toEndOf="@+id/editnama"
+      app:layout_constraintStart_toStartOf="@+id/editnama"
+      app:layout_constraintTop_toBottomOf="@+id/editnama" />
+
+  <EditText
+      android:id="@+id/editalamat"
+      android:layout_width="313dp"
+      android:layout_height="50dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="8dp"
+      android:background="@drawable/custom_input"
+      android:drawableStart="@drawable/ic_location"
+      android:drawableEnd="@drawable/ic_edit"
+      android:drawablePadding="12dp"
+      android:ems="10"
+      android:hint="Alamat"
+      android:inputType="textPersonName"
+      android:paddingStart="12dp"
+      android:paddingEnd="12dp"
+      app:layout_constraintEnd_toEndOf="@+id/edittanggallahir"
+      app:layout_constraintStart_toStartOf="@+id/edittanggallahir"
+      app:layout_constraintTop_toBottomOf="@+id/edittanggallahir" />
+
+  <androidx.appcompat.widget.AppCompatButton
+      android:id="@+id/btnsimpan"
+      android:layout_width="276dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="24dp"
+      android:background="@drawable/custom_button"
+      android:text="SIMPAN"
+      android:textColor="@color/white"
+      android:textSize="15dp"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="@+id/editalamat"
+      app:layout_constraintStart_toStartOf="@+id/editalamat"
+      app:layout_constraintTop_toBottomOf="@+id/editalamat" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

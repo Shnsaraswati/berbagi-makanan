@@ -57,6 +57,7 @@
         android:background="@drawable/custom_input"
         android:ems="10"
         android:inputType="number"
+        android:paddingStart="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/code4"
         app:layout_constraintEnd_toStartOf="@+id/code2"
         app:layout_constraintStart_toStartOf="@+id/textView3"
