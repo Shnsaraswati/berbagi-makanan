@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".model.AnotherActivity"
+    android:background="@color/myblue">
+
+    <ImageView
+        android:id="@+id/fotouploadclick"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_fotomakanan"
+        />
+
+    <TextView
+        android:id="@+id/namaakunpostclick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nama Akun"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:layout_below="@id/fotouploadclick"/>
+    <TextView
+        android:id="@+id/namamakananpostclick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nama Makanan"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:layout_below="@id/namaakunpostclick"
+        />
+
+    <ImageView
+        android:id="@+id/seenclick"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="7dp"
+        android:layout_below="@id/namamakananpostclick"
+        android:src="@drawable/ic_eye" />
+
+    <TextView
+        android:id="@+id/dilihatclick"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/namamakananpostclick"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/seenclick"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/lokasiclick"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_below="@id/namamakananpostclick"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="7dp"
+        android:layout_toRightOf="@id/dilihatclick"
+        android:src="@drawable/ic_location" />
+
+    <TextView
+        android:id="@+id/lokasipostclick"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@id/namamakananpostclick"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/lokasiclick"
+        android:text="Lokasi"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+
+</RelativeLayout>

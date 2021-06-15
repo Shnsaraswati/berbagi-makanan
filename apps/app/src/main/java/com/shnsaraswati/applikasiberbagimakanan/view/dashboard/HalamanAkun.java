@@ -1,13 +1,17 @@
-package com.shnsaraswati.applikasiberbagimakanan;
+package com.shnsaraswati.applikasiberbagimakanan.view.dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 
-public class HalamanEditAkun extends AppCompatActivity {
+import com.shnsaraswati.applikasiberbagimakanan.R;
+
+public class HalamanAkun extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_halaman_edit_akun);
+
+
     }
 }

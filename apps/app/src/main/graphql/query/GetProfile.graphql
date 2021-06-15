@@ -1,0 +1,10 @@
+query getProfile($id: uuid!) {
+    users(where: {id: {_eq: $id}}) {
+        address
+        birth_date
+        id
+        name
+        password
+        phone_number
+    }
+}

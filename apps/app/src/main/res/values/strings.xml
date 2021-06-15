@@ -3,4 +3,10 @@
     <string name="txt1">Kami akan mengirimkan kode verifikasi melalui nomer Hp anda untuk mengatur ulang kata sandi akun anda.</string>
     <string name="ACCOUNT_SID">ACf93c1b6d45840374aef32e6d689f8502</string>
     <string name="AUTH_TOKEN">4076eaa873e04f66ed681dac6c4b6430</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_cole">Close navigation drawe</string>
+
+
 </resources>

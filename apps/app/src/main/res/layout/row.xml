@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="10dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/mygrey"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_marginTop="10dp"
+        >
+    <ImageView
+        android:id="@+id/fotoupload"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/ic_fotomakanan"
+        />
+
+        <TextView
+            android:id="@+id/namaakunpost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/fotoupload"
+            android:text="Nama Akun"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/namamakananpost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Makanan"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:layout_toRightOf="@id/fotoupload"
+            android:layout_toEndOf="@id/fotoupload"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_below="@id/namaakunpost"
+            />
+
+        <ImageView
+            android:id="@+id/seen"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_below="@id/namamakananpost"
+            android:layout_marginLeft="-11dp"
+            android:layout_marginTop="25dp"
+            android:layout_toRightOf="@id/namaakunpost"
+            android:src="@drawable/ic_eye" />
+
+        <TextView
+            android:id="@+id/dilihat"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/namamakananpost"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="29dp"
+            android:layout_toRightOf="@id/seen"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/lokasi"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_below="@id/namamakananpost"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="25dp"
+            android:layout_toRightOf="@id/dilihat"
+            android:src="@drawable/ic_location" />
+
+        <TextView
+            android:id="@+id/lokasipost"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@id/namamakananpost"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="29dp"
+            android:layout_toRightOf="@id/lokasi"
+            android:text="Lokasi"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

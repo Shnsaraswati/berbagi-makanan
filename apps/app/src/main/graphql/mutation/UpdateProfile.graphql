@@ -1,0 +1,12 @@
+mutation updateProfile($address: String!, $birth_date: date!, $id: uuid!, $name: String!, $phone_number: String!) {
+    update_users(where: {
+        id: {_eq: $id}
+    }, _set: {
+        address: $address,
+        name: $name,
+        phone_number: $phone_number,
+        birth_date: $birth_date
+    }) {
+        affected_rows
+    }
+}

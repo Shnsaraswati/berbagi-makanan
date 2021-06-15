@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,8 +27,12 @@ import query.GetUserQuery;
 
 public class HalamanLogin extends AppCompatActivity {
     private static final String TAG = "HalamanLogin";
+    private static final String SHARED_PREF_NAME = "shared_preferences";
 
     private User user;
+    SharedPreferences sharedPreferences;
+
+    Boolean isLoggedIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,15 @@ public class HalamanLogin extends AppCompatActivity {
         EditText nohp = findViewById(R.id.LoginNoHP);
         EditText password = findViewById(R.id.LoginPassword);
 
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+
+        isLoggedIn = sharedPreferences.getBoolean("is_logged_in", false);
+
+        if (isLoggedIn) {
+            MainActivity();
+            finish();
+        }
+
         OtentikasiRepository otentikasiRepository = new OtentikasiRepository();
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +65,12 @@ public class HalamanLogin extends AppCompatActivity {
                 otentikasiRepository.login(user, new OtentikasiDataSource.LoadDataCallback() {
                     @Override
                     public void onDataLoaded(List<GetUserQuery.User> users) {
+                        // mengatur sharedPreferences
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("user_id", users.get(0).id().toString());
+                        editor.putBoolean("is_logged_in", true);
+                        editor.apply();
+
                         MainActivity();
                     }
 
