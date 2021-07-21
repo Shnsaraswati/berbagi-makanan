@@ -52,8 +52,8 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_below="@id/namamakananpost"
-            android:layout_marginLeft="-11dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginLeft="-60dp"
+            android:layout_marginTop="23dp"
             android:layout_toRightOf="@id/namaakunpost"
             android:src="@drawable/ic_eye" />
 
@@ -63,7 +63,7 @@
             android:layout_height="20dp"
             android:layout_below="@id/namamakananpost"
             android:layout_marginLeft="1dp"
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="27dp"
             android:layout_toRightOf="@id/seen"
             android:text="0"
             android:textAlignment="center"
@@ -82,7 +82,7 @@
 
         <TextView
             android:id="@+id/lokasipost"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_below="@id/namamakananpost"
             android:layout_marginLeft="1dp"

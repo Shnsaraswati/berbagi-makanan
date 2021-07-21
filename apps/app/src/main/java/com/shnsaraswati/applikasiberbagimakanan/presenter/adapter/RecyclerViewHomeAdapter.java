@@ -15,14 +15,17 @@ import com.shnsaraswati.applikasiberbagimakanan.R;
 import com.shnsaraswati.applikasiberbagimakanan.model.Model;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import query.GetAllPostsQuery;
 
 public class RecyclerViewHomeAdapter extends RecyclerView.Adapter<RecyclerViewHomeAdapter.ViewHolder> {
     public static final String TAG = "RecyclerViewHomeAdapter";
 
-    private ArrayList<Model> models = new ArrayList<>();
+    private List<GetAllPostsQuery.Post> models = new ArrayList<>();
     private final Context context;
 
-    public RecyclerViewHomeAdapter(ArrayList<Model> models, Context context) {
+    public RecyclerViewHomeAdapter(List<GetAllPostsQuery.Post> models, Context context) {
         this.models = models;
         this.context = context;
     }
@@ -39,10 +42,10 @@ public class RecyclerViewHomeAdapter extends RecyclerView.Adapter<RecyclerViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called ");
 
-        holder.txtNamaAkun.setText(models.get(position).getNamaAkun());
-        holder.txtLokasi.setText(models.get(position).getLokasi());
-        holder.txtNamaMakanan.setText(models.get(position).getNamaMakanan());
-        holder.txtDilihat.setText(String.valueOf(models.get(position).getDilihat()));
+        holder.txtNamaAkun.setText(models.get(position).user().name());
+        holder.txtLokasi.setText(models.get(position).location());
+        holder.txtNamaMakanan.setText(models.get(position).name_food());
+        holder.txtDilihat.setText(String.valueOf(models.get(position).seen()));
     }
 
     @Override

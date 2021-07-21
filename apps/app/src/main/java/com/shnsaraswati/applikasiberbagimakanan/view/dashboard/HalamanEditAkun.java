@@ -12,7 +12,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.shnsaraswati.applikasiberbagimakanan.R;
 import com.shnsaraswati.applikasiberbagimakanan.model.User;
 import com.shnsaraswati.applikasiberbagimakanan.presenter.profile.ProfileDataSource;
@@ -41,6 +43,14 @@ public class HalamanEditAkun extends AppCompatActivity {
         EditText tanggallahir = findViewById(R.id.edittanggallahir);
         EditText alamat = findViewById(R.id.editalamat);
         Button btnsimpan =findViewById(R.id.btnsimpan);
+        ImageView fotoprofile = findViewById(R.id.editfotoakun);
+
+        fotoprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImagePicker.with(HalamanEditAkun.this).start();
+            }
+        });
 
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 

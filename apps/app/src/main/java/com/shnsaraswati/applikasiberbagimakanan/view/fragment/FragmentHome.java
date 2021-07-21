@@ -14,8 +14,13 @@ import android.view.ViewGroup;
 import com.shnsaraswati.applikasiberbagimakanan.R;
 import com.shnsaraswati.applikasiberbagimakanan.model.Model;
 import com.shnsaraswati.applikasiberbagimakanan.presenter.adapter.RecyclerViewHomeAdapter;
+import com.shnsaraswati.applikasiberbagimakanan.presenter.home.HomeDataSource;
+import com.shnsaraswati.applikasiberbagimakanan.presenter.home.HomeRepository;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import query.GetAllPostsQuery;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +39,7 @@ public class FragmentHome extends Fragment {
     private String mParam1;
     private String mParam2;
     RecyclerView recyclerView;
+    List<GetAllPostsQuery.Post> allPosts;
 
     public FragmentHome() {
         // Required empty public constructor
@@ -75,14 +81,40 @@ public class FragmentHome extends Fragment {
         // cara merubah action bar nya
         getActivity().setTitle("Berbagi Makanan");
 
-        ArrayList<Model> models = getMylist();
+//        ArrayList<Model> models = getMylist();
 
-        Log.d(TAG, "onCreateView: " + models);
+        allPosts = new ArrayList<>();
 
-        recyclerView = view.findViewById(R.id.recyeclerview);
-        RecyclerViewHomeAdapter adapter = new RecyclerViewHomeAdapter(models, getContext());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        HomeRepository repository = new HomeRepository();
+        repository.getPosts(new HomeDataSource.LoadDataCallback() {
+            @Override
+            public void onDataLoaded(List<GetAllPostsQuery.Post> posts) {
+                allPosts = posts;
+                Log.d(TAG, "onCreateView: Posts: " + allPosts);
+
+                recyclerView = view.findViewById(R.id.recyeclerview);
+                RecyclerViewHomeAdapter adapter = new RecyclerViewHomeAdapter(allPosts, getContext());
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    }
+                });
+            }
+
+            @Override
+            public void onNoDataLoaded() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
+
         return view;
     }
     private ArrayList<Model> getMylist(){

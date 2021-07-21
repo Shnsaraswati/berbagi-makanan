@@ -1,0 +1,14 @@
+query GetAllPosts {
+    posts {
+        id
+        location
+        name_food
+        picture
+        seen
+        status
+        user {
+            name
+        }
+        created_at
+    }
+}
