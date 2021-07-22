@@ -7,18 +7,23 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cloudinary.android.MediaManager;
 import com.shnsaraswati.applikasiberbagimakanan.R;
 import com.shnsaraswati.applikasiberbagimakanan.model.User;
 import com.shnsaraswati.applikasiberbagimakanan.presenter.profile.ProfileDataSource;
 import com.shnsaraswati.applikasiberbagimakanan.presenter.profile.ProfileRepository;
 import com.shnsaraswati.applikasiberbagimakanan.view.dashboard.HalamanEditAkun;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -75,6 +80,7 @@ public class FragmentAkun extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MediaManager.init(getContext());
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -96,6 +102,7 @@ public class FragmentAkun extends Fragment {
         txtNamaAkun = view.findViewById(R.id.txtnamaakun);
         txtLokasi = view.findViewById(R.id.textView9);
         sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        ImageView foto = view.findViewById(R.id.imageView8);
 
         String id = sharedPreferences.getString("user_id", "");
 
@@ -111,6 +118,19 @@ public class FragmentAkun extends Fragment {
                     @Override
                     public void run() {
                         txtLokasi.setText(profiles.get(0).address());
+                    }
+                });
+                String imgprofile = profiles.get(0).img_profile();
+                String img = MediaManager.get().url().generate("berbagimakanan/" + imgprofile);
+                Handler uiHandler = new Handler(Looper.getMainLooper());
+                uiHandler.post(new Runnable(){
+                    @Override
+                    public void run() {
+                        Picasso.get()
+                                .load(img)
+                                .error(R.drawable.ic_account)
+                                .fit()
+                                .into(foto);
                     }
                 });
             }

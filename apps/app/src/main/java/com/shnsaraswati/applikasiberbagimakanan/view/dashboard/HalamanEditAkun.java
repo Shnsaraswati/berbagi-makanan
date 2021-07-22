@@ -1,28 +1,39 @@
 package com.shnsaraswati.applikasiberbagimakanan.view.dashboard;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.cloudinary.android.MediaManager;
+import com.cloudinary.android.callback.ErrorInfo;
+import com.cloudinary.android.callback.UploadCallback;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.shnsaraswati.applikasiberbagimakanan.R;
 import com.shnsaraswati.applikasiberbagimakanan.model.User;
 import com.shnsaraswati.applikasiberbagimakanan.presenter.profile.ProfileDataSource;
 import com.shnsaraswati.applikasiberbagimakanan.presenter.profile.ProfileRepository;
-import com.shnsaraswati.applikasiberbagimakanan.view.MainActivity;
 import com.shnsaraswati.applikasiberbagimakanan.view.fragment.FragmentAkun;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import query.GetProfileQuery;
 
@@ -33,17 +44,25 @@ public class HalamanEditAkun extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     User user;
 
+    ImageView fotoprofile;
+
+    Uri uri;
+
+    String userid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_halaman_edit_akun);
 
+        MediaManager.init(this);
+
         EditText nohp = findViewById(R.id.editnohp);
         EditText nama = findViewById(R.id.editnama);
         EditText tanggallahir = findViewById(R.id.edittanggallahir);
         EditText alamat = findViewById(R.id.editalamat);
-        Button btnsimpan =findViewById(R.id.btnsimpan);
-        ImageView fotoprofile = findViewById(R.id.editfotoakun);
+        Button btnsimpan = findViewById(R.id.btnsimpan);
+        fotoprofile = findViewById(R.id.editfotoakun);
 
         fotoprofile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +87,24 @@ public class HalamanEditAkun extends AppCompatActivity {
                 alamat.setText(profile.address());
                 nohp.setText(profile.phone_number());
                 tanggallahir.setText(profile.birth_date().toString());
+
+                userid = profile.id().toString();
+                String imgprofile = profile.img_profile();
+
+
+                String img = MediaManager.get().url().generate("berbagimakanan/" + imgprofile);
+                Handler uiHandler = new Handler(Looper.getMainLooper());
+                uiHandler.post(new Runnable(){
+                    @Override
+                    public void run() {
+                        Picasso.get()
+                                .load(img)
+                                .error(R.drawable.ic_account)
+                                .fit()
+                                .into(fotoprofile);
+                    }
+                });
+                Log.d(TAG, "onDataLoaded: " + img);
             }
 
             @Override
@@ -77,7 +114,7 @@ public class HalamanEditAkun extends AppCompatActivity {
 
             @Override
             public void onError(Throwable e) {
-                Log.e(TAG, "onError-Editakun: " + e.getMessage() );
+                Log.e(TAG, "onError-Editakun: " + e.getMessage());
             }
         });
 
@@ -88,27 +125,86 @@ public class HalamanEditAkun extends AppCompatActivity {
                 user.setAddress(alamat.getText().toString());
                 user.setBirth_date(tanggallahir.getText().toString());
                 user.setPhone_number(nohp.getText().toString());
+                user.setImg_profile(userid + ".jpg");
+                String requestId = MediaManager.get().
+                    upload(uri).
+                    unsigned("berbagi_preset").
+                    option("public_id", userid).
+                    callback(new UploadCallback() {
+                        @Override
+                        public void onStart(String requestId) {
 
-                repository.updateProfile(user, new ProfileDataSource.LoadDataCallbackUpdateProfile() {
-                    @Override
-                    public void onDataLoaded(int affected_rows) {
-                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container, new FragmentAkun());
-                        fragmentTransaction.commit();
-                    }
+                        }
 
-                    @Override
-                    public void onNoDataLoaded() {
+                        @Override
+                        public void onProgress(String requestId, long bytes, long totalBytes) {
+                            
 
-                    }
+                        }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "onError-HalamanAkun: " + e.getMessage() );
-                    }
-                });
+                        @Override
+                        public void onSuccess(String requestId, Map resultData) {
+                            Log.d(TAG, "onSuccess: Berhasil");
+                            repository.updateProfile(user, new ProfileDataSource.LoadDataCallbackUpdateProfile() {
+                                @Override
+                                public void onDataLoaded(int affected_rows) {
+                                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                                    fragmentTransaction.replace(R.id.fragment_container, new FragmentAkun());
+                                    fragmentTransaction.commit();
+                                }
+
+                                @Override
+                                public void onNoDataLoaded() {
+
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    Log.e(TAG, "onError-HalamanAkun: " + e.getMessage());
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onError(String requestId, ErrorInfo error) {
+                            Log.d(TAG, "onError: ");
+                        }
+
+                        @Override
+                        public void onReschedule(String requestId, ErrorInfo error) {
+                            Log.d(TAG, "onReschedule: ");
+                        }
+                    }).dispatch();
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            uri = data.getData();
+            File file = new File(uri.getPath());
+            fotoprofile.setImageURI(uri);
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public String getPath(Uri uri) {
+        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
+        cursor.moveToFirst();
+
+        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        String picturePath = cursor.getString(columnIndex);
+
+        Log.d(TAG, "getPath: " + picturePath);
+
+        return picturePath;
     }
 }

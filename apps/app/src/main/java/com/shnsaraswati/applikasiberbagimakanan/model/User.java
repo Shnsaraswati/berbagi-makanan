@@ -8,6 +8,7 @@ public class User {
     private String address;
     private String birth_date;
     private String password;
+    private String img_profile;
 
     public User(String id) {
         this.id = id;
@@ -72,5 +73,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getImg_profile() {
+        return img_profile;
+    }
+
+    public void setImg_profile(String img_profile) {
+        this.img_profile = img_profile;
     }
 }

@@ -6,5 +6,6 @@ query getProfile($id: uuid!) {
         name
         password
         phone_number
+        img_profile
     }
 }

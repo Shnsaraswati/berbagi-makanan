@@ -43,7 +43,7 @@ public class ProfileRepository implements ProfileDataSource {
 
     @Override
     public void updateProfile(User user, LoadDataCallbackUpdateProfile callback) {
-        apolloClient.mutate(new UpdateProfileMutation(user.getAddress(), user.getBirth_date(), user.getId(), user.getName(), user.getPhone_number()))
+        apolloClient.mutate(new UpdateProfileMutation(user.getAddress(), user.getBirth_date(), user.getId(), user.getName(), user.getPhone_number(), user.getImg_profile()))
                 .enqueue(new ApolloCall.Callback<UpdateProfileMutation.Data>() {
                     @Override
                     public void onResponse(@NotNull Response<UpdateProfileMutation.Data> response) {
