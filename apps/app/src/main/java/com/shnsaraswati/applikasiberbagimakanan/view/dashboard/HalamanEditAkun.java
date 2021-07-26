@@ -47,7 +47,7 @@ public class HalamanEditAkun extends AppCompatActivity {
     ImageView fotoprofile;
 
     Uri uri;
-
+    String profileimg;
     String userid;
 
     @Override
@@ -55,7 +55,7 @@ public class HalamanEditAkun extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_halaman_edit_akun);
 
-        MediaManager.init(this);
+        //MediaManager.init(this);
 
         EditText nohp = findViewById(R.id.editnohp);
         EditText nama = findViewById(R.id.editnama);
@@ -63,6 +63,7 @@ public class HalamanEditAkun extends AppCompatActivity {
         EditText alamat = findViewById(R.id.editalamat);
         Button btnsimpan = findViewById(R.id.btnsimpan);
         fotoprofile = findViewById(R.id.editfotoakun);
+
 
         fotoprofile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,10 +88,9 @@ public class HalamanEditAkun extends AppCompatActivity {
                 alamat.setText(profile.address());
                 nohp.setText(profile.phone_number());
                 tanggallahir.setText(profile.birth_date().toString());
-
                 userid = profile.id().toString();
                 String imgprofile = profile.img_profile();
-
+                profileimg = imgprofile;
 
                 String img = MediaManager.get().url().generate("berbagimakanan/" + imgprofile);
                 Handler uiHandler = new Handler(Looper.getMainLooper());
@@ -125,56 +125,80 @@ public class HalamanEditAkun extends AppCompatActivity {
                 user.setAddress(alamat.getText().toString());
                 user.setBirth_date(tanggallahir.getText().toString());
                 user.setPhone_number(nohp.getText().toString());
-                user.setImg_profile(userid + ".jpg");
-                String requestId = MediaManager.get().
-                    upload(uri).
-                    unsigned("berbagi_preset").
-                    option("public_id", userid).
-                    callback(new UploadCallback() {
-                        @Override
-                        public void onStart(String requestId) {
-
-                        }
-
-                        @Override
-                        public void onProgress(String requestId, long bytes, long totalBytes) {
-                            
-
-                        }
-
-                        @Override
-                        public void onSuccess(String requestId, Map resultData) {
-                            Log.d(TAG, "onSuccess: Berhasil");
-                            repository.updateProfile(user, new ProfileDataSource.LoadDataCallbackUpdateProfile() {
+                user.setImg_profile(profileimg);
+                if (uri != null){
+                    user.setImg_profile(userid + ".jpg");
+                    String requestId = MediaManager.get().
+                            upload(uri).
+                            unsigned("berbagi_preset").
+                            option("public_id", userid).
+                            callback(new UploadCallback() {
                                 @Override
-                                public void onDataLoaded(int affected_rows) {
-                                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                                    fragmentTransaction.replace(R.id.fragment_container, new FragmentAkun());
-                                    fragmentTransaction.commit();
-                                }
-
-                                @Override
-                                public void onNoDataLoaded() {
+                                public void onStart(String requestId) {
 
                                 }
 
                                 @Override
-                                public void onError(Throwable e) {
-                                    Log.e(TAG, "onError-HalamanAkun: " + e.getMessage());
+                                public void onProgress(String requestId, long bytes, long totalBytes) {
+
+
                                 }
-                            });
+
+                                @Override
+                                public void onSuccess(String requestId, Map resultData) {
+                                    Log.d(TAG, "onSuccess: Berhasil");
+                                    repository.updateProfile(user, new ProfileDataSource.LoadDataCallbackUpdateProfile() {
+                                        @Override
+                                        public void onDataLoaded(int affected_rows) {
+                                            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                                            fragmentTransaction.replace(R.id.fragment_container, new FragmentAkun());
+                                            fragmentTransaction.commit();
+                                        }
+
+                                        @Override
+                                        public void onNoDataLoaded() {
+
+                                        }
+
+                                        @Override
+                                        public void onError(Throwable e) {
+                                            Log.e(TAG, "onError-HalamanAkun: " + e.getMessage());
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onError(String requestId, ErrorInfo error) {
+                                    Log.d(TAG, "onError: ");
+                                }
+
+                                @Override
+                                public void onReschedule(String requestId, ErrorInfo error) {
+                                    Log.d(TAG, "onReschedule: ");
+                                }
+                            }).dispatch();
+                }else{
+                    Log.d(TAG, "onSuccess: Berhasil");
+                    repository.updateProfile(user, new ProfileDataSource.LoadDataCallbackUpdateProfile() {
+                        @Override
+                        public void onDataLoaded(int affected_rows) {
+                            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_container, new FragmentAkun());
+                            fragmentTransaction.commit();
                         }
 
                         @Override
-                        public void onError(String requestId, ErrorInfo error) {
-                            Log.d(TAG, "onError: ");
+                        public void onNoDataLoaded() {
+
                         }
 
                         @Override
-                        public void onReschedule(String requestId, ErrorInfo error) {
-                            Log.d(TAG, "onReschedule: ");
+                        public void onError(Throwable e) {
+                            Log.e(TAG, "onError-HalamanAkun: " + e.getMessage());
                         }
-                    }).dispatch();
+                    });
+                }
+
             }
         });
 
