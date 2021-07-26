@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,6 +37,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 import query.GetProfileQuery;
 
 public class HalamanEditAkun extends AppCompatActivity {
@@ -61,7 +64,7 @@ public class HalamanEditAkun extends AppCompatActivity {
         EditText nama = findViewById(R.id.editnama);
         EditText tanggallahir = findViewById(R.id.edittanggallahir);
         EditText alamat = findViewById(R.id.editalamat);
-        Button btnsimpan = findViewById(R.id.btnsimpan);
+        CircularProgressButton btnsimpan = findViewById(R.id.btnsimpan);
         fotoprofile = findViewById(R.id.editfotoakun);
 
 
@@ -121,6 +124,7 @@ public class HalamanEditAkun extends AppCompatActivity {
         btnsimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnsimpan.startAnimation();
                 user.setName(nama.getText().toString());
                 user.setAddress(alamat.getText().toString());
                 user.setBirth_date(tanggallahir.getText().toString());
@@ -150,9 +154,11 @@ public class HalamanEditAkun extends AppCompatActivity {
                                     repository.updateProfile(user, new ProfileDataSource.LoadDataCallbackUpdateProfile() {
                                         @Override
                                         public void onDataLoaded(int affected_rows) {
+                                            btnsimpan.doneLoadingAnimation(Color.parseColor("#333639"), BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
                                             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                                             fragmentTransaction.replace(R.id.fragment_container, new FragmentAkun());
                                             fragmentTransaction.commit();
+
                                         }
 
                                         @Override
@@ -182,6 +188,7 @@ public class HalamanEditAkun extends AppCompatActivity {
                     repository.updateProfile(user, new ProfileDataSource.LoadDataCallbackUpdateProfile() {
                         @Override
                         public void onDataLoaded(int affected_rows) {
+                            btnsimpan.doneLoadingAnimation(Color.parseColor("#333639"), BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
                             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                             fragmentTransaction.replace(R.id.fragment_container, new FragmentAkun());
                             fragmentTransaction.commit();

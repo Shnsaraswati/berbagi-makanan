@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation 'br.com.simplepass:loading-button-android:1.7.2'
     implementation 'com.cloudinary:cloudinary-android:1.30.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.dhaval2404:imagepicker:2.1'

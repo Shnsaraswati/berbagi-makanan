@@ -118,7 +118,7 @@
       app:layout_constraintStart_toStartOf="@+id/edittanggallahir"
       app:layout_constraintTop_toBottomOf="@+id/edittanggallahir" />
 
-  <androidx.appcompat.widget.AppCompatButton
+  <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
       android:id="@+id/btnsimpan"
       android:layout_width="276dp"
       android:layout_height="50dp"
@@ -128,6 +128,9 @@
       android:textColor="@color/white"
       android:textSize="15dp"
       android:textStyle="bold"
+      app:spinning_bar_color="@color/white"
+      app:spinning_bar_padding="6dp"
+      app:spinning_bar_width="4dp"
       app:layout_constraintEnd_toEndOf="@+id/editalamat"
       app:layout_constraintStart_toStartOf="@+id/editalamat"
       app:layout_constraintTop_toBottomOf="@+id/editalamat" />
