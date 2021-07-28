@@ -8,14 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.shnsaraswati.applikasiberbagimakanan.R;
+import com.shnsaraswati.applikasiberbagimakanan.view.dashboard.HalamanEditAkun;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FragmentMessage#newInstance} factory method to
+ * Use the {@link FragmentKamera#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentMessage extends Fragment {
+public class FragmentKamera extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +28,7 @@ public class FragmentMessage extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FragmentMessage() {
+    public FragmentKamera() {
         // Required empty public constructor
     }
 
@@ -36,11 +38,11 @@ public class FragmentMessage extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentMessage.
+     * @return A new instance of fragment FragmentKamera.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentMessage newInstance(String param1, String param2) {
-        FragmentMessage fragment = new FragmentMessage();
+    public static FragmentKamera newInstance(String param1, String param2) {
+        FragmentKamera fragment = new FragmentKamera();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,9 +63,10 @@ public class FragmentMessage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_message, container, false);
+        View view = inflater.inflate(R.layout.fragment_kamera, container, false);
 
-        getActivity().setTitle("Message");
+        getActivity().setTitle("Upload Makanan");
+        ImagePicker.with(getActivity()).start();
 
         return view;
     }

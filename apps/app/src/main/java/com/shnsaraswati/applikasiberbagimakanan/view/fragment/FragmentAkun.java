@@ -113,7 +113,9 @@ public class FragmentAkun extends Fragment {
         repository.getProfile(user, new ProfileDataSource.LoadDataCallback() {
             @Override
             public void onDataLoaded(List<GetProfileQuery.User> profiles) {
-                txtNamaAkun.setText(profiles.get(0).name());
+                String nama = profiles.get(0).name();
+                String[] NamaDepan = nama.split(" ");
+                txtNamaAkun.setText(NamaDepan[0]);
                 txtLokasi.post(new Runnable() {
                     @Override
                     public void run() {
