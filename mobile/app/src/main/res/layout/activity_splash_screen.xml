@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SplashScreen">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="170dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/namaapp"
+        android:layout_width="235dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Berbagi Makanan"
+        android:textColor="@color/brown"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/logo"
+        app:layout_constraintStart_toStartOf="@+id/logo"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+    <TextView
+        android:id="@+id/selogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_light"
+        android:text="Mari saling berbagi"
+        app:layout_constraintEnd_toEndOf="@+id/namaapp"
+        app:layout_constraintStart_toStartOf="@+id/namaapp"
+        app:layout_constraintTop_toBottomOf="@+id/namaapp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

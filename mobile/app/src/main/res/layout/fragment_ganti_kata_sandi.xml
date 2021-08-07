@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentGantiKataSandi">
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnsimpangansandibaru_gantisandi"
+        android:layout_width="298dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_oren"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Simpan"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/inputkonfirmasikatasandibaru"
+        app:layout_constraintStart_toStartOf="@+id/inputkonfirmasikatasandibaru"
+        app:layout_constraintTop_toBottomOf="@+id/inputkonfirmasikatasandibaru" />
+
+    <TextView
+        android:id="@+id/txtsandilama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="90dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Masukkan kata sandi lama"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/inputkatasandilama"
+        android:layout_width="298dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/input_text"
+        android:drawableStart="@drawable/ic_katasandi"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Kata sandi"
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/txtsandilama"
+        app:layout_constraintTop_toBottomOf="@+id/txtsandilama" />
+
+    <TextView
+        android:id="@+id/txtsandibaru"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Masukkan kata sandi lama baru"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@+id/txtsandilama"
+        app:layout_constraintTop_toBottomOf="@+id/inputkatasandilama" />
+
+    <EditText
+        android:id="@+id/inputkatasandibaru"
+        android:layout_width="298dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/input_text"
+        android:drawableStart="@drawable/ic_katasandi"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Kata sandi "
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/txtsandibaru"
+        app:layout_constraintTop_toBottomOf="@+id/txtsandibaru" />
+
+    <EditText
+        android:id="@+id/inputkonfirmasikatasandibaru"
+        android:layout_width="298dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/input_text"
+        android:drawableStart="@drawable/ic_katasandi"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Kata sandi "
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/inputkatasandibaru"
+        app:layout_constraintTop_toBottomOf="@+id/inputkatasandibaru" />
+</androidx.constraintlayout.widget.ConstraintLayout>

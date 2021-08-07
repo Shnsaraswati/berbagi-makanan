@@ -5,15 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="de824d33-54a6-4d49-8af5-65803478aa45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/presenter/home/HomeDataSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/presenter/home/HomeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/app/src/main/graphql/schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app/src/main/graphql/schema.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/presenter/adapter/RecyclerViewHomeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/presenter/adapter/RecyclerViewHomeAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/view/fragment/FragmentHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/view/fragment/FragmentHome.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/view/fragment/FragmentInformasi.java" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/view/fragment/FragmentInformasi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/view/fragment/FragmentMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/view/fragment/FragmentMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/app/src/main/res/layout/row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app/src/main/res/layout/row.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hasura/migrations/metadata.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/hasura/migrations/metadata.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app/src/main/res/drawable/ic__fastfood_24.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/view/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/view/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/view/fragment/FragmentKamera.java" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/view/fragment/FragmentMakanan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app/src/main/res/layout/fragment_kamera.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app/src/main/res/layout/fragment_makanan.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app/src/main/res/menu/bottom_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app/src/main/res/menu/bottom_navigation.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,9 +48,9 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.md" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1626697985514">
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1628182909081">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1626697985514" />
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1628182909081" />
   </component>
 </project>

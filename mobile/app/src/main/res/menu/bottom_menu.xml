@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/fragmentMenu"
+        android:title="Menu"
+        android:icon="@drawable/ic_menu" />
+
+    <item
+        android:id="@+id/fragmentRiwayat"
+        android:title="Riwayat"
+        android:icon="@drawable/ic_riwayat" />
+
+    <item
+        android:id="@+id/fragmentBerbagi"
+        android:title="Berbagi"
+        android:icon="@drawable/ic_berbagi" />
+
+    <item
+        android:id="@+id/fragmentNotifikasi"
+        android:title="Notifikasi"
+        android:icon="@drawable/ic_notifikasi" />
+
+    <item
+        android:id="@+id/fragmentProfil"
+        android:title="Profil"
+        android:icon="@drawable/ic_profil"/>
+</menu>

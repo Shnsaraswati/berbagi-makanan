@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/fragmentMenu">
+    <fragment
+        android:id="@+id/fragmentMenu"
+        android:name="com.shnsaraswati.berbagimmakanan.FragmentMenu"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" />
+    <fragment
+        android:id="@+id/fragmentRiwayat"
+        android:name="com.shnsaraswati.berbagimmakanan.FragmentRiwayat"
+        android:label="fragment_riwayat"
+        tools:layout="@layout/fragment_riwayat" />
+    <fragment
+        android:id="@+id/fragmentBerbagi"
+        android:name="com.shnsaraswati.berbagimmakanan.FragmentBerbagi"
+        android:label="fragment_berbagi"
+        tools:layout="@layout/fragment_berbagi" />
+    <fragment
+        android:id="@+id/fragmentNotifikasi"
+        android:name="com.shnsaraswati.berbagimmakanan.FragmentNotifikasi"
+        android:label="fragment_notifikasi"
+        tools:layout="@layout/fragment_notifikasi" />
+    <fragment
+        android:id="@+id/fragmentProfil"
+        android:name="com.shnsaraswati.berbagimmakanan.FragmentProfil"
+        android:label="fragment_profil"
+        tools:layout="@layout/fragment_profil" />
+    <fragment
+        android:id="@+id/fragmentProfilSaya"
+        android:name="com.shnsaraswati.berbagimmakanan.FragmentProfilSaya"
+        android:label="fragment_profil_saya"
+        tools:layout="@layout/fragment_profil_saya" />
+    <fragment
+        android:id="@+id/fragmentGantiKataSandi"
+        android:name="com.shnsaraswati.berbagimmakanan.FragmentGantiKataSandi"
+        android:label="fragment_ganti_kata_sandi"
+        tools:layout="@layout/fragment_ganti_kata_sandi" />
+    <fragment
+        android:id="@+id/fragmentTentangAplikasi"
+        android:name="com.shnsaraswati.berbagimmakanan.FragmentTentangAplikasi"
+        android:label="fragment_tentang_aplikasi"
+        tools:layout="@layout/fragment_tentang_aplikasi" />
+</navigation>

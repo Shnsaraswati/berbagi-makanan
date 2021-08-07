@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HalamanLupaKataSandi">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnselanjutnyalupasandi"
+        android:layout_width="298dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/button_oren"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Selanjutnya"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/inputnohp2"
+        app:layout_constraintStart_toStartOf="@+id/inputnohp2"
+        app:layout_constraintTop_toBottomOf="@+id/inputnohp2" />
+
+    <EditText
+        android:id="@+id/inputnohp2"
+        android:layout_width="298dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/input_text"
+        android:drawableStart="@drawable/ic_nohp"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="No hp"
+        android:inputType="phone"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selogan10" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="156dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Lupa kata sandi"
+        android:textColor="@color/brown"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selogan8" />
+
+    <TextView
+        android:id="@+id/selogan10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="197dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="Masukkan no hp anda"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="190dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/namaapp5"
+        android:layout_width="174dp"
+        android:layout_height="30dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Berbagi Makanan"
+        android:textColor="@color/brown"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageView4"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/selogan8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_light"
+        android:text="Mari saling berbagi"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/namaapp5"
+        app:layout_constraintStart_toStartOf="@+id/namaapp5"
+        app:layout_constraintTop_toBottomOf="@+id/namaapp5" />
+</androidx.constraintlayout.widget.ConstraintLayout>

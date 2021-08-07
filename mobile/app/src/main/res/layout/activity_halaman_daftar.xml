@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HalamanDaftar">
+
+    <EditText
+        android:id="@+id/daftarnohp"
+        android:layout_width="298dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/input_text"
+        android:drawableStart="@drawable/ic_nohp"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="No hp"
+        android:inputType="phone"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/daftarnama"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/daftarnama"
+        app:layout_constraintTop_toBottomOf="@+id/daftarnama" />
+
+    <TextView
+        android:id="@+id/txtlinkmasuk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="65dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="masuk"
+        android:textColor="@color/orange"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtsudahpunyaakun"
+        app:layout_constraintEnd_toEndOf="@+id/btndaftarakun"
+        app:layout_constraintStart_toEndOf="@+id/txtsudahpunyaakun"
+        app:layout_constraintTop_toTopOf="@+id/txtsudahpunyaakun" />
+
+    <TextView
+        android:id="@+id/txtsudahpunyaakun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Sudah punya akun?"
+        android:textColor="@color/brown"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="@+id/btndaftarakun"
+        app:layout_constraintTop_toBottomOf="@+id/btndaftarakun" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btndaftarakun"
+        android:layout_width="298dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/button_oren"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Daftar"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/daftarkatasandi"
+        app:layout_constraintStart_toStartOf="@+id/daftarkatasandi"
+        app:layout_constraintTop_toBottomOf="@+id/daftarnohp" />
+
+    <EditText
+        android:id="@+id/daftarkatasandi"
+        android:layout_width="298dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/input_text"
+        android:drawableStart="@drawable/ic_katasandi"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Kata Sandi"
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/daftarnohp"
+        app:layout_constraintStart_toStartOf="@+id/daftarnohp"
+        app:layout_constraintTop_toBottomOf="@+id/daftarnohp" />
+
+    <EditText
+        android:id="@+id/daftarnama"
+        android:layout_width="298dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/input_text"
+        android:drawableStart="@drawable/ic_nama"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Nama"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selogan6" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="190dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/namaapp4"
+        android:layout_width="174dp"
+        android:layout_height="30dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Berbagi Makanan"
+        android:textColor="@color/brown"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/selogan5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_light"
+        android:text="Mari saling berbagi"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/namaapp4"
+        app:layout_constraintStart_toStartOf="@+id/namaapp4"
+        app:layout_constraintTop_toBottomOf="@+id/namaapp4" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="262dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Daftar"
+        android:textColor="@color/brown"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selogan5" />
+
+    <TextView
+        android:id="@+id/selogan6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="Masukkan nama, no hp dan kata sandi anda"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HalamanAturUlangKataSandi">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="94dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Atur ulang kata sandi"
+        android:textColor="@color/brown"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selogan12" />
+
+    <TextView
+        android:id="@+id/selogan11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="173dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="Masukkan kata sandi baru"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/namaapp7"
+        android:layout_width="174dp"
+        android:layout_height="30dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Berbagi Makanan"
+        android:textColor="@color/brown"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageView6"
+        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="190dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/selogan12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_light"
+        android:text="Mari saling berbagi"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/namaapp7"
+        app:layout_constraintStart_toStartOf="@+id/namaapp7"
+        app:layout_constraintTop_toBottomOf="@+id/namaapp7" />
+
+    <EditText
+        android:id="@+id/inputsandibaru"
+        android:layout_width="298dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/input_text"
+        android:drawableStart="@drawable/ic_katasandi"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Kata kandi baru"
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selogan11" />
+
+    <EditText
+        android:id="@+id/konfirmasisandi"
+        android:layout_width="298dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/input_text"
+        android:drawableStart="@drawable/ic_katasandi"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Konfirmasi kata sandi"
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/inputsandibaru"
+        app:layout_constraintStart_toStartOf="@+id/inputsandibaru"
+        app:layout_constraintTop_toBottomOf="@+id/inputsandibaru" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnsimpansandibaru"
+        android:layout_width="298dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/button_oren"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Simpan"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/konfirmasisandi"
+        app:layout_constraintStart_toStartOf="@+id/konfirmasisandi"
+        app:layout_constraintTop_toBottomOf="@+id/konfirmasisandi" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

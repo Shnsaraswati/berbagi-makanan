@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,7 +27,7 @@ import com.shnsaraswati.applikasiberbagimakanan.presenter.profile.ProfileReposit
 import com.shnsaraswati.applikasiberbagimakanan.view.fragment.FragmentAkun;
 import com.shnsaraswati.applikasiberbagimakanan.view.fragment.FragmentHome;
 import com.shnsaraswati.applikasiberbagimakanan.view.fragment.FragmentInformasi;
-import com.shnsaraswati.applikasiberbagimakanan.view.fragment.FragmentKamera;
+import com.shnsaraswati.applikasiberbagimakanan.view.fragment.FragmentMakanan;
 import com.shnsaraswati.applikasiberbagimakanan.view.fragment.FragmentMessage;
 import com.shnsaraswati.applikasiberbagimakanan.view.fragment.FragmentPenggunaTerdekat;
 import com.shnsaraswati.applikasiberbagimakanan.view.fragment.FragmentRiwayat;
@@ -147,8 +146,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case R.id.nav_home:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
                     break;
-                case R.id.nav_camera:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentKamera()).commit();
+                case R.id.nav_makanan:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentMakanan()).commit();
                     break;
                 case R.id.nav_message:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentMessage()).commit();

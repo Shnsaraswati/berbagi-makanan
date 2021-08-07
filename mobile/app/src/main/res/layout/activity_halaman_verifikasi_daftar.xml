@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HalamanVerifikasi">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnkirimverifikasi"
+        android:layout_width="298dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/button_oren"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Kirim"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toStartOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/code2" />
+
+    <TextView
+        android:id="@+id/selogan7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_light"
+        android:text="Mari saling berbagi"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/namaapp6"
+        app:layout_constraintStart_toStartOf="@+id/namaapp6"
+        app:layout_constraintTop_toBottomOf="@+id/namaapp6" />
+
+    <TextView
+        android:id="@+id/namaapp6"
+        android:layout_width="174dp"
+        android:layout_height="30dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Berbagi Makanan"
+        android:textColor="@color/brown"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toStartOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="190dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/selogan9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="87dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="Masukkan kode verifikasi yang kami kirim"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="54dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Masukkan kode verifikasi"
+        android:textColor="@color/brown"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selogan7" />
+
+    <EditText
+        android:id="@+id/code1"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/input_text"
+        android:ems="10"
+        android:inputType="number"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/selogan9"
+        app:layout_constraintTop_toBottomOf="@+id/selogan9" />
+
+    <EditText
+        android:id="@+id/code2"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/input_text"
+        android:ems="10"
+        android:inputType="number"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/code1"
+        app:layout_constraintStart_toEndOf="@+id/code1"
+        app:layout_constraintTop_toTopOf="@+id/code1" />
+
+    <EditText
+        android:id="@+id/code3"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/input_text"
+        android:ems="10"
+        android:inputType="number"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/code2"
+        app:layout_constraintStart_toEndOf="@+id/code2"
+        app:layout_constraintTop_toTopOf="@+id/code2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/code4"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/input_text"
+        android:ems="10"
+        android:inputType="number"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/code3"
+        app:layout_constraintStart_toEndOf="@+id/code3"
+        app:layout_constraintTop_toTopOf="@+id/code3"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/linkkirimulang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="227dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Kirm ulang"
+        android:textColor="@color/yellow"
+        android:textSize="13dp"
+        app:layout_constraintEnd_toEndOf="@+id/code4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/code4" />
+</androidx.constraintlayout.widget.ConstraintLayout>
