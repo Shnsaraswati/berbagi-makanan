@@ -1,4 +1,4 @@
-package com.shnsaraswati.berbagimmakanan;
+package com.shnsaraswati.berbagimmakanan.view;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.shnsaraswati.berbagimmakanan.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FragmentGantiKataSandi#newInstance} factory method to
+ * Use the {@link FragmentBerbagi#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentGantiKataSandi extends Fragment {
+public class FragmentBerbagi extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class FragmentGantiKataSandi extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FragmentGantiKataSandi() {
+    public FragmentBerbagi() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class FragmentGantiKataSandi extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentGantiKataSandi.
+     * @return A new instance of fragment FragmentBerbagi.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentGantiKataSandi newInstance(String param1, String param2) {
-        FragmentGantiKataSandi fragment = new FragmentGantiKataSandi();
+    public static FragmentBerbagi newInstance(String param1, String param2) {
+        FragmentBerbagi fragment = new FragmentBerbagi();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class FragmentGantiKataSandi extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ganti_kata_sandi, container, false);
+        return inflater.inflate(R.layout.fragment_berbagi, container, false);
     }
 }

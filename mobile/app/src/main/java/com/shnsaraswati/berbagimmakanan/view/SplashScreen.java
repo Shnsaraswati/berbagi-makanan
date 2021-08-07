@@ -1,4 +1,4 @@
-package com.shnsaraswati.berbagimmakanan;
+package com.shnsaraswati.berbagimmakanan.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.shnsaraswati.berbagimmakanan.R;
 
 public class SplashScreen extends AppCompatActivity {
 

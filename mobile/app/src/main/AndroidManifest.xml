@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.shnsaraswati.berbagimmakanan">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -9,15 +10,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BerbagiMmakanan">
-        <activity android:name=".HalamanPanduan"></activity>
-        <activity android:name=".HalamanAturUlangKataSandi" />
-        <activity android:name=".HalamanVerifikasi" />
-        <activity android:name=".HalamanLupaKataSandi" />
-        <activity android:name=".HalamanDaftar" />
-        <activity android:name=".HalamanMasuk" />
-        <activity android:name=".HalamanUtama" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".SplashScreen">
+        <activity android:name=".view.HalamanPanduan"></activity>
+        <activity android:name=".view.HalamanAturUlangKataSandi" />
+        <activity android:name=".view.HalamanVerifikasi" />
+        <activity android:name=".view.HalamanLupaKataSandi" />
+        <activity android:name=".view.HalamanDaftar" />
+        <activity android:name=".view.HalamanMasuk" />
+        <activity android:name=".view.HalamanUtama" />
+        <activity android:name=".view.MainActivity" />
+        <activity android:name=".view.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

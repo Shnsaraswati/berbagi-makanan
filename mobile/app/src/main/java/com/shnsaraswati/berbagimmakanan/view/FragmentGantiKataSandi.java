@@ -1,4 +1,4 @@
-package com.shnsaraswati.berbagimmakanan;
+package com.shnsaraswati.berbagimmakanan.view;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.shnsaraswati.berbagimmakanan.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FragmentTentangAplikasi#newInstance} factory method to
+ * Use the {@link FragmentGantiKataSandi#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentTentangAplikasi extends Fragment {
+public class FragmentGantiKataSandi extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class FragmentTentangAplikasi extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FragmentTentangAplikasi() {
+    public FragmentGantiKataSandi() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class FragmentTentangAplikasi extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentTentangAplikasi.
+     * @return A new instance of fragment FragmentGantiKataSandi.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentTentangAplikasi newInstance(String param1, String param2) {
-        FragmentTentangAplikasi fragment = new FragmentTentangAplikasi();
+    public static FragmentGantiKataSandi newInstance(String param1, String param2) {
+        FragmentGantiKataSandi fragment = new FragmentGantiKataSandi();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class FragmentTentangAplikasi extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tentang_aplikasi, container, false);
+        return inflater.inflate(R.layout.fragment_ganti_kata_sandi, container, false);
     }
 }

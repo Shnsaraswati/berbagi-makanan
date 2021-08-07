@@ -1,0 +1,5 @@
+mutation registerUser($address: String!, $birth_date: date!, $name: String!, $password: String!, $phone_number: String!) {
+    insert_users(objects: [{address: $address, birth_date: $birth_date, name: $name, password: $password, phone_number: $phone_number, role: {data: {name: "member"}, on_conflict: {constraint: roles_name_key, update_columns: [name]}}}]) {
+        affected_rows
+    }
+}

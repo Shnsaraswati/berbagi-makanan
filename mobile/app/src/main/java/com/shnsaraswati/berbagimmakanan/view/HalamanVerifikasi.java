@@ -1,9 +1,11 @@
-package com.shnsaraswati.berbagimmakanan;
+package com.shnsaraswati.berbagimmakanan.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.WindowManager;
+
+import com.shnsaraswati.berbagimmakanan.R;
 
 public class HalamanVerifikasi extends AppCompatActivity {
 
