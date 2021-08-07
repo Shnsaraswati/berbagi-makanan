@@ -15,7 +15,7 @@ import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.presenter.UserAuthContract;
 import com.shnsaraswati.berbagimmakanan.presenter.UserAuthPresenter;
 
-public class HalamanMasuk extends AppCompatActivity implements UserAuthContract.View {
+public class HalamanMasuk extends AppCompatActivity implements UserAuthContract.ViewHalamanMasuk {
 
     private TextView linkdaftar,linklupakatasandi;
     private Button btnmasuk;
@@ -80,7 +80,7 @@ public class HalamanMasuk extends AppCompatActivity implements UserAuthContract.
     }
 
     @Override
-    public void onFailureLogin(String message) {
+    public void onFailure(String message) {
        runOnUiThread(new Runnable() {
            @Override
            public void run() {

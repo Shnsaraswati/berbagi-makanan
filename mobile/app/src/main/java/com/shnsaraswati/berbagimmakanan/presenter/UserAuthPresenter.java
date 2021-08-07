@@ -9,37 +9,62 @@ import com.shnsaraswati.berbagimmakanan.config.Apollo;
 import org.jetbrains.annotations.NotNull;
 import org.mindrot.jbcrypt.BCrypt;
 
+import mutation.UserCreateUserMutation;
 import query.UseGetUserByPhoneQuery;
 
 public class UserAuthPresenter implements UserAuthContract.Presenter {
-    UserAuthContract.View view;
+    UserAuthContract.ViewHalamanMasuk viewHalamanMasuk;
+    UserAuthContract.ViewHalamanDaftar viewHalamanDaftar;
     Apollo apollo = new Apollo();
+    ApolloClient apolloClient = apollo.ConnectApollo();
 
-    public UserAuthPresenter(UserAuthContract.View view) {
-        this.view = view;
+    public UserAuthPresenter(UserAuthContract.ViewHalamanMasuk view) {
+        this.viewHalamanMasuk = view;
+    }
+
+    public UserAuthPresenter(UserAuthContract.ViewHalamanDaftar viewHalamanDaftar) {
+        this.viewHalamanDaftar = viewHalamanDaftar;
     }
 
     @Override
     public void onLogin(String phonenumber, String password) {
-        ApolloClient apolloClient = apollo.ConnectApollo();
-
         apolloClient.query(new UseGetUserByPhoneQuery(phonenumber)).enqueue(new ApolloCall.Callback<UseGetUserByPhoneQuery.Data>() {
             @Override
             public void onResponse(@NotNull Response<UseGetUserByPhoneQuery.Data> response) {
                 if (response.getData().users().isEmpty()){
-                    view.onFailureLogin("username atau password salah");
+                    viewHalamanMasuk.onFailure("username atau password salah");
                 } else {
                     if (BCrypt.checkpw(password, response.getData().users().get(0).password())){
-                        view.onSuccessLogin();
+                        viewHalamanMasuk.onSuccessLogin();
                     } else {
-                        view.onFailureLogin("username atau password salah");
+                        viewHalamanMasuk.onFailure("username atau password salah");
                     }
                 }
             }
 
             @Override
             public void onFailure(@NotNull ApolloException e) {
-                view.onFailureLogin("terjadi kesalahan");
+                viewHalamanMasuk.onFailure("terjadi kesalahan");
+            }
+        });
+    }
+
+    @Override
+    public void onRegister(String phonenumber, String password, String name) {
+        apolloClient.mutate(new UserCreateUserMutation(name, password, phonenumber)).enqueue(new ApolloCall.Callback<UserCreateUserMutation.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<UserCreateUserMutation.Data> response) {
+                if (response.getData().insert_users().affected_rows() > 0) {
+                    viewHalamanDaftar.onSuccessRegister();
+                }
+                else {
+                    viewHalamanDaftar.onFailure("gagal daftar");
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                viewHalamanDaftar.onFailure("terjadi kesalahan");
             }
         });
     }

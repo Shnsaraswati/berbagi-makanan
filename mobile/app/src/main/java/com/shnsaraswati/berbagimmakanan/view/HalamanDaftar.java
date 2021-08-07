@@ -7,14 +7,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shnsaraswati.berbagimmakanan.R;
+import com.shnsaraswati.berbagimmakanan.presenter.UserAuthContract;
+import com.shnsaraswati.berbagimmakanan.presenter.UserAuthPresenter;
 
-public class HalamanDaftar extends AppCompatActivity {
+public class HalamanDaftar extends AppCompatActivity implements UserAuthContract.ViewHalamanDaftar {
 
-    TextView linkmasuk;
-    Button btnverifikasi;
+    private TextView linkmasuk;
+    private Button btnverifikasi;
+    private EditText daftarnama, daftarnohp, daftarkatasandi;
+
+    private UserAuthPresenter userAuthPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +29,11 @@ public class HalamanDaftar extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_halaman_daftar);
 
+        userAuthPresenter = new UserAuthPresenter(this);
+
+        daftarnama = findViewById(R.id.daftarnama);
+        daftarnohp = findViewById(R.id.daftarnohp);
+        daftarkatasandi = findViewById(R.id.daftarkatasandi);
         linkmasuk = findViewById(R.id.txtlinkmasuk);
         linkmasuk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,7 +46,11 @@ public class HalamanDaftar extends AppCompatActivity {
         btnverifikasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openHalamanverifikasi();
+                String nama = daftarnama.getText().toString();
+                String hp = daftarnohp.getText().toString();
+                String sandi = daftarkatasandi.getText().toString();
+
+                userAuthPresenter.onRegister(hp,sandi,nama);
             }
         });
     }
@@ -45,5 +61,21 @@ public class HalamanDaftar extends AppCompatActivity {
     public void openHalamanverifikasi(){
         Intent intent = new Intent(this, HalamanVerifikasi.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onSuccessRegister() {
+        Intent intent = new Intent(this, HalamanVerifikasi.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onFailure(String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
