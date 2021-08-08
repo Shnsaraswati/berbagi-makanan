@@ -15,6 +15,8 @@ import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.presenter.UserAuthContract;
 import com.shnsaraswati.berbagimmakanan.presenter.UserAuthPresenter;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 public class HalamanDaftar extends AppCompatActivity implements UserAuthContract.ViewHalamanDaftar {
 
     private TextView linkmasuk;
@@ -48,7 +50,8 @@ public class HalamanDaftar extends AppCompatActivity implements UserAuthContract
             public void onClick(View v) {
                 String nama = daftarnama.getText().toString();
                 String hp = daftarnohp.getText().toString();
-                String sandi = daftarkatasandi.getText().toString();
+                String sandi = BCrypt.hashpw(daftarkatasandi.getText().toString(), BCrypt.gensalt(12));
+
 
                 userAuthPresenter.onRegister(hp,sandi,nama);
             }

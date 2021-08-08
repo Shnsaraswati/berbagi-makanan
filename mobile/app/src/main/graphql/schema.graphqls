@@ -911,7 +911,7 @@ columns and relationships of "users"
 """
 type users {
   address: String!
-  birth_date: date!
+  birth_date: date
   id: uuid!
   img_profile: String
   name: String!
@@ -922,6 +922,7 @@ type users {
   """
   role: roles!
   role_id: uuid!
+  verification_code: String
 }
 
 """
@@ -974,6 +975,7 @@ input users_bool_exp {
   phone_number: String_comparison_exp
   role: roles_bool_exp
   role_id: uuid_comparison_exp
+  verification_code: String_comparison_exp
 }
 
 """
@@ -1003,6 +1005,7 @@ input users_insert_input {
   phone_number: String
   role: roles_obj_rel_insert_input
   role_id: uuid
+  verification_code: String
 }
 
 """
@@ -1017,6 +1020,7 @@ type users_max_fields {
   password: String
   phone_number: String
   role_id: uuid
+  verification_code: String
 }
 
 """
@@ -1031,6 +1035,7 @@ input users_max_order_by {
   password: order_by
   phone_number: order_by
   role_id: order_by
+  verification_code: order_by
 }
 
 """
@@ -1045,6 +1050,7 @@ type users_min_fields {
   password: String
   phone_number: String
   role_id: uuid
+  verification_code: String
 }
 
 """
@@ -1059,6 +1065,7 @@ input users_min_order_by {
   password: order_by
   phone_number: order_by
   role_id: order_by
+  verification_code: order_by
 }
 
 """
@@ -1105,6 +1112,7 @@ input users_order_by {
   phone_number: order_by
   role: roles_order_by
   role_id: order_by
+  verification_code: order_by
 }
 
 """
@@ -1150,6 +1158,10 @@ enum users_select_column {
   column name
   """
   role_id
+  """
+  column name
+  """
+  verification_code
 }
 
 """
@@ -1164,6 +1176,7 @@ input users_set_input {
   password: String
   phone_number: String
   role_id: uuid
+  verification_code: String
 }
 
 """
@@ -1202,6 +1215,10 @@ enum users_update_column {
   column name
   """
   role_id
+  """
+  column name
+  """
+  verification_code
 }
 
 scalar uuid

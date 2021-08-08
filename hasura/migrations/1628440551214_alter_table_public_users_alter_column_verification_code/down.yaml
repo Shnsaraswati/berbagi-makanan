@@ -1,0 +1,5 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: ALTER TABLE "public"."users" ALTER COLUMN "verification_code" TYPE integer;
+  type: run_sql

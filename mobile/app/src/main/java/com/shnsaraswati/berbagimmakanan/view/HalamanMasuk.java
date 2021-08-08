@@ -77,6 +77,7 @@ public class HalamanMasuk extends AppCompatActivity implements UserAuthContract.
     public void onSuccessLogin() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override

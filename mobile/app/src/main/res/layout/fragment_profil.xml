@@ -44,6 +44,7 @@
     <TextView
         android:id="@+id/linkeditprofil"
         android:layout_width="298dp"
+        android:clickable="true"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="80dp"

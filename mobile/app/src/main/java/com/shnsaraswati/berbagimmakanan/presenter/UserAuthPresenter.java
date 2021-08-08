@@ -5,6 +5,7 @@ import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
 import com.shnsaraswati.berbagimmakanan.config.Apollo;
+import com.shnsaraswati.berbagimmakanan.util.RandomNumber;
 
 import org.jetbrains.annotations.NotNull;
 import org.mindrot.jbcrypt.BCrypt;
@@ -17,6 +18,7 @@ public class UserAuthPresenter implements UserAuthContract.Presenter {
     UserAuthContract.ViewHalamanDaftar viewHalamanDaftar;
     Apollo apollo = new Apollo();
     ApolloClient apolloClient = apollo.ConnectApollo();
+    RandomNumber randomNumber = new RandomNumber();
 
     public UserAuthPresenter(UserAuthContract.ViewHalamanMasuk view) {
         this.viewHalamanMasuk = view;
@@ -51,7 +53,8 @@ public class UserAuthPresenter implements UserAuthContract.Presenter {
 
     @Override
     public void onRegister(String phonenumber, String password, String name) {
-        apolloClient.mutate(new UserCreateUserMutation(name, password, phonenumber)).enqueue(new ApolloCall.Callback<UserCreateUserMutation.Data>() {
+        String otp = randomNumber.generateOTP();
+        apolloClient.mutate(new UserCreateUserMutation(name, password, phonenumber, otp)).enqueue(new ApolloCall.Callback<UserCreateUserMutation.Data>() {
             @Override
             public void onResponse(@NotNull Response<UserCreateUserMutation.Data> response) {
                 if (response.getData().insert_users().affected_rows() > 0) {
