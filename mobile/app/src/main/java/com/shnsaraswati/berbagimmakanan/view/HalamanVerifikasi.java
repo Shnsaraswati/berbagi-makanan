@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.config.SharedPreference;
+import com.shnsaraswati.berbagimmakanan.config.TwillioAPI;
 
 public class HalamanVerifikasi extends AppCompatActivity {
 
@@ -24,6 +25,9 @@ public class HalamanVerifikasi extends AppCompatActivity {
     private TextView linkkirimulang;
 
     private SharedPreference sharedPreference;
+    private TwillioAPI twillioAPI;
+    private Thread thread;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +35,7 @@ public class HalamanVerifikasi extends AppCompatActivity {
         setContentView(R.layout.activity_halaman_verifikasi);
 
         sharedPreference = new SharedPreference(this);
+        twillioAPI = new TwillioAPI();
 
         code1 = findViewById(R.id.code1);
         code2 = findViewById(R.id.code2);
@@ -66,7 +71,14 @@ public class HalamanVerifikasi extends AppCompatActivity {
         linkkirimulang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getApplicationContext(), "melakukan proses mengirim ulang kode verifikasi", Toast.LENGTH_LONG).show();
+               thread = new Thread(new Runnable() {
+                   @Override
+                   public void run() {
+                       twillioAPI.sendSMSVerification(phonenumber, otp);
+                   }
+               });
+               thread.start();
             }
         });
 
