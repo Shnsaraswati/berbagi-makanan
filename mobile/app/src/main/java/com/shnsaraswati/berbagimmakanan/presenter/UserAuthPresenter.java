@@ -1,7 +1,5 @@
 package com.shnsaraswati.berbagimmakanan.presenter;
 
-import android.content.Intent;
-import android.content.res.Resources;
 import android.util.Base64;
 
 import com.apollographql.apollo.ApolloCall;
@@ -56,11 +54,12 @@ public class UserAuthPresenter implements UserAuthContract.Presenter {
         apolloClient.query(new UseGetUserByPhoneQuery(phonenumber)).enqueue(new ApolloCall.Callback<UseGetUserByPhoneQuery.Data>() {
             @Override
             public void onResponse(@NotNull Response<UseGetUserByPhoneQuery.Data> response) {
-                if (response.getData().users().isEmpty()){
+                if (response.getData().users().isEmpty()) {
                     viewHalamanMasuk.onFailure("username atau password salah");
                 } else {
-                    if (BCrypt.checkpw(password, response.getData().users().get(0).password())){
-                        viewHalamanMasuk.onSuccessLogin();
+                    if (BCrypt.checkpw(password, response.getData().users().get(0).password())) {
+                        UseGetUserByPhoneQuery.User user = response.getData().users().get(0);
+                        viewHalamanMasuk.onSuccessLogin(user);
                     } else {
                         viewHalamanMasuk.onFailure("username atau password salah");
                     }
@@ -82,7 +81,7 @@ public class UserAuthPresenter implements UserAuthContract.Presenter {
             public void onResponse(@NotNull Response<UserCreateUserMutation.Data> response) {
                 if (response.getData().insert_users().affected_rows() > 0) {
                     String URL = "https://api.twilio.com/2010-04-01/Accounts/" + ACCOUNT_SID + "/Messages.json";
-                    String base64EncodedCredentials = "Basic " + Base64.encodeToString(( ACCOUNT_SID + ":" +  AUTH_TOKEN).getBytes(), Base64.NO_WRAP);
+                    String base64EncodedCredentials = "Basic " + Base64.encodeToString((ACCOUNT_SID + ":" + AUTH_TOKEN).getBytes(), Base64.NO_WRAP);
 
                     String id = response.getData().insert_users().returning().get(0).id().toString();
                     String name = response.getData().insert_users().returning().get(0).name();
@@ -91,7 +90,7 @@ public class UserAuthPresenter implements UserAuthContract.Presenter {
                     Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
                     HttpClient httpClient = new DefaultHttpClient();
                     HttpPost httpPostm = new HttpPost(URL);
-                    httpPostm.setHeader("Authorization", base64EncodedCredentials );
+                    httpPostm.setHeader("Authorization", base64EncodedCredentials);
                     try {
                         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                         nameValuePairs.add(new BasicNameValuePair("MessagingServiceSid",
@@ -109,18 +108,17 @@ public class UserAuthPresenter implements UserAuthContract.Presenter {
                         HttpEntity entity = responsehttp.getEntity();
                         System.out.println("Entity post is: "
                                 + EntityUtils.toString(entity));
-                        viewHalamanDaftar.onSuccessRegister(otp,id,name,phone_number);
+                        viewHalamanDaftar.onSuccessRegister(otp, id, name, phone_number);
 
-                    } catch (ClientProtocolException e){
+                    } catch (ClientProtocolException e) {
 
-                    }  catch (UnsupportedEncodingException e) {
+                    } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
 
-                }
-                else {
+                } else {
                     viewHalamanDaftar.onFailure("gagal daftar");
                 }
             }

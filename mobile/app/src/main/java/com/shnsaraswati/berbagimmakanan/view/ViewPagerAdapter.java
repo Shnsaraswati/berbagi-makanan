@@ -17,7 +17,6 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     Context context;
     int images[] ={
-
             R.drawable.keranjang,
             R.drawable.foto,
             R.drawable.upload,
@@ -25,9 +24,6 @@ public class ViewPagerAdapter extends PagerAdapter {
             R.drawable.tunggu,
             R.drawable.peta,
             R.drawable.bintang
-
-
-
     };
 
     int description[] = {

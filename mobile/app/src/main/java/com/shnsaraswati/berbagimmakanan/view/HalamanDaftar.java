@@ -1,7 +1,5 @@
 package com.shnsaraswati.berbagimmakanan.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.presenter.UserAuthContract;
@@ -28,7 +28,7 @@ public class HalamanDaftar extends AppCompatActivity implements UserAuthContract
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_halaman_daftar);
 
         userAuthPresenter = new UserAuthPresenter(this);
@@ -53,15 +53,17 @@ public class HalamanDaftar extends AppCompatActivity implements UserAuthContract
                 String sandi = BCrypt.hashpw(daftarkatasandi.getText().toString(), BCrypt.gensalt(12));
 
 
-                userAuthPresenter.onRegister(hp,sandi,nama);
+                userAuthPresenter.onRegister(hp, sandi, nama);
             }
         });
     }
-    public void openHalamanmasuk(){
+
+    public void openHalamanmasuk() {
         Intent intent = new Intent(this, HalamanMasuk.class);
         startActivity(intent);
     }
-    public void openHalamanverifikasi(){
+
+    public void openHalamanverifikasi() {
         Intent intent = new Intent(this, HalamanVerifikasi.class);
         startActivity(intent);
     }
@@ -69,10 +71,10 @@ public class HalamanDaftar extends AppCompatActivity implements UserAuthContract
     @Override
     public void onSuccessRegister(String otp, String id, String name, String phonenumber) {
         Intent intent = new Intent(this, HalamanVerifikasi.class);
-        intent.putExtra("otp",otp);
-        intent.putExtra("id",id);
-        intent.putExtra("name",name);
-        intent.putExtra("phonenumber",phonenumber);
+        intent.putExtra("otp", otp);
+        intent.putExtra("id", id);
+        intent.putExtra("name", name);
+        intent.putExtra("phonenumber", phonenumber);
         startActivity(intent);
     }
 

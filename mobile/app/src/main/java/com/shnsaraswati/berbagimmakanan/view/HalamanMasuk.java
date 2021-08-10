@@ -1,7 +1,5 @@
 package com.shnsaraswati.berbagimmakanan.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,23 +9,32 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.shnsaraswati.berbagimmakanan.R;
+import com.shnsaraswati.berbagimmakanan.config.SharedPreference;
 import com.shnsaraswati.berbagimmakanan.presenter.UserAuthContract;
 import com.shnsaraswati.berbagimmakanan.presenter.UserAuthPresenter;
 
+import query.UseGetUserByPhoneQuery;
+
 public class HalamanMasuk extends AppCompatActivity implements UserAuthContract.ViewHalamanMasuk {
 
-    private TextView linkdaftar,linklupakatasandi;
+    private TextView linkdaftar, linklupakatasandi;
     private Button btnmasuk;
-    private EditText inputnohp,inputkatasandi;
+    private EditText inputnohp, inputkatasandi;
 
     private UserAuthPresenter userAuthPresenter;
+
+    private SharedPreference sharedPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_halaman_masuk);
+
+        sharedPreference = new SharedPreference(this);
 
         userAuthPresenter = new UserAuthPresenter(this);
 
@@ -39,7 +46,7 @@ public class HalamanMasuk extends AppCompatActivity implements UserAuthContract.
             public void onClick(View v) {
                 String nohp = inputnohp.getText().toString();
                 String katasandi = inputkatasandi.getText().toString();
-                userAuthPresenter.onLogin(nohp,katasandi);
+                userAuthPresenter.onLogin(nohp, katasandi);
             }
         });
 
@@ -60,21 +67,30 @@ public class HalamanMasuk extends AppCompatActivity implements UserAuthContract.
         });
     }
 
-    public void openHalamandaftar(){
+    public void openHalamandaftar() {
         Intent intent = new Intent(this, HalamanDaftar.class);
         startActivity(intent);
     }
-    public void openHalamanlupakatasandi(){
+
+    public void openHalamanlupakatasandi() {
         Intent intent = new Intent(this, HalamanLupaKataSandi.class);
         startActivity(intent);
     }
-    public void openMainactivity(){
+
+    public void openMainactivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
     @Override
-    public void onSuccessLogin() {
+    public void onSuccessLogin(UseGetUserByPhoneQuery.User user) {
+        // melakukan set preference profile dan is logged in agar tersimpan di memory lokal android
+        String userid = user.id().toString();
+        String name = user.name();
+        String phone_number = user.phone_number();
+        sharedPreference.setProfileSharedPreference(userid, name, phone_number);
+        sharedPreference.setIsLoggedIn(true);
+
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -82,11 +98,11 @@ public class HalamanMasuk extends AppCompatActivity implements UserAuthContract.
 
     @Override
     public void onFailure(String message) {
-       runOnUiThread(new Runnable() {
-           @Override
-           public void run() {
-               Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-           }
-       });
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

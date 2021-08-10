@@ -1,8 +1,10 @@
 package com.shnsaraswati.berbagimmakanan.presenter;
 
+import query.UseGetUserByPhoneQuery;
+
 public class UserAuthContract {
     public interface ViewHalamanMasuk {
-        void onSuccessLogin();
+        void onSuccessLogin(UseGetUserByPhoneQuery.User user);
         void onFailure(String message);
     }
 

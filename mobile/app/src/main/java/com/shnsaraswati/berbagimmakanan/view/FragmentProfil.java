@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 import com.shnsaraswati.berbagimmakanan.FragmentPenggunaTerdekat;
 import com.shnsaraswati.berbagimmakanan.R;
+import com.shnsaraswati.berbagimmakanan.config.SharedPreference;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +27,7 @@ public class FragmentProfil extends Fragment {
 
     TextView linkeditprofil,linkgantikatasandi,linkpenggunaterdekat,linktentangaplikasi, linktpanduan;
     Button btnkeluarapp;
+    SharedPreference sharedPreference;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -63,6 +67,7 @@ public class FragmentProfil extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        sharedPreference = new SharedPreference(requireContext());
     }
 
     @Override
@@ -83,7 +88,10 @@ public class FragmentProfil extends Fragment {
         btnkeluarapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                sharedPreference.clearSharedPreference();
+                Intent intent = new Intent(getContext(), HalamanUtama.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 
