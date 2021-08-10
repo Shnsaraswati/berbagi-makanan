@@ -48,6 +48,7 @@ public class HalamanVerifikasi extends AppCompatActivity {
         String userid = getIntent().getStringExtra("id");
         String name = getIntent().getStringExtra("name");
         String phonenumber = getIntent().getStringExtra("phonenumber");
+        String address = getIntent().getStringExtra("address");
 
         btnkirimverifikasi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +57,7 @@ public class HalamanVerifikasi extends AppCompatActivity {
 
                 if (otp.equals(code)){
                     // melakukan set preference profile dan is logged in agar tersimpan di memory lokal android
-                    sharedPreference.setProfileSharedPreference(userid, name, phonenumber);
+                    sharedPreference.setProfileSharedPreference(userid, name, phonenumber, address);
                     sharedPreference.setIsLoggedIn(true);
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);

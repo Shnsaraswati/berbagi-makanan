@@ -6,6 +6,7 @@ mutation userCreateUser($name: String!, $password: String!, $phone_number: Strin
             verification_code
             name
             phone_number
+            address
         }
     }
 }

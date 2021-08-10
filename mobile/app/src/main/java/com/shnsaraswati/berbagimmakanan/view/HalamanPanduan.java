@@ -58,10 +58,7 @@ public class HalamanPanduan extends AppCompatActivity {
         txtskip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(HalamanPanduan.this,MainActivity.class);
-                startActivity(i);
                 finish();
-
             }
         });
 

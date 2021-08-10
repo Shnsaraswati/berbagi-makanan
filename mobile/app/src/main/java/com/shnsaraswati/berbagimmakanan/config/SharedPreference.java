@@ -16,11 +16,12 @@ public class SharedPreference {
         this.sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);;
     }
 
-    public void setProfileSharedPreference(String id, String name, String phone_number){
+    public void setProfileSharedPreference(String id, String name, String phone_number, String address) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("user_id", id);
         editor.putString("name", name);
         editor.putString("phone_number", phone_number);
+        editor.putString("address", address);
         editor.apply();
     }
 
@@ -36,6 +37,10 @@ public class SharedPreference {
 
     public String getProfileID() {
         return sharedPreferences.getString("user_id", "");
+    }
+
+    public String getProfileAddress() {
+        return sharedPreferences.getString("address", "");
     }
 
     public String getProfileName() {

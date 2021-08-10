@@ -41,6 +41,8 @@ public class HalamanMasuk extends AppCompatActivity implements UserAuthContract.
         inputnohp = findViewById(R.id.inputnohp);
         inputkatasandi = findViewById(R.id.inputkatasandi);
         btnmasuk = findViewById(R.id.btnmasukapp);
+
+        inputnohp.setSelection(inputnohp.getText().length());
         btnmasuk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,10 +90,12 @@ public class HalamanMasuk extends AppCompatActivity implements UserAuthContract.
         String userid = user.id().toString();
         String name = user.name();
         String phone_number = user.phone_number();
-        sharedPreference.setProfileSharedPreference(userid, name, phone_number);
+        String address = user.address();
+        sharedPreference.setProfileSharedPreference(userid, name, phone_number, address);
         sharedPreference.setIsLoggedIn(true);
 
         Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         finish();
     }

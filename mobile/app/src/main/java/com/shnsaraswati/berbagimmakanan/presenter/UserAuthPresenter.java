@@ -86,9 +86,10 @@ public class UserAuthPresenter implements UserAuthContract.Presenter {
                        String id = response.getData().insert_users().returning().get(0).id().toString();
                        String name = response.getData().insert_users().returning().get(0).name();
                        String phone_number = response.getData().insert_users().returning().get(0).phone_number();
+                       String address = response.getData().insert_users().returning().get(0).address();
 
                        twillioAPI.sendSMSVerification(phonenumber, otp);
-                       viewHalamanDaftar.onSuccessRegister(otp, id, name, phone_number);
+                       viewHalamanDaftar.onSuccessRegister(otp, id, name, phone_number, address);
                    } else {
                        viewHalamanDaftar.onFailure("gagal daftar");
                    }

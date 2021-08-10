@@ -25,7 +25,7 @@ import java.util.Objects;
  */
 public class FragmentProfil extends Fragment {
 
-    TextView linkeditprofil,linkgantikatasandi,linkpenggunaterdekat,linktentangaplikasi, linktpanduan;
+    TextView linkeditprofil,linkgantikatasandi,linkpenggunaterdekat,linktentangaplikasi, linktpanduan, txtnamaprofil;
     Button btnkeluarapp;
     SharedPreference sharedPreference;
 
@@ -84,6 +84,11 @@ public class FragmentProfil extends Fragment {
         linktentangaplikasi = view.findViewById(R.id.linktentangaplikasi);
         linktpanduan = view.findViewById(R.id.linktpanduan);
         btnkeluarapp = view.findViewById(R.id.btnkeluarapp);
+        txtnamaprofil = view.findViewById(R.id.txtnamaprofil);
+
+        String name = sharedPreference.getProfileName();
+
+        txtnamaprofil.setText(name);
 
         btnkeluarapp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +105,7 @@ public class FragmentProfil extends Fragment {
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new FragmentGantiKataSandi(), "Berhasil");
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
@@ -109,6 +115,7 @@ public class FragmentProfil extends Fragment {
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new FragmentPenggunaTerdekat(), "Berhasil");
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
@@ -118,6 +125,7 @@ public class FragmentProfil extends Fragment {
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new FragmentTentangAplikasi(), "Berhasil");
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
@@ -135,6 +143,7 @@ public class FragmentProfil extends Fragment {
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, new FragmentProfilSaya(), "Berhasil");
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
             }

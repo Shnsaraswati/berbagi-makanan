@@ -37,6 +37,8 @@ public class HalamanDaftar extends AppCompatActivity implements UserAuthContract
         daftarnohp = findViewById(R.id.daftarnohp);
         daftarkatasandi = findViewById(R.id.daftarkatasandi);
         linkmasuk = findViewById(R.id.txtlinkmasuk);
+
+        daftarnohp.setSelection(daftarnohp.getText().length());
         linkmasuk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,12 +71,13 @@ public class HalamanDaftar extends AppCompatActivity implements UserAuthContract
     }
 
     @Override
-    public void onSuccessRegister(String otp, String id, String name, String phonenumber) {
+    public void onSuccessRegister(String otp, String id, String name, String phonenumber, String address) {
         Intent intent = new Intent(this, HalamanVerifikasi.class);
         intent.putExtra("otp", otp);
         intent.putExtra("id", id);
         intent.putExtra("name", name);
         intent.putExtra("phonenumber", phonenumber);
+        intent.putExtra("address", address);
         startActivity(intent);
     }
 

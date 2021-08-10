@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
@@ -13,6 +14,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.shnsaraswati.berbagimmakanan.R;
 
 public class MainActivity extends AppCompatActivity  {
+    private static final String TAG = "MainActivity";
 
     private BottomNavigationView bottomNavigationView;
 
@@ -62,4 +64,13 @@ public class MainActivity extends AppCompatActivity  {
             return true;
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            finish();
+        }
+    }
 }

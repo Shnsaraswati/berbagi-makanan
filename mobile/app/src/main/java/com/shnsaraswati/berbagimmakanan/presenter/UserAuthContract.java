@@ -9,7 +9,7 @@ public class UserAuthContract {
     }
 
     public  interface ViewHalamanDaftar {
-        void onSuccessRegister(String otp,String id, String name, String phonenumber);
+        void onSuccessRegister(String otp,String id, String name, String phonenumber, String address);
         void onFailure(String message);
     }
 
