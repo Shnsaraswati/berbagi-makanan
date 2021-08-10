@@ -9,8 +9,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.shnsaraswati.berbagimmakanan.FragmentPenggunaTerdekat;
 import com.shnsaraswati.berbagimmakanan.R;
 
 /**
@@ -20,7 +22,8 @@ import com.shnsaraswati.berbagimmakanan.R;
  */
 public class FragmentProfil extends Fragment {
 
-    TextView linkeditprofil,linkgantikatasandi,linkpenggunaterdekat,linktentangaplikasi;
+    TextView linkeditprofil,linkgantikatasandi,linkpenggunaterdekat,linktentangaplikasi, linktpanduan;
+    Button btnkeluarapp;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -71,6 +74,54 @@ public class FragmentProfil extends Fragment {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_profil, container, false);
         linkeditprofil = view.findViewById(R.id.linkeditprofil);
+        linkgantikatasandi = view.findViewById(R.id.linkgantikatasandi);
+        linkpenggunaterdekat = view.findViewById(R.id.linkpenggunaterdekat);
+        linktentangaplikasi = view.findViewById(R.id.linktentangaplikasi);
+        linktpanduan = view.findViewById(R.id.linktpanduan);
+        btnkeluarapp = view.findViewById(R.id.btnkeluarapp);
+
+        btnkeluarapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        linkgantikatasandi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, new FragmentGantiKataSandi(), "Berhasil");
+                fragmentTransaction.commit();
+            }
+        });
+
+        linkpenggunaterdekat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, new FragmentPenggunaTerdekat(), "Berhasil");
+                fragmentTransaction.commit();
+            }
+        });
+
+        linktentangaplikasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, new FragmentTentangAplikasi(), "Berhasil");
+                fragmentTransaction.commit();
+            }
+        });
+
+        linktpanduan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), HalamanPanduan.class);
+                startActivity(intent);
+            }
+        });
+
         linkeditprofil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

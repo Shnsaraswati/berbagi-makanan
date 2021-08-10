@@ -67,8 +67,12 @@ public class HalamanDaftar extends AppCompatActivity implements UserAuthContract
     }
 
     @Override
-    public void onSuccessRegister() {
+    public void onSuccessRegister(String otp, String id, String name, String phonenumber) {
         Intent intent = new Intent(this, HalamanVerifikasi.class);
+        intent.putExtra("otp",otp);
+        intent.putExtra("id",id);
+        intent.putExtra("name",name);
+        intent.putExtra("phonenumber",phonenumber);
         startActivity(intent);
     }
 

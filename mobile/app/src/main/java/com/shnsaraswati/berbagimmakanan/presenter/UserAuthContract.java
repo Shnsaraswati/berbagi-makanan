@@ -7,7 +7,7 @@ public class UserAuthContract {
     }
 
     public  interface ViewHalamanDaftar {
-        void onSuccessRegister();
+        void onSuccessRegister(String otp,String id, String name, String phonenumber);
         void onFailure(String message);
     }
 

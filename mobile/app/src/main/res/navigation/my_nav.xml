@@ -44,4 +44,9 @@
         android:name="com.shnsaraswati.berbagimmakanan.view.FragmentTentangAplikasi"
         android:label="fragment_tentang_aplikasi"
         tools:layout="@layout/fragment_tentang_aplikasi" />
+    <fragment
+        android:id="@+id/fragmentPenggunaTerdekat"
+        android:name="com.shnsaraswati.berbagimmakanan.FragmentPenggunaTerdekat"
+        android:label="fragment_pengguna_terdekat"
+        tools:layout="@layout/fragment_pengguna_terdekat" />
 </navigation>
