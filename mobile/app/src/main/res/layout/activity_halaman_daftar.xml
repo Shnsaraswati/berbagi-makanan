@@ -16,6 +16,7 @@
         android:drawablePadding="12dp"
         android:ems="10"
         android:hint="No hp"
+        android:text="+62"
         android:inputType="phone"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
