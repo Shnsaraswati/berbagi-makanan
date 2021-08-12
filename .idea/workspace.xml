@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="de824d33-54a6-4d49-8af5-65803478aa45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/app/src/main/res/drawable/ic__fastfood_24.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/view/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/view/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/view/fragment/FragmentKamera.java" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app/src/main/java/com/shnsaraswati/applikasiberbagimakanan/view/fragment/FragmentMakanan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/app/src/main/res/layout/fragment_kamera.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app/src/main/res/layout/fragment_makanan.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/app/src/main/res/menu/bottom_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app/src/main/res/menu/bottom_navigation.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mobile/app/src/main/res/drawable/ic_insert_photo.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/app/src/main/java/com/shnsaraswati/berbagimmakanan/presenter/ProfileContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/app/src/main/java/com/shnsaraswati/berbagimmakanan/presenter/ProfileContract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/app/src/main/java/com/shnsaraswati/berbagimmakanan/presenter/ProfilePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/app/src/main/java/com/shnsaraswati/berbagimmakanan/presenter/ProfilePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/app/src/main/java/com/shnsaraswati/berbagimmakanan/view/FragmentGantiKataSandi.java" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/app/src/main/java/com/shnsaraswati/berbagimmakanan/view/FragmentGantiKataSandi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/app/src/main/res/layout/fragment_berbagi.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/app/src/main/res/layout/fragment_berbagi.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/app/src/main/res/layout/fragment_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/app/src/main/res/layout/fragment_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/app/src/main/res/layout/fragment_profil_saya.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/app/src/main/res/layout/fragment_profil_saya.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,9 +52,9 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.md" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1628182909081">
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1628780916396">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1628182909081" />
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1628780916396" />
   </component>
 </project>

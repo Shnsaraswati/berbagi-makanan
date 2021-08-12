@@ -8,7 +8,13 @@ public class ProfileContract {
         void onFailure(String message);
     }
 
+    public interface ViewFragmentGantiKataSandi {
+        void onUpdateProfilePassword();
+        void onFailure(String message);
+    }
+
     interface Presenter {
         void onUpdateProfil(String id, String name, String phonenumber, String address);
+        void onUpdateProfilePassword(String id, String oldpassword, String newpassword);
     }
 }

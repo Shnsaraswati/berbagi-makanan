@@ -12,4 +12,57 @@
     <string name="ACCOUNT_SID">ACf93c1b6d45840374aef32e6d689f8502</string>
     <string name="AUTH_TOKEN">5f89c7bed3966c0632d4ac89c919a1fc</string>
     <string name="txt_isi_tentang_aplikasi">Aplikasi ini bertujuan untuk meningkatkan kepedulian atar sesama serta mengurangi sampah makanan yang ada di sekitar kita.\n\n Dalam aplikasi ini kita bisa memberikan makan kita kepada orang yang menginginkannya ataupun kita dapat meminta makanan orang lain yang ingin memberikannya.\n\n Dalam aplikasi ini pengguna berperan sebagai pemberi makanan dan peminta makanan.\n\n Shania Saraswati - 171111011 \n Teknik Informatika \n STIKI Malang</string>
+
+    <string-array name="NamaAkun">
+        <item>Akun1</item>
+        <item>Akun2</item>
+        <item>Akun3</item>
+        <item>Akun4</item>
+        <item>Akun5</item>
+        <item>Akun6</item>
+        <item>Akun7</item>
+        <item>Akun8</item>
+        <item>Akun9</item>
+        <item>Akun10</item>
+    </string-array>
+
+    <string-array name="NamaMakanan">
+        <item>Makanan1</item>
+        <item>Makanan2</item>
+        <item>Makanan3</item>
+        <item>Makanan4</item>
+        <item>Makanan5</item>
+        <item>Makanan6</item>
+        <item>Makanan7</item>
+        <item>Makanan8</item>
+        <item>Makanan9</item>
+        <item>Makanan10</item>
+    </string-array>
+
+    <string-array name="Lokasi">
+        <item>Lokasi1</item>
+        <item>Lokasi2</item>
+        <item>Lokasi3</item>
+        <item>Lokasi4</item>
+        <item>Lokasi5</item>
+        <item>Lokasi6</item>
+        <item>Lokasi7</item>
+        <item>Lokasi8</item>
+        <item>Lokasi9</item>
+        <item>Lokasi10</item>
+    </string-array>
+
+    <string-array name="Dilihat">
+        <item>Dilihat1</item>
+        <item>Dilihat2</item>
+        <item>Dilihat3</item>
+        <item>Dilihat4</item>
+        <item>Dilihat5</item>
+        <item>Dilihat6</item>
+        <item>Dilihat7</item>
+        <item>Dilihat8</item>
+        <item>Dilihat9</item>
+        <item>Dilihat10</item>
+    </string-array>
+
 </resources>

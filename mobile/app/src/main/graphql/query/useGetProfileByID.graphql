@@ -1,0 +1,6 @@
+query useGetProfileByID($id: uuid!) {
+    users(where: {_and: [{id: {_eq: $id}}]}) {
+        id
+        password
+    }
+}

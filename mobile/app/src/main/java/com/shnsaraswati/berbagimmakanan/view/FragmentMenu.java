@@ -3,12 +3,15 @@ package com.shnsaraswati.berbagimmakanan.view;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.shnsaraswati.berbagimmakanan.R;
+import com.shnsaraswati.berbagimmakanan.adapter.MenuRecyclerViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +28,7 @@ public class FragmentMenu extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    RecyclerView recyclerView;
 
     public FragmentMenu() {
         // Required empty public constructor
@@ -61,6 +65,12 @@ public class FragmentMenu extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+        View view = inflater.inflate(R.layout.fragment_menu, container, false);
+        recyclerView = view.findViewById(R.id.recyeclerview);
+        MenuRecyclerViewAdapter adapter = new MenuRecyclerViewAdapter( getContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        return view;
     }
 }
