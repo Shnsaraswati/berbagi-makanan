@@ -28,6 +28,11 @@ public class MainActivity extends AppCompatActivity  {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(listener);
 
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new FragmentMenu()).commit();
+            bottomNavigationView.setSelectedItemId(R.id.fragmentMenu);
+        }
+
     }
 
     private final NavigationBarView.OnItemSelectedListener listener = new NavigationBarView.OnItemSelectedListener() {
