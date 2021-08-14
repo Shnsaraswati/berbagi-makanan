@@ -2,10 +2,7 @@ package com.shnsaraswati.berbagimmakanan.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +11,25 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.apollographql.apollo.exception.ApolloException;
+import com.cloudinary.android.MediaManager;
 import com.shnsaraswati.berbagimmakanan.FragmentPenggunaTerdekat;
 import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.config.SharedPreference;
 import com.shnsaraswati.berbagimmakanan.presenter.ProfileContract;
 import com.shnsaraswati.berbagimmakanan.presenter.ProfilePresenter;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
-import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
+
+import java.math.BigDecimal;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import query.UseGetProfileByIDQuery;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,10 +37,12 @@ import java.util.Objects;
  * create an instance of this fragment.
  */
 public class FragmentProfil extends Fragment implements ProfileContract.ViewFragmentProfil {
+    public static final String TAG = "FragmentProfile";
 
-    TextView linkeditprofil,linkgantikatasandi,linkpenggunaterdekat,linktentangaplikasi, linktpanduan, txtnamaprofil;
+    TextView linkeditprofil, linkgantikatasandi, linkpenggunaterdekat, linktentangaplikasi, linktpanduan, txtnamaprofil;
     Button btnkeluarapp;
     RatingBar ratingBar;
+    CircleImageView fotoprofil;
 
     SharedPreference sharedPreference;
     ProfilePresenter profilePresenter;
@@ -94,13 +105,34 @@ public class FragmentProfil extends Fragment implements ProfileContract.ViewFrag
         btnkeluarapp = view.findViewById(R.id.btnkeluarapp);
         txtnamaprofil = view.findViewById(R.id.txtnamaprofil);
         ratingBar = view.findViewById(R.id.ratingBar);
+        fotoprofil = view.findViewById(R.id.fotoprofil);
 
         String name = sharedPreference.getProfileName();
         String userID = sharedPreference.getProfileID();
 
         txtnamaprofil.setText(name);
 
-        profilePresenter.onGetProfile(userID);
+        profilePresenter.onGetProfile(userID, new ProfileContract.Callback() {
+            @Override
+            public void onResponse(UseGetProfileByIDQuery.User user) {
+                if (user != null) {
+                    float rating = ((BigDecimal) user.rating()).floatValue();
+                    String img_profile = user.img_profile();
+                    String image = MediaManager.get().url().generate("berbagimakanan/" + img_profile);
+                    String[] images = image.split("http://");
+
+                    onSetRatingBar(rating);
+                    onSetPhotoProfile(images[1]);
+                } else {
+                    onSetFailure("terjadi kesalahan");
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                onSetFailure("terjadi kesalahan");
+            }
+        });
 
         btnkeluarapp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,11 +203,31 @@ public class FragmentProfil extends Fragment implements ProfileContract.ViewFrag
     }
 
     @Override
-    public void onFailure(String message) {
+    public void onSetFailure(String message) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void onSetPhotoProfile(String images) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                String image = "https://" + images;
+                Picasso.get().load(image).error(R.drawable.ic_fotoprofil).into(fotoprofil, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d(TAG, "onSuccess:");
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Log.e(TAG, "onError: " + e.getMessage());
+                    }
+                });
             }
         });
     }

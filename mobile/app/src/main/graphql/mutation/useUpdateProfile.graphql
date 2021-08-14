@@ -1,5 +1,5 @@
-mutation useUpdateProfile($id:uuid!, $name:String!, $phonenumber:String!, $address:String!) {
-    update_users_by_pk(pk_columns: {id: $id}, _set: {name: $name, phone_number: $phonenumber, address: $address}) {
+mutation useUpdateProfile($id:uuid!, $name:String!, $phonenumber:String!, $address:String!, $img_profile: String!) {
+    update_users_by_pk(pk_columns: {id: $id}, _set: {name: $name, phone_number: $phonenumber, address: $address, img_profile: $img_profile}) {
         id
         name
         address

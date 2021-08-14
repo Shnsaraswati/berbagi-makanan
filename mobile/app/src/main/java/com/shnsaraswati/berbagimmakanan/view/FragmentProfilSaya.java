@@ -1,10 +1,10 @@
 package com.shnsaraswati.berbagimmakanan.view;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +13,25 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.apollographql.apollo.exception.ApolloException;
+import com.cloudinary.android.MediaManager;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.config.SharedPreference;
 import com.shnsaraswati.berbagimmakanan.presenter.ProfileContract;
 import com.shnsaraswati.berbagimmakanan.presenter.ProfilePresenter;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import query.UseGetProfileByIDQuery;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +39,7 @@ import com.shnsaraswati.berbagimmakanan.presenter.ProfilePresenter;
  * create an instance of this fragment.
  */
 public class FragmentProfilSaya extends Fragment implements ProfileContract.ViewFragmentProfilSaya {
+    public static final String TAG = "FragmentProfilSaya";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,8 +49,14 @@ public class FragmentProfilSaya extends Fragment implements ProfileContract.View
     EditText editnama, editnohp, editalamat;
     SharedPreference sharedPreference;
     Button btnsimpanprofil;
-    TextView linkeditfotoprofil;
+    TextView linkeditfotoprofil, txtnamaprofilhalamanedit;
+    CircleImageView fotoprofiledit;
+
+    Uri uri;
+
     ProfilePresenter profilePresenter;
+
+    String img_profile;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -71,7 +93,7 @@ public class FragmentProfilSaya extends Fragment implements ProfileContract.View
         }
 
         sharedPreference = new SharedPreference(getContext());
-        profilePresenter =  new ProfilePresenter(this);
+        profilePresenter = new ProfilePresenter(this);
     }
 
     @Override
@@ -85,6 +107,8 @@ public class FragmentProfilSaya extends Fragment implements ProfileContract.View
         editalamat = view.findViewById(R.id.editalamat);
         btnsimpanprofil = view.findViewById(R.id.btnsimpanprofil);
         linkeditfotoprofil = view.findViewById(R.id.linkeditfotoprofil);
+        txtnamaprofilhalamanedit = view.findViewById(R.id.txtnamaprofilhalamanedit);
+        fotoprofiledit = view.findViewById(R.id.fotoprofiledit);
 
         String curName = sharedPreference.getProfileName();
         String userID = sharedPreference.getProfileID();
@@ -94,6 +118,27 @@ public class FragmentProfilSaya extends Fragment implements ProfileContract.View
         editnama.setText(curName);
         editnohp.setText(curPhonenumber);
         editalamat.setText(curAddress);
+        txtnamaprofilhalamanedit.setText(curName);
+
+        profilePresenter.onGetProfile(userID, new ProfileContract.Callback() {
+            @Override
+            public void onResponse(UseGetProfileByIDQuery.User user) {
+                if (user != null) {
+                    img_profile = user.img_profile();
+                    String image = MediaManager.get().url().generate("berbagimakanan/" + img_profile);
+                    String[] images = image.split("http://");
+
+                    onSetPhotoProfile(images[1]);
+                } else {
+                    onSetFailure("terjadi kesalahan");
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                onSetFailure("terjadi kesalahan");
+            }
+        });
 
         btnsimpanprofil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,11 +146,43 @@ public class FragmentProfilSaya extends Fragment implements ProfileContract.View
                 String name = editnama.getText().toString();
                 String phonenumber = editnohp.getText().toString();
                 String alamat = editalamat.getText().toString();
-                profilePresenter.onUpdateProfil(userID, name,phonenumber,alamat);
+                profilePresenter.onUpdateProfil(userID, name, phonenumber, alamat, img_profile, uri);
+            }
+        });
+
+        linkeditfotoprofil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImagePicker.with(requireActivity()).crop().start();
             }
         });
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                uri = data.getData();
+                File file = new File(uri.getPath());
+                long fileSizeInKB = file.length() / 1024;
+                if (fileSizeInKB > 3072) {
+                    Log.d(TAG, "onActivityResult: " + file.length());
+                    onSetFailure("gagal, maksimal ukuran gambar kurang dari 3MB!");
+                    uri = null;
+                } else {
+                    fotoprofiledit.setImageURI(uri);
+                }
+            }
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Toast.makeText(getContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "Task Cancelled", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
@@ -121,11 +198,31 @@ public class FragmentProfilSaya extends Fragment implements ProfileContract.View
     }
 
     @Override
-    public void onFailure(String message) {
+    public void onSetFailure(String message) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void onSetPhotoProfile(String images) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                String image = "https://" + images;
+                Picasso.get().load(image).error(R.drawable.ic_fotoprofil).placeholder(R.drawable.ic_fotoprofil).into(fotoprofiledit, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d(TAG, "onSuccess:");
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Log.e(TAG, "onError: " + e.getMessage());
+                    }
+                });
             }
         });
     }

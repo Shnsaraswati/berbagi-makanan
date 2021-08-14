@@ -3,5 +3,6 @@ query useGetProfileByID($id: uuid!) {
         id
         password
         rating
+        img_profile
     }
 }
