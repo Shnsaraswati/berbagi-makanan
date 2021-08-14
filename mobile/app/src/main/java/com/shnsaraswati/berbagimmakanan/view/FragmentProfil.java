@@ -10,11 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shnsaraswati.berbagimmakanan.FragmentPenggunaTerdekat;
 import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.config.SharedPreference;
+import com.shnsaraswati.berbagimmakanan.presenter.ProfileContract;
+import com.shnsaraswati.berbagimmakanan.presenter.ProfilePresenter;
 
 import java.util.Objects;
 
@@ -23,11 +27,14 @@ import java.util.Objects;
  * Use the {@link FragmentProfil#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentProfil extends Fragment {
+public class FragmentProfil extends Fragment implements ProfileContract.ViewFragmentProfil {
 
     TextView linkeditprofil,linkgantikatasandi,linkpenggunaterdekat,linktentangaplikasi, linktpanduan, txtnamaprofil;
     Button btnkeluarapp;
+    RatingBar ratingBar;
+
     SharedPreference sharedPreference;
+    ProfilePresenter profilePresenter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,6 +75,7 @@ public class FragmentProfil extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         sharedPreference = new SharedPreference(requireContext());
+        profilePresenter = new ProfilePresenter(this);
     }
 
     @Override
@@ -85,10 +93,14 @@ public class FragmentProfil extends Fragment {
         linktpanduan = view.findViewById(R.id.linktpanduan);
         btnkeluarapp = view.findViewById(R.id.btnkeluarapp);
         txtnamaprofil = view.findViewById(R.id.txtnamaprofil);
+        ratingBar = view.findViewById(R.id.ratingBar);
 
         String name = sharedPreference.getProfileName();
+        String userID = sharedPreference.getProfileID();
 
         txtnamaprofil.setText(name);
+
+        profilePresenter.onGetProfile(userID);
 
         btnkeluarapp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,5 +163,20 @@ public class FragmentProfil extends Fragment {
 
         return view;
 
+    }
+
+    @Override
+    public void onSetRatingBar(float rating) {
+        ratingBar.setRating(rating);
+    }
+
+    @Override
+    public void onFailure(String message) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

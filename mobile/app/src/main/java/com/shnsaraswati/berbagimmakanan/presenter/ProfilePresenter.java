@@ -10,6 +10,9 @@ import com.shnsaraswati.berbagimmakanan.config.Apollo;
 import org.jetbrains.annotations.NotNull;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import mutation.UseUpdateProfileMutation;
 import mutation.UseUpdateProfilePasswordMutation;
 import query.UseGetProfileByIDQuery;
@@ -17,6 +20,7 @@ import query.UseGetProfileByIDQuery;
 public class ProfilePresenter implements ProfileContract.Presenter{
     ProfileContract.ViewFragmentProfilSaya viewFragmentProfilSaya;
     ProfileContract.ViewFragmentGantiKataSandi viewFragmentGantiKataSandi;
+    ProfileContract.ViewFragmentProfil viewFragmentProfil;
     Apollo apollo = new Apollo();
     ApolloClient apolloClient = apollo.ConnectApollo();
 
@@ -26,6 +30,10 @@ public class ProfilePresenter implements ProfileContract.Presenter{
 
     public ProfilePresenter(ProfileContract.ViewFragmentGantiKataSandi viewFragmentGantiKataSandi) {
         this.viewFragmentGantiKataSandi = viewFragmentGantiKataSandi;
+    }
+
+    public ProfilePresenter(ProfileContract.ViewFragmentProfil viewFragmentProfil) {
+        this.viewFragmentProfil = viewFragmentProfil;
     }
 
     @Override
@@ -82,6 +90,26 @@ public class ProfilePresenter implements ProfileContract.Presenter{
             @Override
             public void onFailure(@NotNull ApolloException e) {
                 viewFragmentGantiKataSandi.onFailure("terjadi kesalahan");
+            }
+        });
+    }
+
+    @Override
+    public void onGetProfile(String id) {
+        apolloClient.query(new UseGetProfileByIDQuery(id)).enqueue(new ApolloCall.Callback<UseGetProfileByIDQuery.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<UseGetProfileByIDQuery.Data> response) {
+                if (!response.getData().users().isEmpty()) {
+                    float rating = ((BigDecimal) response.getData().users().get(0).rating()).floatValue();
+                    viewFragmentProfil.onSetRatingBar(rating);
+                } else {
+                    viewFragmentProfil.onFailure("terjadi kesalahan");
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                viewFragmentProfil.onFailure("terjadi kesalahan");
             }
         });
     }

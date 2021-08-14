@@ -37,6 +37,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:isIndicator="true"
+        android:numStars="5"
+        android:stepSize="0.1"
+        android:progressTint="@color/orange"
+        android:secondaryProgressTint="@color/orange"
         app:layout_constraintEnd_toEndOf="@+id/txtnamaprofil"
         app:layout_constraintStart_toStartOf="@+id/txtnamaprofil"
         app:layout_constraintTop_toBottomOf="@+id/txtnamaprofil" />
