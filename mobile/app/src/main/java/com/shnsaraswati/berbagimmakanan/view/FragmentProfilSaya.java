@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shnsaraswati.berbagimmakanan.R;
@@ -32,6 +33,7 @@ public class FragmentProfilSaya extends Fragment implements ProfileContract.View
     EditText editnama, editnohp, editalamat;
     SharedPreference sharedPreference;
     Button btnsimpanprofil;
+    TextView linkeditfotoprofil;
     ProfilePresenter profilePresenter;
 
     // TODO: Rename and change types of parameters
@@ -82,6 +84,7 @@ public class FragmentProfilSaya extends Fragment implements ProfileContract.View
         editnohp = view.findViewById(R.id.editnohp);
         editalamat = view.findViewById(R.id.editalamat);
         btnsimpanprofil = view.findViewById(R.id.btnsimpanprofil);
+        linkeditfotoprofil = view.findViewById(R.id.linkeditfotoprofil);
 
         String curName = sharedPreference.getProfileName();
         String userID = sharedPreference.getProfileID();

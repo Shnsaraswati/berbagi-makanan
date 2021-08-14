@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +14,15 @@ import android.view.ViewGroup;
 import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.adapter.MenuRecyclerViewAdapter;
 
+import java.util.Calendar;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentMenu#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class FragmentMenu extends Fragment {
+    private static final String TAG = "FragmentMenu";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,6 +74,7 @@ public class FragmentMenu extends Fragment {
         MenuRecyclerViewAdapter adapter = new MenuRecyclerViewAdapter( getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
 
         return view;
     }

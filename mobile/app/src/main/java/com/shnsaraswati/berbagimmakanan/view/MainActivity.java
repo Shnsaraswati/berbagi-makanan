@@ -1,19 +1,18 @@
 package com.shnsaraswati.berbagimmakanan.view;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.WindowManager;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.WindowManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.shnsaraswati.berbagimmakanan.R;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private BottomNavigationView bottomNavigationView;
@@ -21,7 +20,7 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         // mengarahkan isi fragmen sesuai dengan bottom menu
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity  {
         bottomNavigationView.setOnItemSelectedListener(listener);
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new FragmentMenu()).commit();
+//            getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new FragmentMenu()).commit();
             bottomNavigationView.setSelectedItemId(R.id.fragmentMenu);
         }
 
