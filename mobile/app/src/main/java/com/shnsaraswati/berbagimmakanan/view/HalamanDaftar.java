@@ -17,10 +17,12 @@ import com.shnsaraswati.berbagimmakanan.presenter.UserAuthPresenter;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
+
 public class HalamanDaftar extends AppCompatActivity implements UserAuthContract.ViewHalamanDaftar {
 
     private TextView linkmasuk;
-    private Button btnverifikasi;
+    private CircularProgressButton btnverifikasi;
     private EditText daftarnama, daftarnohp, daftarkatasandi;
 
     private UserAuthPresenter userAuthPresenter;
@@ -50,6 +52,8 @@ public class HalamanDaftar extends AppCompatActivity implements UserAuthContract
         btnverifikasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnverifikasi.startAnimation();
+
                 String nama = daftarnama.getText().toString();
                 String hp = daftarnohp.getText().toString();
                 String sandi = BCrypt.hashpw(daftarkatasandi.getText().toString(), BCrypt.gensalt(12));
@@ -72,6 +76,14 @@ public class HalamanDaftar extends AppCompatActivity implements UserAuthContract
 
     @Override
     public void onSuccessRegister(String otp, String id, String name, String phonenumber, String address) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                btnverifikasi.revertAnimation();
+                btnverifikasi.setBackgroundResource(R.drawable.button_oren);
+            }
+        });
+
         Intent intent = new Intent(this, HalamanVerifikasi.class);
         intent.putExtra("otp", otp);
         intent.putExtra("id", id);
@@ -86,6 +98,8 @@ public class HalamanDaftar extends AppCompatActivity implements UserAuthContract
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                btnverifikasi.revertAnimation();
+                btnverifikasi.setBackgroundResource(R.drawable.button_oren);
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
             }
         });

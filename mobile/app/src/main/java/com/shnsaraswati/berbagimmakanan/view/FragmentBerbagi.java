@@ -3,12 +3,15 @@ package com.shnsaraswati.berbagimmakanan.view;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.shnsaraswati.berbagimmakanan.R;
+import com.shnsaraswati.berbagimmakanan.presenter.FragmentMaps;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +19,8 @@ import com.shnsaraswati.berbagimmakanan.R;
  * create an instance of this fragment.
  */
 public class FragmentBerbagi extends Fragment {
+
+    TextView txtlokasi;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +66,17 @@ public class FragmentBerbagi extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_berbagi, container, false);
+        View view = inflater.inflate(R.layout.fragment_berbagi, container, false);
+        txtlokasi = view.findViewById(R.id.txtlokasi);
+        txtlokasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, new FragmentMaps(), "Berhasil");
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+        return view;
     }
 }

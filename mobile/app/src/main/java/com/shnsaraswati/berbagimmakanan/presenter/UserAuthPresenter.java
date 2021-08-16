@@ -41,7 +41,7 @@ public class UserAuthPresenter implements UserAuthContract.Presenter {
     TwillioAPI twillioAPI = new TwillioAPI();
 
     private final static String ACCOUNT_SID = "ACf93c1b6d45840374aef32e6d689f8502";
-    private final static String AUTH_TOKEN = "5f89c7bed3966c0632d4ac89c919a1fc";
+    private final static String AUTH_TOKEN = "eca44db12bd9b4f1448792d2b49cb71e";
 
     public UserAuthPresenter(UserAuthContract.ViewHalamanMasuk view) {
         this.viewHalamanMasuk = view;

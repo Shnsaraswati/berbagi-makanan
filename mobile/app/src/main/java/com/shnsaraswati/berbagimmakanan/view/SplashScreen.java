@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.config.SharedPreference;
 
-public class SplashScreen extends AppCompatActivity {
+public class SplashScreen extends AppCompatActivity  {
 
     Animation topAnim,botomAnim;
     ImageView logoimage;

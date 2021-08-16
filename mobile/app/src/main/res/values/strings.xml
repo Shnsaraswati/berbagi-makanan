@@ -2,6 +2,7 @@
     <string name="app_name">BerbagiMmakanan</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment"></string>
+    <string name="access_token">pk.eyJ1Ijoic2huc2FyYXN3YXRpIiwiYSI6ImNrMzFlZXIzNDA4YXMzbG5xbG9xN3FkeW0ifQ.eORmC-PpHdrA9OTPji4IUA</string>
     <string name="desc1">siapkan makanan yang ingin kamu bagikan</string>
     <string name="desc2">Foto makananmu lalu isi deskripsi makanan serta lokasi pengambilan makanan</string>
     <string name="desc3">Unggah foto makananmu ke beranda</string>
@@ -10,7 +11,7 @@
     <string name="desc6">Setelah permintaanmu diterima, kamu bisa mengambil makananmu di lokasi pemberi makanan</string>
     <string name="desc7">Jangan lupa kasih bintang ya !</string>
     <string name="ACCOUNT_SID">ACf93c1b6d45840374aef32e6d689f8502</string>
-    <string name="AUTH_TOKEN">5f89c7bed3966c0632d4ac89c919a1fc</string>
+    <string name="AUTH_TOKEN">eca44db12bd9b4f1448792d2b49cb71e</string>
     <string name="txt_isi_tentang_aplikasi">Aplikasi ini bertujuan untuk meningkatkan kepedulian atar sesama serta mengurangi sampah makanan yang ada di sekitar kita.\n\n Dalam aplikasi ini kita bisa memberikan makan kita kepada orang yang menginginkannya ataupun kita dapat meminta makanan orang lain yang ingin memberikannya.\n\n Dalam aplikasi ini pengguna berperan sebagai pemberi makanan dan peminta makanan.\n\n Shania Saraswati - 171111011 \n Teknik Informatika \n STIKI Malang</string>
 
     <string-array name="NamaAkun">

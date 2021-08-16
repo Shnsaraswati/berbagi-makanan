@@ -51,10 +51,10 @@
         android:text="Sudah punya akun?"
         android:textColor="@color/brown"
         android:textSize="12dp"
-        app:layout_constraintStart_toStartOf="@+id/btndaftarakun"
+        app:layout_constraintStart_toStartOf="@+id/daftarkatasandi"
         app:layout_constraintTop_toBottomOf="@+id/btndaftarakun" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/btndaftarakun"
         android:layout_width="298dp"
         android:layout_height="49dp"

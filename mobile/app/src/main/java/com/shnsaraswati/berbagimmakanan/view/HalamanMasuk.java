@@ -16,12 +16,13 @@ import com.shnsaraswati.berbagimmakanan.config.SharedPreference;
 import com.shnsaraswati.berbagimmakanan.presenter.UserAuthContract;
 import com.shnsaraswati.berbagimmakanan.presenter.UserAuthPresenter;
 
+import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
 import query.UseGetUserByPhoneQuery;
 
 public class HalamanMasuk extends AppCompatActivity implements UserAuthContract.ViewHalamanMasuk {
 
     private TextView linkdaftar, linklupakatasandi;
-    private Button btnmasuk;
+    private CircularProgressButton btnmasuk;
     private EditText inputnohp, inputkatasandi;
 
     private UserAuthPresenter userAuthPresenter;
@@ -46,6 +47,7 @@ public class HalamanMasuk extends AppCompatActivity implements UserAuthContract.
         btnmasuk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnmasuk.startAnimation();
                 String nohp = inputnohp.getText().toString();
                 String katasandi = inputkatasandi.getText().toString();
                 userAuthPresenter.onLogin(nohp, katasandi);
@@ -94,6 +96,13 @@ public class HalamanMasuk extends AppCompatActivity implements UserAuthContract.
         sharedPreference.setProfileSharedPreference(userid, name, phone_number, address);
         sharedPreference.setIsLoggedIn(true);
 
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                btnmasuk.stopAnimation();
+            }
+        });
+
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
@@ -105,6 +114,8 @@ public class HalamanMasuk extends AppCompatActivity implements UserAuthContract.
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                btnmasuk.revertAnimation();
+                btnmasuk.setBackgroundResource(R.drawable.button_oren);
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
             }
         });
