@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.shnsaraswati.berbagimmakanan.R;
-import com.shnsaraswati.berbagimmakanan.presenter.FragmentMaps;
 
 /**
  * A simple {@link Fragment} subclass.

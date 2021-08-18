@@ -1,4 +1,4 @@
-package com.shnsaraswati.berbagimmakanan.presenter;
+package com.shnsaraswati.berbagimmakanan.view;
 
 import android.location.Location;
 import android.os.Bundle;

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presenter.FragmentMaps">
+    tools:context=".view.FragmentMaps">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
@@ -17,7 +17,7 @@
         mapbox:mapbox_cameraZoom="12"
         />
 
-    
+
 
 
 

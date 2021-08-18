@@ -16,7 +16,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.apollographql.apollo.exception.ApolloException;
 import com.cloudinary.android.MediaManager;
-import com.shnsaraswati.berbagimmakanan.FragmentPenggunaTerdekat;
 import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.config.SharedPreference;
 import com.shnsaraswati.berbagimmakanan.presenter.ProfileContract;

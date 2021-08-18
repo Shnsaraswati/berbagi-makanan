@@ -1,4 +1,4 @@
-package com.shnsaraswati.berbagimmakanan;
+package com.shnsaraswati.berbagimmakanan.view;
 
 import android.os.Bundle;
 
@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.adapter.PenggunaTerdekatRecyclerViewAdapter;
-import com.shnsaraswati.berbagimmakanan.adapter.RiwayatRecyclerViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
