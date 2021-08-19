@@ -8,18 +8,31 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shnsaraswati.berbagimmakanan.R;
+import com.shnsaraswati.berbagimmakanan.config.SharedPreference;
+import com.shnsaraswati.berbagimmakanan.presenter.PostContract;
+import com.shnsaraswati.berbagimmakanan.presenter.PostPresenter;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentBerbagi#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentBerbagi extends Fragment {
+public class FragmentBerbagi extends Fragment implements PostContract.ViewFragmentBerbagi {
 
     TextView txtlokasi;
+    Button btnunggah;
+    EditText inputnamamakanan, inputdeskripsinamamakanan;
+    ImageView imguploadmakanan;
+
+    PostPresenter postPresenter;
+    SharedPreference sharedPreference;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +72,8 @@ public class FragmentBerbagi extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        sharedPreference = new SharedPreference(requireContext());
+        postPresenter = new PostPresenter(this);
     }
 
     @Override
@@ -67,6 +82,20 @@ public class FragmentBerbagi extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_berbagi, container, false);
         txtlokasi = view.findViewById(R.id.txtlokasi);
+        btnunggah = view.findViewById(R.id.btnunggah);
+        inputnamamakanan = view.findViewById(R.id.inputnamamakanan);
+        inputdeskripsinamamakanan = view.findViewById(R.id.inputdeskripsinamamakanan);
+        imguploadmakanan = view.findViewById(R.id.imguploadmakanan);
+
+        String curUserID = sharedPreference.getProfileID();
+
+        btnunggah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String namefood = inputnamamakanan.getText().toString();
+            }
+        });
+
         txtlokasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,5 +106,25 @@ public class FragmentBerbagi extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onSuccessAddPost(String message) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    @Override
+    public void onFailure(String message) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

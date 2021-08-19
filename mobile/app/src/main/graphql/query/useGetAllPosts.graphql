@@ -1,0 +1,13 @@
+query useGetAllPosts {
+    posts(order_by: [{created_at: desc}]) {
+        id
+        name_food
+        seen
+        address
+        picture
+        user {
+            id
+            name
+        }
+    }
+}

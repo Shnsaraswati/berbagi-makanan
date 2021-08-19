@@ -1,0 +1,5 @@
+mutation useAddNewPost($name_food: String!, $picture: String!, $address: String!, $user_id: uuid!, $latitude: float8!, $longitude: float8!) {
+    insert_posts(objects: [{name_food: $name_food, picture: $picture, address: $address, status: true, user_id: $user_id, latitude: $latitude, longitude: $longitude}]) {
+        affected_rows
+    }
+}

@@ -230,7 +230,4 @@ public class FragmentMaps extends Fragment implements OnMapReadyCallback, Locati
         mapView.onDestroy();
     }
 
-
-
-
 }

@@ -1,0 +1,5 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: ALTER TABLE "public"."posts" ADD COLUMN "longitude" float8 NULL;
+  type: run_sql

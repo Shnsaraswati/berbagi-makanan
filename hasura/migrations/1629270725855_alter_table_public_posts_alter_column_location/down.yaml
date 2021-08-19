@@ -1,0 +1,5 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: alter table "public"."posts" rename column "address" to "location";
+  type: run_sql
