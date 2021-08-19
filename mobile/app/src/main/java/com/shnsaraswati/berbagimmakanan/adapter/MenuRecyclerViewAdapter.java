@@ -28,10 +28,10 @@ import query.UseGetAllPostsQuery;
 public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuRecyclerViewAdapter.ViewHolder> implements PostContract.MenuRecyclerView {
     public static final String TAG = "MenuRecyclerViewAdapter";
 
-    private Context context;
-    private FragmentTransaction fragmentTransaction;
-    private List<UseGetAllPostsQuery.Post> posts;
-    private FragmentMenu fragmentMenu;
+    private final Context context;
+    private final FragmentTransaction fragmentTransaction;
+    private final List<UseGetAllPostsQuery.Post> posts;
+    private final FragmentMenu fragmentMenu;
     PostPresenter postPresenter;
 
     public MenuRecyclerViewAdapter(Context context, FragmentTransaction fragmentTransaction, List<UseGetAllPostsQuery.Post> posts, FragmentMenu fragmentMenu) {
@@ -46,7 +46,7 @@ public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuRecyclerVi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_layout_adapter,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_layout_adapter, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -74,10 +74,10 @@ public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuRecyclerVi
         return posts.size();
     }
 
-    public  class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView fotomakanan_menu;
-        TextView txtnamapemberi,txtnamamakanan_menu,txtlinklokasimakanan,txtdilihat;
+        TextView txtnamapemberi, txtnamamakanan_menu, txtlinklokasimakanan, txtdilihat;
         ConstraintLayout constraintLayout;
 
         public ViewHolder(@NonNull View itemView) {

@@ -1,10 +1,7 @@
 package com.shnsaraswati.berbagimmakanan.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -12,15 +9,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.config.SharedPreference;
 import com.shnsaraswati.berbagimmakanan.config.TwillioAPI;
 
 public class HalamanVerifikasi extends AppCompatActivity {
 
-    private  static final String TAG = "HalamanVerifikasi";
+    private static final String TAG = "HalamanVerifikasi";
 
-    private EditText code1,code2,code3,code4;
+    private EditText code1, code2, code3, code4;
     private Button btnkirimverifikasi;
     private TextView linkkirimulang;
 
@@ -31,7 +30,7 @@ public class HalamanVerifikasi extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_halaman_verifikasi);
 
         sharedPreference = new SharedPreference(this);
@@ -55,15 +54,14 @@ public class HalamanVerifikasi extends AppCompatActivity {
             public void onClick(View v) {
                 String code = code1.getText().toString() + code2.getText().toString() + code3.getText().toString() + code4.getText().toString();
 
-                if (otp.equals(code)){
+                if (otp.equals(code)) {
                     // melakukan set preference profile dan is logged in agar tersimpan di memory lokal android
                     sharedPreference.setProfileSharedPreference(userid, name, phonenumber, address);
                     sharedPreference.setIsLoggedIn(true);
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-                }
-                else {
+                } else {
                     Toast.makeText(getApplicationContext(), "Kode Verifikasi Salah !", Toast.LENGTH_LONG).show();
                 }
             }
@@ -73,13 +71,13 @@ public class HalamanVerifikasi extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "melakukan proses mengirim ulang kode verifikasi", Toast.LENGTH_LONG).show();
-               thread = new Thread(new Runnable() {
-                   @Override
-                   public void run() {
-                       twillioAPI.sendSMSVerification(phonenumber, otp);
-                   }
-               });
-               thread.start();
+                thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        twillioAPI.sendSMSVerification(phonenumber, otp);
+                    }
+                });
+                thread.start();
             }
         });
 

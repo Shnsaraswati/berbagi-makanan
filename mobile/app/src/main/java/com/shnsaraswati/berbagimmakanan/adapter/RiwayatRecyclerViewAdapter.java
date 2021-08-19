@@ -20,7 +20,7 @@ public class RiwayatRecyclerViewAdapter extends RecyclerView.Adapter<RiwayatRecy
     private ArrayList<String> imgakun = new ArrayList<>();
     private ArrayList<String> txtnamaakun_riwayat = new ArrayList<>();
     private ArrayList<String> txtketerangan_riwayat = new ArrayList<>();
-    private Context context;
+    private final Context context;
 
     public RiwayatRecyclerViewAdapter(Context context) {
         this.context = context;
@@ -37,7 +37,7 @@ public class RiwayatRecyclerViewAdapter extends RecyclerView.Adapter<RiwayatRecy
     @NonNull
     @Override
     public RiwayatRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.riwayat_layout_adapter,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.riwayat_layout_adapter, parent, false);
         RiwayatRecyclerViewAdapter.ViewHolder viewHolder = new RiwayatRecyclerViewAdapter.ViewHolder(view);
         return viewHolder;
     }
@@ -52,10 +52,10 @@ public class RiwayatRecyclerViewAdapter extends RecyclerView.Adapter<RiwayatRecy
         return 5;
     }
 
-    public  class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgakun;
-        TextView txtnamaakun_riwayat,txtketerangan_riwayat;
+        TextView txtnamaakun_riwayat, txtketerangan_riwayat;
         ConstraintLayout constraintLayoutRiwayat;
 
         public ViewHolder(@NonNull View itemView) {

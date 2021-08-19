@@ -1,23 +1,23 @@
 package com.shnsaraswati.berbagimmakanan.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.shnsaraswati.berbagimmakanan.R;
 
 public class HalamanUtama extends AppCompatActivity {
 
-    Button btnmasuk,btndaftar;
+    Button btnmasuk, btndaftar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_halaman_utama);
 
         btnmasuk = findViewById(R.id.btnmasuk);
@@ -38,11 +38,12 @@ public class HalamanUtama extends AppCompatActivity {
         });
     }
 
-    public void openHalamanmasuk(){
+    public void openHalamanmasuk() {
         Intent intent = new Intent(this, HalamanMasuk.class);
         startActivity(intent);
     }
-    public void openHalamandaftar(){
+
+    public void openHalamandaftar() {
         Intent intent = new Intent(this, HalamanDaftar.class);
         startActivity(intent);
     }

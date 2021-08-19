@@ -2,13 +2,12 @@ package com.shnsaraswati.berbagimmakanan.view;
 
 import android.location.Location;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineListener;
@@ -101,8 +100,8 @@ public class FragmentMaps extends Fragment implements OnMapReadyCallback, Locati
         enableLocation();
     }
 
-    private void enableLocation(){
-        if (PermissionsManager.areLocationPermissionsGranted(getContext())){
+    private void enableLocation() {
+        if (PermissionsManager.areLocationPermissionsGranted(getContext())) {
             initializeLocationEngine();
             initializeLocationLayer();
         } else {
@@ -120,7 +119,7 @@ public class FragmentMaps extends Fragment implements OnMapReadyCallback, Locati
 
     @Override
     public void onLocationChanged(Location location) {
-        if (location != null){
+        if (location != null) {
             originLocation = location;
             setCameraPosition(location);
         }
@@ -134,41 +133,41 @@ public class FragmentMaps extends Fragment implements OnMapReadyCallback, Locati
 
     @Override
     public void onPermissionResult(boolean granted) {
-        if (granted){
+        if (granted) {
             enableLocation();
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        permissionsManager.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @SuppressWarnings("MissingPermission")
-    private void initializeLocationEngine(){
+    private void initializeLocationEngine() {
         locationEngine = new LocationEngineProvider(getContext()).obtainBestLocationEngineAvailable();
         locationEngine.setPriority(LocationEnginePriority.HIGH_ACCURACY);
         locationEngine.activate();
 
         Location lastLocation = locationEngine.getLastLocation();
-        if (lastLocation != null){
+        if (lastLocation != null) {
             originLocation = lastLocation;
             setCameraPosition(lastLocation);
-        }else {
+        } else {
             locationEngine.addLocationEngineListener(this);
         }
 
     }
 
     @SuppressWarnings("MissingPermission")
-    private void initializeLocationLayer(){
+    private void initializeLocationLayer() {
         locationLayerPlugin = new LocationLayerPlugin(mapView, map, locationEngine);
         locationLayerPlugin.setLocationLayerEnabled(true);
         locationLayerPlugin.setCameraMode(CameraMode.TRACKING);
         locationLayerPlugin.setRenderMode(RenderMode.NORMAL);
     }
 
-    private  void setCameraPosition(Location location){
+    private void setCameraPosition(Location location) {
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13.0));
     }
 
@@ -176,10 +175,10 @@ public class FragmentMaps extends Fragment implements OnMapReadyCallback, Locati
     @Override
     public void onStart() {
         super.onStart();
-        if (locationEngine != null){
+        if (locationEngine != null) {
             locationEngine.requestLocationUpdates();
         }
-        if (locationLayerPlugin != null){
+        if (locationLayerPlugin != null) {
             locationLayerPlugin.onStart();
         }
         mapView.onStart();
@@ -200,10 +199,10 @@ public class FragmentMaps extends Fragment implements OnMapReadyCallback, Locati
     @Override
     public void onStop() {
         super.onStop();
-        if (locationEngine != null){
+        if (locationEngine != null) {
             locationEngine.removeLocationUpdates();
         }
-        if (locationLayerPlugin != null){
+        if (locationLayerPlugin != null) {
             locationLayerPlugin.onStop();
         }
         mapView.onStop();
@@ -224,7 +223,7 @@ public class FragmentMaps extends Fragment implements OnMapReadyCallback, Locati
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (locationEngine != null){
+        if (locationEngine != null) {
             locationEngine.deactivate();
         }
         mapView.onDestroy();

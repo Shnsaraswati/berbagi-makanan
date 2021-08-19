@@ -124,10 +124,10 @@ public class PostPresenter implements PostContract.Presenter {
         apolloClient.mutate(new UseUpdateSeenPostMutation(post_id)).enqueue(new ApolloCall.Callback<UseUpdateSeenPostMutation.Data>() {
             @Override
             public void onResponse(@NotNull Response<UseUpdateSeenPostMutation.Data> response) {
-                if (response.getData() != null){
-                    if (response.getData().update_posts().affected_rows() > 0){
+                if (response.getData() != null) {
+                    if (response.getData().update_posts().affected_rows() > 0) {
                         menuRecyclerView.onSuccessUpdateSeenPost();
-                    }else {
+                    } else {
                         menuRecyclerView.onFailure("Terjadi Kesalahan");
                     }
                 } else {

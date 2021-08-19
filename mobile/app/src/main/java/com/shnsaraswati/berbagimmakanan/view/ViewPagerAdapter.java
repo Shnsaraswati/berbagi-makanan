@@ -16,7 +16,7 @@ import com.shnsaraswati.berbagimmakanan.R;
 public class ViewPagerAdapter extends PagerAdapter {
 
     Context context;
-    int images[] ={
+    int[] images = {
             R.drawable.keranjang,
             R.drawable.foto,
             R.drawable.upload,
@@ -26,7 +26,7 @@ public class ViewPagerAdapter extends PagerAdapter {
             R.drawable.bintang
     };
 
-    int description[] = {
+    int[] description = {
 
             R.string.desc1,
             R.string.desc2,
@@ -38,7 +38,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     };
 
-    public ViewPagerAdapter( Context context){
+    public ViewPagerAdapter(Context context) {
 
         this.context = context;
 
@@ -57,8 +57,8 @@ public class ViewPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.slider_layout,container,false);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.slider_layout, container, false);
 
         ImageView slidetitleimage = (ImageView) view.findViewById(R.id.gambar1);
         TextView slidedescription = (TextView) view.findViewById(R.id.textslide1);
@@ -72,6 +72,6 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((LinearLayout)object);
+        container.removeView((LinearLayout) object);
     }
 }

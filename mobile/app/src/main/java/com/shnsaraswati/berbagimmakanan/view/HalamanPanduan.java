@@ -1,8 +1,5 @@
 package com.shnsaraswati.berbagimmakanan.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -10,13 +7,16 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.shnsaraswati.berbagimmakanan.R;
 
 public class HalamanPanduan extends AppCompatActivity {
 
     ViewPager mslideViewpager;
     LinearLayout mDotLayout;
-    TextView txtskip,txtnext,txtback;
+    TextView txtskip, txtnext, txtback;
 
     TextView[] dots;
     ViewPagerAdapter viewPagerAdapter;
@@ -35,8 +35,8 @@ public class HalamanPanduan extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (getitem(0) > 0){
-                    mslideViewpager.setCurrentItem(getitem(-1),true);
+                if (getitem(0) > 0) {
+                    mslideViewpager.setCurrentItem(getitem(-1), true);
                 }
 
             }
@@ -45,10 +45,10 @@ public class HalamanPanduan extends AppCompatActivity {
         txtnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (getitem(0) < 6){
-                    mslideViewpager.setCurrentItem(getitem(1), true );
+                if (getitem(0) < 6) {
+                    mslideViewpager.setCurrentItem(getitem(1), true);
                 } else {
-                    Intent i = new Intent(HalamanPanduan.this,MainActivity.class);
+                    Intent i = new Intent(HalamanPanduan.this, MainActivity.class);
                     startActivity(i);
                     finish();
                 }
@@ -72,20 +72,20 @@ public class HalamanPanduan extends AppCompatActivity {
         mslideViewpager.addOnPageChangeListener(viewListener);
     }
 
-    public void setUpindicator(int position){
+    public void setUpindicator(int position) {
         dots = new TextView[7];
         mDotLayout.removeAllViews();
 
-        for (int i = 0 ; i <dots.length;i++){
+        for (int i = 0; i < dots.length; i++) {
 
             dots[i] = new TextView(this);
             dots[i].setText(Html.fromHtml("&#8226"));
             dots[i].setTextSize(35);
-            dots[i].setTextColor(getResources().getColor(R.color.white,getApplicationContext().getTheme()));
+            dots[i].setTextColor(getResources().getColor(R.color.white, getApplicationContext().getTheme()));
             mDotLayout.addView(dots[i]);
         }
 
-        dots[position].setTextColor(getResources().getColor(R.color.white,getApplicationContext().getTheme()));
+        dots[position].setTextColor(getResources().getColor(R.color.white, getApplicationContext().getTheme()));
     }
 
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
@@ -98,7 +98,7 @@ public class HalamanPanduan extends AppCompatActivity {
         public void onPageSelected(int position) {
 
             setUpindicator(position);
-            if (position > 0 ){
+            if (position > 0) {
                 txtback.setVisibility(View.VISIBLE);
             } else {
                 txtback.setVisibility(View.INVISIBLE);
@@ -112,8 +112,8 @@ public class HalamanPanduan extends AppCompatActivity {
         }
     };
 
-    private  int getitem(int i){
-        return  mslideViewpager.getCurrentItem() + i;
+    private int getitem(int i) {
+        return mslideViewpager.getCurrentItem() + i;
     }
 
 }

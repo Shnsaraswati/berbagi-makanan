@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +20,7 @@ public class PenggunaTerdekatRecyclerViewAdapter extends RecyclerView.Adapter<Pe
     private ArrayList<String> imgakun_terdekat = new ArrayList<>();
     private ArrayList<String> txtnamaakun_terdekat = new ArrayList<>();
     private ArrayList<String> lokasi_terdekat = new ArrayList<>();
-    private Context context;
+    private final Context context;
 
     public PenggunaTerdekatRecyclerViewAdapter(Context context) {
         this.context = context;
@@ -34,10 +33,11 @@ public class PenggunaTerdekatRecyclerViewAdapter extends RecyclerView.Adapter<Pe
         this.context = context;
 
     }
+
     @NonNull
     @Override
     public PenggunaTerdekatRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.penggunaterdekat_layout_adapter,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.penggunaterdekat_layout_adapter, parent, false);
         PenggunaTerdekatRecyclerViewAdapter.ViewHolder viewHolder = new PenggunaTerdekatRecyclerViewAdapter.ViewHolder(view);
         return viewHolder;
     }
@@ -52,7 +52,7 @@ public class PenggunaTerdekatRecyclerViewAdapter extends RecyclerView.Adapter<Pe
         return 10;
     }
 
-    public  class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgakun_terdekat;
         TextView txtnamaakun_terdekat, lokasi_terdekat;

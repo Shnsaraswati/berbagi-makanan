@@ -23,13 +23,13 @@ public class NotifikasiRecyclerViewAdapter extends RecyclerView.Adapter<Notifika
     private ArrayList<String> txtketerangan_notif = new ArrayList<>();
     private ArrayList<String> btndtolak = new ArrayList<>();
     private ArrayList<String> btnterima = new ArrayList<>();
-    private Context context;
+    private final Context context;
 
     public NotifikasiRecyclerViewAdapter(Context context) {
         this.context = context;
     }
 
-    public NotifikasiRecyclerViewAdapter(ArrayList<String> imgakun_notif, ArrayList<String> txtnamaakun_notif,ArrayList<String> btnterima,ArrayList<String> btndtolak, ArrayList<String> txtketerangan_notif, Context context) {
+    public NotifikasiRecyclerViewAdapter(ArrayList<String> imgakun_notif, ArrayList<String> txtnamaakun_notif, ArrayList<String> btnterima, ArrayList<String> btndtolak, ArrayList<String> txtketerangan_notif, Context context) {
         this.imgakun_notif = imgakun_notif;
         this.txtnamaakun_notif = txtnamaakun_notif;
         this.txtketerangan_notif = txtketerangan_notif;
@@ -42,7 +42,7 @@ public class NotifikasiRecyclerViewAdapter extends RecyclerView.Adapter<Notifika
     @NonNull
     @Override
     public NotifikasiRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notifikasi_layout_adapter,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notifikasi_layout_adapter, parent, false);
         NotifikasiRecyclerViewAdapter.ViewHolder viewHolder = new NotifikasiRecyclerViewAdapter.ViewHolder(view);
         return viewHolder;
     }
@@ -57,12 +57,12 @@ public class NotifikasiRecyclerViewAdapter extends RecyclerView.Adapter<Notifika
         return 5;
     }
 
-    public  class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgakun_notif;
         TextView txtnamaakun_notif, txtketerangan_notif;
         ConstraintLayout constraintLayoutNotif;
-        Button btnterima,btndtolak;
+        Button btnterima, btndtolak;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
