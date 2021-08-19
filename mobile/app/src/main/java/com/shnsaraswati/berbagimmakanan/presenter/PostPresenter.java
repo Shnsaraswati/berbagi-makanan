@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import mutation.UseAddNewPostMutation;
+import mutation.UseUpdateSeenPostMutation;
 import query.UseGetAllPostsQuery;
 
 public class PostPresenter implements PostContract.Presenter {
@@ -26,6 +27,7 @@ public class PostPresenter implements PostContract.Presenter {
 
     PostContract.ViewFragmentMenu viewFragmentMenu;
     PostContract.ViewFragmentBerbagi viewFragmentBerbagi;
+    PostContract.MenuRecyclerView menuRecyclerView;
     Apollo apollo = new Apollo();
     ApolloClient apolloClient = apollo.ConnectApollo();
 
@@ -35,6 +37,10 @@ public class PostPresenter implements PostContract.Presenter {
 
     public PostPresenter(PostContract.ViewFragmentBerbagi viewFragmentBerbagi) {
         this.viewFragmentBerbagi = viewFragmentBerbagi;
+    }
+
+    public PostPresenter(PostContract.MenuRecyclerView menuRecyclerView) {
+        this.menuRecyclerView = menuRecyclerView;
     }
 
     @Override
@@ -111,5 +117,28 @@ public class PostPresenter implements PostContract.Presenter {
                         Log.d(TAG, "onReschedule: ");
                     }
                 }).dispatch();
+    }
+
+    @Override
+    public void onUpdateSeenPost(String post_id) {
+        apolloClient.mutate(new UseUpdateSeenPostMutation(post_id)).enqueue(new ApolloCall.Callback<UseUpdateSeenPostMutation.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<UseUpdateSeenPostMutation.Data> response) {
+                if (response.getData() != null){
+                    if (response.getData().update_posts().affected_rows() > 0){
+                        menuRecyclerView.onSuccessUpdateSeenPost();
+                    }else {
+                        menuRecyclerView.onFailure("Terjadi Kesalahan");
+                    }
+                } else {
+                    menuRecyclerView.onFailure("Terjadi Kesalahan");
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                menuRecyclerView.onFailure("Terjadi Kesalahan");
+            }
+        });
     }
 }

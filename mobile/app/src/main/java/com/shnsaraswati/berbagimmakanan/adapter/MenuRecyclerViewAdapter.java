@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -14,6 +15,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.shnsaraswati.berbagimmakanan.R;
+import com.shnsaraswati.berbagimmakanan.presenter.PostContract;
+import com.shnsaraswati.berbagimmakanan.presenter.PostPresenter;
+import com.shnsaraswati.berbagimmakanan.view.FragmentMenu;
 import com.shnsaraswati.berbagimmakanan.view.FragmentMenuDipilih;
 import com.squareup.picasso.Picasso;
 
@@ -21,18 +25,22 @@ import java.util.List;
 
 import query.UseGetAllPostsQuery;
 
-public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuRecyclerViewAdapter.ViewHolder> {
+public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuRecyclerViewAdapter.ViewHolder> implements PostContract.MenuRecyclerView {
     public static final String TAG = "MenuRecyclerViewAdapter";
 
     private Context context;
     private FragmentTransaction fragmentTransaction;
     private List<UseGetAllPostsQuery.Post> posts;
+    private FragmentMenu fragmentMenu;
+    PostPresenter postPresenter;
 
-    public MenuRecyclerViewAdapter(Context context, FragmentTransaction fragmentTransaction, List<UseGetAllPostsQuery.Post> posts) {
+    public MenuRecyclerViewAdapter(Context context, FragmentTransaction fragmentTransaction, List<UseGetAllPostsQuery.Post> posts, FragmentMenu fragmentMenu) {
         Log.d(TAG, "MenuRecyclerViewAdapter Posts: " + posts);
         this.context = context;
         this.fragmentTransaction = fragmentTransaction;
         this.posts = posts;
+        this.fragmentMenu = fragmentMenu;
+        postPresenter = new PostPresenter(this);
     }
 
     @NonNull
@@ -55,9 +63,8 @@ public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuRecyclerVi
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentTransaction.replace(R.id.fragment, new FragmentMenuDipilih(), "Berhasil");
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                String post_id = posts.get(position).id().toString();
+                postPresenter.onUpdateSeenPost(post_id);
             }
         });
     }
@@ -84,5 +91,23 @@ public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuRecyclerVi
             constraintLayout = itemView.findViewById(R.id.constraintLayout);
 
         }
+    }
+
+    @Override
+    public void onSuccessUpdateSeenPost() {
+        fragmentTransaction.replace(R.id.fragment, new FragmentMenuDipilih(), "Berhasil");
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onFailure(String message) {
+        fragmentMenu.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 }

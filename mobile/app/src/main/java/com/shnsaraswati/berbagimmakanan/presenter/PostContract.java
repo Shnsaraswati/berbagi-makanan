@@ -20,6 +20,11 @@ public class PostContract {
         void onFailure(String message);
     }
 
+    public interface MenuRecyclerView{
+        void onSuccessUpdateSeenPost();
+        void onFailure(String message);
+    }
+
     public interface Callback {
         void onResponse(List<UseGetAllPostsQuery.Post> posts);
         void onFailure(@NotNull ApolloException e);
@@ -28,5 +33,7 @@ public class PostContract {
     interface Presenter {
         void onGetAllPosts(Callback callback);
         void onNewAddPost(String namefood, String address, String user_id, float latitude, float longitude, Uri uri);
+        void onUpdateSeenPost(String post_id);
     }
+
 }

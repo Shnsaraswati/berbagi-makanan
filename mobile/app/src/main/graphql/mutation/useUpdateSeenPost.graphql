@@ -1,0 +1,5 @@
+mutation useUpdateSeenPost($post_id: uuid!) {
+    update_posts(where: {id: {_eq: $post_id}}, _inc: {seen: 1}) {
+        affected_rows
+    }
+}
