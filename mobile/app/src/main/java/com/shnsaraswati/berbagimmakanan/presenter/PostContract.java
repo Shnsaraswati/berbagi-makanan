@@ -36,7 +36,7 @@ public class PostContract {
     interface Presenter {
         void onGetAllPosts(Callback callback);
 
-        void onNewAddPost(String namefood, String address, String user_id, float latitude, float longitude, Uri uri);
+        void onNewAddPost(String namefood, String address, String user_id, double latitude, double longitude, Uri uri);
 
         void onUpdateSeenPost(String post_id);
     }

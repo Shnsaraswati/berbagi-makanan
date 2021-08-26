@@ -1,7 +1,13 @@
 package com.shnsaraswati.berbagimmakanan.view;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +17,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineListener;
 import com.mapbox.android.core.location.LocationEnginePriority;
 import com.mapbox.android.core.location.LocationEngineProvider;
+import com.mapbox.api.geocoding.v5.GeocodingCriteria;
+import com.mapbox.api.geocoding.v5.MapboxGeocoding;
 import com.mapbox.api.staticmap.v1.MapboxStaticMap;
 import com.mapbox.api.staticmap.v1.StaticMapCriteria;
 import com.mapbox.api.staticmap.v1.models.StaticMarkerAnnotation;
@@ -28,8 +38,11 @@ import com.shnsaraswati.berbagimmakanan.presenter.PostContract;
 import com.shnsaraswati.berbagimmakanan.presenter.PostPresenter;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,19 +50,25 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class FragmentBerbagi extends Fragment implements PostContract.ViewFragmentBerbagi, LocationEngineListener {
+    public static final String TAG = "FragmentBerbagi";
 
     TextView txtlokasi;
     Button btnunggah;
     EditText inputnamamakanan, inputdeskripsinamamakanan;
     ImageView imguploadmakanan, imgmaplokasi;
 
+
     PostPresenter postPresenter;
     SharedPreference sharedPreference;
 
+    Uri uri;
+
     LocationEngine locationEngine;
-    Location originLocation;
+    public Location originLocation;
     List<StaticMarkerAnnotation> markerStatic;
     StaticMarkerAnnotation staticMarkerAnnotation;
+    Geocoder geocoder;
+    List<Address> addresses;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -91,7 +110,6 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
         }
         sharedPreference = new SharedPreference(requireContext());
         postPresenter = new PostPresenter(this);
-        initializeLocationEngine();
     }
 
     @Override
@@ -99,6 +117,7 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_berbagi, container, false);
+        initializeLocationEngine();
         txtlokasi = view.findViewById(R.id.txtlokasi);
         btnunggah = view.findViewById(R.id.btnunggah);
         inputnamamakanan = view.findViewById(R.id.inputnamamakanan);
@@ -128,13 +147,35 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
                 .retina(true)
                 .build();
 
+        geocoder = new Geocoder(requireContext(), Locale.getDefault());
+
+        try {
+            addresses = geocoder.getFromLocation(originLocation.getLatitude(), originLocation.getLongitude(), 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+            onFailure("terjadi kesalahan");
+        }
+
+
         String imgURL = staticMap.url().toString();
         Picasso.get().load(imgURL).error(R.drawable.ic_map).into(imgmaplokasi);
+
+        imguploadmakanan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImagePicker.with(requireActivity()).crop().start();
+            }
+        });
 
         btnunggah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String namefood = inputnamamakanan.getText().toString();
+                String address = addresses.get(0).getAddressLine(0);
+                double latitude = originLocation.getLatitude();
+                double longitude = originLocation.getLongitude();
+
+                postPresenter.onNewAddPost(namefood, address, curUserID, latitude, longitude, uri);
             }
         });
 
@@ -148,6 +189,30 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
             }
         });
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                uri = data.getData();
+                File file = new File(uri.getPath());
+                long fileSizeInKB = file.length() / 1024;
+                if (fileSizeInKB > 3072) {
+                    Log.d(TAG, "onActivityResult: " + file.length());
+                    onFailure("gagal, maksimal ukuran gambar kurang dari 3MB!");
+                    uri = null;
+                } else {
+                    imguploadmakanan.setImageURI(uri);
+                }
+            }
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Toast.makeText(getContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "Task Cancelled", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -178,8 +243,10 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
 
         Location lastLocation = locationEngine.getLastLocation();
         if (lastLocation != null) {
+            Log.d(TAG, "initializeLocationEngine: last location tidak null");
             originLocation = lastLocation;
         } else {
+            Log.d(TAG, "initializeLocationEngine: last location null");
             locationEngine.addLocationEngineListener(this);
         }
     }
@@ -192,6 +259,8 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
 
     @Override
     public void onLocationChanged(Location location) {
-
+        if (location != null) {
+            originLocation = location;
+        }
     }
 }

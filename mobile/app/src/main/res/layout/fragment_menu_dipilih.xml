@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Nama Makanan"
@@ -34,21 +34,21 @@
         android:textSize="13dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtnamaakun_menudipilih" />
+        app:layout_constraintTop_toBottomOf="@+id/imgmakanandipilih" />
 
     <TextView
         android:id="@+id/txtxdeskripsimakanan_menudipilih"
         android:layout_width="286dp"
         android:layout_height="142dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/border"
         android:fontFamily="@font/poppins_light"
+        android:paddingStart="15dp"
         android:text="Deskripsi Makanan"
         android:textColor="@color/black"
         android:textSize="12dp"
-        android:paddingStart="15dp"
-        android:background="@drawable/border"
-        app:layout_constraintEnd_toEndOf="@+id/txtnamamakanan_menudipilih"
-        app:layout_constraintStart_toStartOf="@+id/txtnamamakanan_menudipilih"
+        app:layout_constraintEnd_toEndOf="@+id/imgmakanandipilih"
+        app:layout_constraintStart_toStartOf="@+id/imgmakanandipilih"
         app:layout_constraintTop_toBottomOf="@+id/txtnamamakanan_menudipilih" />
 
     <ImageView
@@ -124,6 +124,16 @@
         app:layout_constraintEnd_toEndOf="@+id/txtxdeskripsimakanan_menudipilih"
         app:layout_constraintStart_toEndOf="@+id/btnkembalikemenu"
         app:layout_constraintTop_toTopOf="@+id/btnkembalikemenu" />
+
+    <ImageView
+        android:id="@+id/imgmakanandipilih"
+        android:layout_width="131dp"
+        android:layout_height="119dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/ic_fotomakanan_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

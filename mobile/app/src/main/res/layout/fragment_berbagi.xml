@@ -34,6 +34,7 @@
                 android:layout_height="45dp"
                 android:background="@drawable/input_text"
                 android:text=""
+                android:paddingStart="15dp"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/textView6"
@@ -57,6 +58,7 @@
                 android:layout_height="120dp"
                 android:background="@drawable/input_text"
                 android:text=""
+                android:paddingStart="15dp"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/textView11"
@@ -116,8 +118,8 @@
 
             <ImageView
                 android:id="@+id/imguploadmakanan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
                 android:src="@drawable/ic_photo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

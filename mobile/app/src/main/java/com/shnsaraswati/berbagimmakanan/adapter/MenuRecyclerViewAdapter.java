@@ -14,11 +14,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cloudinary.android.MediaManager;
 import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.presenter.PostContract;
 import com.shnsaraswati.berbagimmakanan.presenter.PostPresenter;
 import com.shnsaraswati.berbagimmakanan.view.FragmentMenu;
 import com.shnsaraswati.berbagimmakanan.view.FragmentMenuDipilih;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -59,7 +61,19 @@ public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuRecyclerVi
         holder.txtnamamakanan_menu.setText(posts.get(position).name_food());
         holder.txtdilihat.setText(seen);
         holder.txtlinklokasimakanan.setText(posts.get(position).address());
-        Picasso.get().load(posts.get(position).picture()).error(R.drawable.ic_fotomakanan_menu).into(holder.fotomakanan_menu);
+        String image = MediaManager.get().url().generate("berbagimakanan/" + posts.get(position).picture());
+        Picasso.get().load(image).error(R.drawable.ic_fotoprofil).placeholder(R.drawable.ic_fotomakanan_menu).into(holder.fotomakanan_menu, new Callback() {
+            @Override
+            public void onSuccess() {
+                Log.d(TAG, "onSuccess:");
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.e(TAG, "onError: " + e.getMessage());
+            }
+        });
+//        Picasso.get().load(posts.get(position).picture()).error(R.drawable.ic_fotomakanan_menu).into(holder.fotomakanan_menu);
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

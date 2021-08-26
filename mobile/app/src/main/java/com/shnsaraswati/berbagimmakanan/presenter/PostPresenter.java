@@ -64,7 +64,7 @@ public class PostPresenter implements PostContract.Presenter {
     }
 
     @Override
-    public void onNewAddPost(String namefood, String address, String user_id, float latitude, float longitude, Uri uri) {
+    public void onNewAddPost(String namefood, String address, String user_id, double latitude, double longitude, Uri uri) {
         String uniqueTime = String.valueOf(Calendar.getInstance().getTimeInMillis());
         String img_public_id = namefood + "_" + uniqueTime;
         String imgFood = namefood + "_" + uniqueTime + ".jpg";

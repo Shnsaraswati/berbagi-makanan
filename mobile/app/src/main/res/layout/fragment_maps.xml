@@ -13,11 +13,23 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="-7.983908"
         mapbox:mapbox_cameraTargetLng="112.621391"
-        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/streets-v10"
         mapbox:mapbox_cameraZoom="12"
         />
 
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnkonfirmasi"
+        android:layout_width="298dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/button_oren"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Konfirmasi"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        mapbox:layout_constraintBottom_toBottomOf="parent"
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:layout_constraintStart_toStartOf="parent" />
 
 
 
