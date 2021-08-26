@@ -1,6 +1,8 @@
 package com.shnsaraswati.berbagimmakanan.view;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -8,13 +10,19 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.config.SharedPreference;
 
 public class SplashScreen extends AppCompatActivity {
+
+    public static final int LOCATION_PERMISSION_CODE = 110;
 
     Animation topAnim, botomAnim;
     ImageView logoimage;
@@ -44,16 +52,41 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (sharedPreference.getIsLoggedIn()) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Intent intent = new Intent(SplashScreen.this, HalamanUtama.class);
-                    startActivity(intent);
-                    finish();
-                }
+                checkPermission(Manifest.permission.ACCESS_FINE_LOCATION, LOCATION_PERMISSION_CODE);
             }
         }, 5000);
+    }
+
+    public void checkPermission(String permission, int requestCode) {
+        if (ContextCompat.checkSelfPermission(SplashScreen.this, permission) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(SplashScreen.this, new String[]{permission}, requestCode);
+        } else {
+            checkStatusUser();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == LOCATION_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                checkStatusUser();
+            } else {
+                Toast.makeText(this, "anda harus mengaktifkan izin lokasi", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    public void checkStatusUser() {
+        if (sharedPreference.getIsLoggedIn()) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Intent intent = new Intent(SplashScreen.this, HalamanUtama.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

@@ -126,9 +126,19 @@ public class FragmentProfilSaya extends Fragment implements ProfileContract.View
                 if (user != null) {
                     img_profile = user.img_profile();
                     String image = MediaManager.get().url().generate("berbagimakanan/" + img_profile);
-                    String[] images = image.split("http://");
+                    String imagehttp = "";
 
-                    onSetPhotoProfile(images[1]);
+                    if (image.contains("http://")) {
+                        String[] images = image.split("http://");
+
+                        imagehttp = images[1];
+                    } else if (image.contains("https://")) {
+                        String[] images = image.split("https://");
+
+                        imagehttp = images[1];
+                    }
+
+                    onSetPhotoProfile(imagehttp);
                 } else {
                     onSetFailure("terjadi kesalahan");
                 }

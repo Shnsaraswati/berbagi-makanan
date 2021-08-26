@@ -1,5 +1,6 @@
 package com.shnsaraswati.berbagimmakanan.view;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,25 +14,42 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.mapbox.android.core.location.LocationEngine;
+import com.mapbox.android.core.location.LocationEngineListener;
+import com.mapbox.android.core.location.LocationEnginePriority;
+import com.mapbox.android.core.location.LocationEngineProvider;
+import com.mapbox.api.staticmap.v1.MapboxStaticMap;
+import com.mapbox.api.staticmap.v1.StaticMapCriteria;
+import com.mapbox.api.staticmap.v1.models.StaticMarkerAnnotation;
+import com.mapbox.geojson.Point;
 import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.config.SharedPreference;
 import com.shnsaraswati.berbagimmakanan.presenter.PostContract;
 import com.shnsaraswati.berbagimmakanan.presenter.PostPresenter;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentBerbagi#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentBerbagi extends Fragment implements PostContract.ViewFragmentBerbagi {
+public class FragmentBerbagi extends Fragment implements PostContract.ViewFragmentBerbagi, LocationEngineListener {
 
     TextView txtlokasi;
     Button btnunggah;
     EditText inputnamamakanan, inputdeskripsinamamakanan;
-    ImageView imguploadmakanan;
+    ImageView imguploadmakanan, imgmaplokasi;
 
     PostPresenter postPresenter;
     SharedPreference sharedPreference;
+
+    LocationEngine locationEngine;
+    Location originLocation;
+    List<StaticMarkerAnnotation> markerStatic;
+    StaticMarkerAnnotation staticMarkerAnnotation;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,6 +91,7 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
         }
         sharedPreference = new SharedPreference(requireContext());
         postPresenter = new PostPresenter(this);
+        initializeLocationEngine();
     }
 
     @Override
@@ -85,8 +104,32 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
         inputnamamakanan = view.findViewById(R.id.inputnamamakanan);
         inputdeskripsinamamakanan = view.findViewById(R.id.inputdeskripsinamamakanan);
         imguploadmakanan = view.findViewById(R.id.imguploadmakanan);
+        imgmaplokasi = view.findViewById(R.id.imgmaplokasi);
 
         String curUserID = sharedPreference.getProfileID();
+
+        staticMarkerAnnotation = StaticMarkerAnnotation.builder()
+                .lnglat(Point.fromLngLat(originLocation.getLongitude(), originLocation.getLatitude()))
+                .name(StaticMapCriteria.MEDIUM_PIN)
+                .build();
+
+        markerStatic = new ArrayList<>();
+        markerStatic.add(staticMarkerAnnotation);
+
+
+        MapboxStaticMap staticMap = MapboxStaticMap.builder()
+                .accessToken(getString(R.string.access_token))
+                .styleId(StaticMapCriteria.STREET_STYLE)
+                .cameraPoint(Point.fromLngLat(originLocation.getLongitude(), originLocation.getLatitude()))
+                .staticMarkerAnnotations(markerStatic)
+                .cameraZoom(13)
+                .width(180)
+                .height(180)
+                .retina(true)
+                .build();
+
+        String imgURL = staticMap.url().toString();
+        Picasso.get().load(imgURL).error(R.drawable.ic_map).into(imgmaplokasi);
 
         btnunggah.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,5 +168,30 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
                 Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @SuppressWarnings("MissingPermission")
+    private void initializeLocationEngine() {
+        locationEngine = new LocationEngineProvider(getContext()).obtainBestLocationEngineAvailable();
+        locationEngine.setPriority(LocationEnginePriority.HIGH_ACCURACY);
+        locationEngine.activate();
+
+        Location lastLocation = locationEngine.getLastLocation();
+        if (lastLocation != null) {
+            originLocation = lastLocation;
+        } else {
+            locationEngine.addLocationEngineListener(this);
+        }
+    }
+
+    @SuppressWarnings("MissingPermission")
+    @Override
+    public void onConnected() {
+        locationEngine.requestLocationUpdates();
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
     }
 }

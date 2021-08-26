@@ -118,10 +118,20 @@ public class FragmentProfil extends Fragment implements ProfileContract.ViewFrag
                     float rating = ((BigDecimal) user.rating()).floatValue();
                     String img_profile = user.img_profile();
                     String image = MediaManager.get().url().generate("berbagimakanan/" + img_profile);
-                    String[] images = image.split("http://");
+                    String imagehttp = "";
+
+                    if (image.contains("http://")) {
+                        String[] images = image.split("http://");
+
+                        imagehttp = images[1];
+                    } else if (image.contains("https://")) {
+                        String[] images = image.split("https://");
+
+                        imagehttp = images[1];
+                    }
 
                     onSetRatingBar(rating);
-                    onSetPhotoProfile(images[1]);
+                    onSetPhotoProfile(imagehttp);
                 } else {
                     onSetFailure("terjadi kesalahan");
                 }
