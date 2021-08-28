@@ -24,6 +24,7 @@
         <activity android:name=".view.HalamanDaftar" />
         <activity android:name=".view.HalamanMasuk" />
         <activity android:name=".view.HalamanUtama" />
+        <activity android:name=".view.HalamanMaps" />
         <activity android:name=".view.MainActivity" />
         <activity android:name=".view.SplashScreen">
             <intent-filter>

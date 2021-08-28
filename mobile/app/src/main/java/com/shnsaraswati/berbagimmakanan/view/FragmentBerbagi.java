@@ -64,7 +64,7 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
     Uri uri;
 
     LocationEngine locationEngine;
-    public Location originLocation;
+    public static Location originLocation;
     List<StaticMarkerAnnotation> markerStatic;
     StaticMarkerAnnotation staticMarkerAnnotation;
     Geocoder geocoder;
@@ -125,10 +125,12 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
         imguploadmakanan = view.findViewById(R.id.imguploadmakanan);
         imgmaplokasi = view.findViewById(R.id.imgmaplokasi);
 
+        Location myLocation = MainActivity.location;
+
         String curUserID = sharedPreference.getProfileID();
 
         staticMarkerAnnotation = StaticMarkerAnnotation.builder()
-                .lnglat(Point.fromLngLat(originLocation.getLongitude(), originLocation.getLatitude()))
+                .lnglat(Point.fromLngLat(myLocation.getLongitude(), myLocation.getLatitude()))
                 .name(StaticMapCriteria.MEDIUM_PIN)
                 .build();
 
@@ -139,7 +141,7 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
         MapboxStaticMap staticMap = MapboxStaticMap.builder()
                 .accessToken(getString(R.string.access_token))
                 .styleId(StaticMapCriteria.STREET_STYLE)
-                .cameraPoint(Point.fromLngLat(originLocation.getLongitude(), originLocation.getLatitude()))
+                .cameraPoint(Point.fromLngLat(myLocation.getLongitude(), myLocation.getLatitude()))
                 .staticMarkerAnnotations(markerStatic)
                 .cameraZoom(13)
                 .width(180)
@@ -150,7 +152,7 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
         geocoder = new Geocoder(requireContext(), Locale.getDefault());
 
         try {
-            addresses = geocoder.getFromLocation(originLocation.getLatitude(), originLocation.getLongitude(), 1);
+            addresses = geocoder.getFromLocation(myLocation.getLatitude(), myLocation.getLongitude(), 1);
         } catch (IOException e) {
             e.printStackTrace();
             onFailure("terjadi kesalahan");
@@ -159,6 +161,8 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
 
         String imgURL = staticMap.url().toString();
         Picasso.get().load(imgURL).error(R.drawable.ic_map).into(imgmaplokasi);
+
+        Log.d(TAG, "onCreateView: Locatiom " + myLocation);
 
         imguploadmakanan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,8 +176,8 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
             public void onClick(View v) {
                 String namefood = inputnamamakanan.getText().toString();
                 String address = addresses.get(0).getAddressLine(0);
-                double latitude = originLocation.getLatitude();
-                double longitude = originLocation.getLongitude();
+                double latitude = myLocation.getLatitude();
+                double longitude = myLocation.getLongitude();
 
                 postPresenter.onNewAddPost(namefood, address, curUserID, latitude, longitude, uri);
             }

@@ -2,13 +2,10 @@ package com.shnsaraswati.berbagimmakanan.view;
 
 import android.location.Location;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineListener;
@@ -17,7 +14,6 @@ import com.mapbox.android.core.location.LocationEngineProvider;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -30,12 +26,7 @@ import com.shnsaraswati.berbagimmakanan.R;
 
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentMaps#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FragmentMaps extends Fragment implements OnMapReadyCallback, LocationEngineListener, PermissionsListener, MapboxMap.OnMapClickListener {
+public class HalamanMaps extends AppCompatActivity implements OnMapReadyCallback, LocationEngineListener, PermissionsListener {
 
     private MapView mapView;
     private MapboxMap map;
@@ -43,102 +34,32 @@ public class FragmentMaps extends Fragment implements OnMapReadyCallback, Locati
     private LocationEngine locationEngine;
     private LocationLayerPlugin locationLayerPlugin;
     private Location originLocation;
-    Button btnkonfirmasi;
-    FragmentBerbagi fragmentBerbagi;
-    Location newLocation;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public FragmentMaps() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentMaps.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentMaps newInstance(String param1, String param2) {
-        FragmentMaps fragment = new FragmentMaps();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.fragment_maps);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_maps, container, false);
-        Mapbox.getInstance(requireContext(), getString(R.string.access_token));
-        mapView = view.findViewById(R.id.mapView);
+        Mapbox.getInstance(getApplicationContext(), getString(R.string.access_token));
+        mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
-
-        fragmentBerbagi = new FragmentBerbagi();
-
-        btnkonfirmasi = view.findViewById(R.id.btnkonfirmasi);
-        btnkonfirmasi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putBoolean("hasNewLocation", true);
-                bundle.putDouble("latitude", newLocation.getLatitude());
-                bundle.putDouble("longitude", newLocation.getLongitude());
-                fragmentBerbagi.setArguments(bundle);
-                mapView.onDestroy();
-                getParentFragmentManager().beginTransaction().replace(R.id.fragment, fragmentBerbagi).commit();
-            }
-        });
-        return view;
     }
 
     @Override
     public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
-        map.addOnMapClickListener(this);
         enableLocation();
     }
 
-    @Override
-    public void onMapClick(@NonNull LatLng point) {
-        map.addMarker(new MarkerOptions().position(point));
-
-        newLocation = new Location("dummyprovider");
-        newLocation.setLongitude(point.getLongitude());
-        newLocation.setLatitude(point.getLatitude());
-        MainActivity.location = newLocation;
-    }
-
     private void enableLocation() {
-        if (PermissionsManager.areLocationPermissionsGranted(getContext())) {
+        if (PermissionsManager.areLocationPermissionsGranted(getApplicationContext())) {
             initializeLocationEngine();
             initializeLocationLayer();
         } else {
             permissionsManager = new PermissionsManager(this);
-            permissionsManager.requestLocationPermissions(getActivity());
+            permissionsManager.requestLocationPermissions(HalamanMaps.this);
         }
     }
 
@@ -172,12 +93,13 @@ public class FragmentMaps extends Fragment implements OnMapReadyCallback, Locati
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @SuppressWarnings("MissingPermission")
     private void initializeLocationEngine() {
-        locationEngine = new LocationEngineProvider(getContext()).obtainBestLocationEngineAvailable();
+        locationEngine = new LocationEngineProvider(getApplicationContext()).obtainBestLocationEngineAvailable();
         locationEngine.setPriority(LocationEnginePriority.HIGH_ACCURACY);
         locationEngine.activate();
 
@@ -260,5 +182,4 @@ public class FragmentMaps extends Fragment implements OnMapReadyCallback, Locati
         }
         mapView.onDestroy();
     }
-
 }
