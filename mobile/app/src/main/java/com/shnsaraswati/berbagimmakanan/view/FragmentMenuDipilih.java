@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.apollographql.apollo.exception.ApolloException;
 import com.cloudinary.android.MediaManager;
 import com.shnsaraswati.berbagimmakanan.R;
+import com.shnsaraswati.berbagimmakanan.config.SharedPreference;
+import com.shnsaraswati.berbagimmakanan.presenter.NotificationPresenter;
 import com.shnsaraswati.berbagimmakanan.presenter.PostContract;
 import com.shnsaraswati.berbagimmakanan.presenter.PostPresenter;
 import com.squareup.picasso.Callback;
@@ -46,6 +48,9 @@ public class FragmentMenuDipilih extends Fragment implements PostContract.ViewFr
     Button btnmintamakanan;
 
     PostPresenter postPresenter;
+    NotificationPresenter notificationPresenter;
+
+    SharedPreference sharedPreference;
 
 
     // TODO: Rename and change types of parameters
@@ -82,7 +87,9 @@ public class FragmentMenuDipilih extends Fragment implements PostContract.ViewFr
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        sharedPreference = new SharedPreference(requireContext());
         postPresenter = new PostPresenter(this);
+        notificationPresenter = new NotificationPresenter(this);
     }
 
     @Override
@@ -93,6 +100,7 @@ public class FragmentMenuDipilih extends Fragment implements PostContract.ViewFr
 
         Bundle bundle = this.getArguments();
         String post_id = bundle.getString("post_id");
+        String user_post_id = bundle.getString("user_post_id");
 
         txtnamaakun_menudipilih = view.findViewById(R.id.txtnamaakun_menudipilih);
         txtnamamakanan_menudipilih = view.findViewById(R.id.txtnamamakanan_menudipilih);
@@ -100,6 +108,18 @@ public class FragmentMenuDipilih extends Fragment implements PostContract.ViewFr
         txtlokasimakanan_menudipilih = view.findViewById(R.id.txtlokasimakanan_menudipilih);
         txtdilihat_menudipilih = view.findViewById(R.id.txtdilihat_menudipilih);
         imgmakanandipilih = view.findViewById(R.id.imgmakanandipilih);
+        btnmintamakanan = view.findViewById(R.id.btnmintamakanan);
+
+        String user_id = sharedPreference.getProfileID();
+
+        btnmintamakanan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String keterangan = "permintaan makanan";
+                String status = "permintaan;";
+                notificationPresenter.onSendNotification(keterangan, status, user_id, user_post_id, post_id);
+            }
+        });
 
         postPresenter.onGetPost(post_id, new PostContract.Callback() {
             @Override
@@ -137,6 +157,16 @@ public class FragmentMenuDipilih extends Fragment implements PostContract.ViewFr
         });
 
         return view;
+    }
+
+    @Override
+    public void onSuccessSendNotification() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getContext(), "Berhsil mengirim notifikasi ke pemilik", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override

@@ -1,0 +1,5 @@
+mutation useAddNoticiation($keterangan: String!, $status: String!, $user_id: uuid!, $to_user_id: uuid!, $post_id: uuid!) {
+    insert_notification(objects: [{keterangan: $keterangan, status: $status, user_id: $user_id, to_user_id: $to_user_id, post_id: $post_id}]) {
+        affected_rows
+    }
+}

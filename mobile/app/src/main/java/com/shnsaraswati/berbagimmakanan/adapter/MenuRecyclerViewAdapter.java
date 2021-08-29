@@ -79,7 +79,8 @@ public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuRecyclerVi
             @Override
             public void onClick(View v) {
                 String post_id = posts.get(position).id().toString();
-                postPresenter.onUpdateSeenPost(post_id);
+                String user_id = posts.get(position).user().id().toString();
+                postPresenter.onUpdateSeenPost(post_id, user_id);
             }
         });
     }
@@ -109,10 +110,11 @@ public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuRecyclerVi
     }
 
     @Override
-    public void onSuccessUpdateSeenPost(String id) {
+    public void onSuccessUpdateSeenPost(String id, String user_id) {
         FragmentMenuDipilih fragmentMenuDipilih = new FragmentMenuDipilih();
         Bundle bundle = new Bundle();
         bundle.putString("post_id", id);
+        bundle.putString("user_post_id", user_id);
         fragmentMenuDipilih.setArguments(bundle);
         fragmentTransaction.replace(R.id.fragment, fragmentMenuDipilih, "Berhasil");
         fragmentTransaction.addToBackStack(null);

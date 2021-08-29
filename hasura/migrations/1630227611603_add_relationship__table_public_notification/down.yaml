@@ -1,0 +1,6 @@
+- args:
+    relationship: post
+    table:
+      name: notification
+      schema: public
+  type: drop_relationship

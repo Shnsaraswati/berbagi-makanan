@@ -4,6 +4,9 @@ tables:
     schema: public
     name: notification
   object_relationships:
+  - name: post
+    using:
+      foreign_key_constraint_on: post_id
   - name: user
     using:
       foreign_key_constraint_on: user_id
@@ -14,6 +17,14 @@ tables:
   - name: user
     using:
       foreign_key_constraint_on: user_id
+  array_relationships:
+  - name: notifications
+    using:
+      foreign_key_constraint_on:
+        column: post_id
+        table:
+          schema: public
+          name: notification
 - table:
     schema: public
     name: roles
@@ -32,3 +43,17 @@ tables:
         table:
           schema: public
           name: notification
+  - name: notification_users
+    using:
+      foreign_key_constraint_on:
+        column: to_user_id
+        table:
+          schema: public
+          name: notification
+  - name: posts
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: public
+          name: posts

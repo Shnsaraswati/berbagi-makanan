@@ -88,6 +88,14 @@ mutation root
 """
 type mutation_root {
   """
+  delete data from the table: "notification"
+  """
+  delete_notification("""filter the rows which have to be deleted""" where: notification_bool_exp!): notification_mutation_response
+  """
+  delete single row from the table: "notification"
+  """
+  delete_notification_by_pk(id: uuid!): notification
+  """
   delete data from the table: "posts"
   """
   delete_posts("""filter the rows which have to be deleted""" where: posts_bool_exp!): posts_mutation_response
@@ -111,6 +119,14 @@ type mutation_root {
   delete single row from the table: "users"
   """
   delete_users_by_pk(id: uuid!): users
+  """
+  insert data into the table: "notification"
+  """
+  insert_notification("""the rows to be inserted""" objects: [notification_insert_input!]!, """on conflict condition""" on_conflict: notification_on_conflict): notification_mutation_response
+  """
+  insert a single row into the table: "notification"
+  """
+  insert_notification_one("""the row to be inserted""" object: notification_insert_input!, """on conflict condition""" on_conflict: notification_on_conflict): notification
   """
   insert data into the table: "posts"
   """
@@ -136,6 +152,14 @@ type mutation_root {
   """
   insert_users_one("""the row to be inserted""" object: users_insert_input!, """on conflict condition""" on_conflict: users_on_conflict): users
   """
+  update data of the table: "notification"
+  """
+  update_notification("""sets the columns of the filtered rows to the given values""" _set: notification_set_input, """filter the rows which have to be updated""" where: notification_bool_exp!): notification_mutation_response
+  """
+  update single row of the table: "notification"
+  """
+  update_notification_by_pk("""sets the columns of the filtered rows to the given values""" _set: notification_set_input, pk_columns: notification_pk_columns_input!): notification
+  """
   update data of the table: "posts"
   """
   update_posts("""increments the integer columns with given value of the filtered values""" _inc: posts_inc_input, """sets the columns of the filtered rows to the given values""" _set: posts_set_input, """filter the rows which have to be updated""" where: posts_bool_exp!): posts_mutation_response
@@ -159,6 +183,286 @@ type mutation_root {
   update single row of the table: "users"
   """
   update_users_by_pk("""increments the integer columns with given value of the filtered values""" _inc: users_inc_input, """sets the columns of the filtered rows to the given values""" _set: users_set_input, pk_columns: users_pk_columns_input!): users
+}
+
+"""
+columns and relationships of "notification"
+"""
+type notification {
+  id: uuid!
+  keterangan: String!
+  """
+  An object relationship
+  """
+  post: posts!
+  post_id: uuid!
+  seen: Boolean!
+  status: String!
+  to_user_id: uuid!
+  """
+  An object relationship
+  """
+  user: users!
+  user_id: uuid!
+}
+
+"""
+aggregated selection of "notification"
+"""
+type notification_aggregate {
+  aggregate: notification_aggregate_fields
+  nodes: [notification!]!
+}
+
+"""
+aggregate fields of "notification"
+"""
+type notification_aggregate_fields {
+  count(columns: [notification_select_column!], distinct: Boolean): Int
+  max: notification_max_fields
+  min: notification_min_fields
+}
+
+"""
+order by aggregate values of table "notification"
+"""
+input notification_aggregate_order_by {
+  count: order_by
+  max: notification_max_order_by
+  min: notification_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "notification"
+"""
+input notification_arr_rel_insert_input {
+  data: [notification_insert_input!]!
+  on_conflict: notification_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "notification". All fields are combined with a logical 'AND'.
+"""
+input notification_bool_exp {
+  _and: [notification_bool_exp]
+  _not: notification_bool_exp
+  _or: [notification_bool_exp]
+  id: uuid_comparison_exp
+  keterangan: String_comparison_exp
+  post: posts_bool_exp
+  post_id: uuid_comparison_exp
+  seen: Boolean_comparison_exp
+  status: String_comparison_exp
+  to_user_id: uuid_comparison_exp
+  user: users_bool_exp
+  user_id: uuid_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "notification"
+"""
+enum notification_constraint {
+  """
+  unique or primary key constraint
+  """
+  notification_pkey
+}
+
+"""
+input type for inserting data into table "notification"
+"""
+input notification_insert_input {
+  id: uuid
+  keterangan: String
+  post: posts_obj_rel_insert_input
+  post_id: uuid
+  seen: Boolean
+  status: String
+  to_user_id: uuid
+  user: users_obj_rel_insert_input
+  user_id: uuid
+}
+
+"""
+aggregate max on columns
+"""
+type notification_max_fields {
+  id: uuid
+  keterangan: String
+  post_id: uuid
+  status: String
+  to_user_id: uuid
+  user_id: uuid
+}
+
+"""
+order by max() on columns of table "notification"
+"""
+input notification_max_order_by {
+  id: order_by
+  keterangan: order_by
+  post_id: order_by
+  status: order_by
+  to_user_id: order_by
+  user_id: order_by
+}
+
+"""
+aggregate min on columns
+"""
+type notification_min_fields {
+  id: uuid
+  keterangan: String
+  post_id: uuid
+  status: String
+  to_user_id: uuid
+  user_id: uuid
+}
+
+"""
+order by min() on columns of table "notification"
+"""
+input notification_min_order_by {
+  id: order_by
+  keterangan: order_by
+  post_id: order_by
+  status: order_by
+  to_user_id: order_by
+  user_id: order_by
+}
+
+"""
+response of any mutation on the table "notification"
+"""
+type notification_mutation_response {
+  """
+  number of affected rows by the mutation
+  """
+  affected_rows: Int!
+  """
+  data of the affected rows by the mutation
+  """
+  returning: [notification!]!
+}
+
+"""
+input type for inserting object relation for remote table "notification"
+"""
+input notification_obj_rel_insert_input {
+  data: notification_insert_input!
+  on_conflict: notification_on_conflict
+}
+
+"""
+on conflict condition type for table "notification"
+"""
+input notification_on_conflict {
+  constraint: notification_constraint!
+  update_columns: [notification_update_column!]!
+  where: notification_bool_exp
+}
+
+"""
+ordering options when selecting data from "notification"
+"""
+input notification_order_by {
+  id: order_by
+  keterangan: order_by
+  post: posts_order_by
+  post_id: order_by
+  seen: order_by
+  status: order_by
+  to_user_id: order_by
+  user: users_order_by
+  user_id: order_by
+}
+
+"""
+primary key columns input for table: "notification"
+"""
+input notification_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "notification"
+"""
+enum notification_select_column {
+  """
+  column name
+  """
+  id
+  """
+  column name
+  """
+  keterangan
+  """
+  column name
+  """
+  post_id
+  """
+  column name
+  """
+  seen
+  """
+  column name
+  """
+  status
+  """
+  column name
+  """
+  to_user_id
+  """
+  column name
+  """
+  user_id
+}
+
+"""
+input type for updating data in table "notification"
+"""
+input notification_set_input {
+  id: uuid
+  keterangan: String
+  post_id: uuid
+  seen: Boolean
+  status: String
+  to_user_id: uuid
+  user_id: uuid
+}
+
+"""
+update columns of table "notification"
+"""
+enum notification_update_column {
+  """
+  column name
+  """
+  id
+  """
+  column name
+  """
+  keterangan
+  """
+  column name
+  """
+  post_id
+  """
+  column name
+  """
+  seen
+  """
+  column name
+  """
+  status
+  """
+  column name
+  """
+  to_user_id
+  """
+  column name
+  """
+  user_id
 }
 
 """
@@ -203,6 +507,14 @@ type posts {
   latitude: float8
   longitude: float8
   name_food: String!
+  """
+  An array relationship
+  """
+  notifications("""distinct select on columns""" distinct_on: [notification_select_column!], """limit the number of rows returned""" limit: Int, """skip the first n rows. Use only with order_by""" offset: Int, """sort the rows by one or more columns""" order_by: [notification_order_by!], """filter the rows returned""" where: notification_bool_exp): [notification!]!
+  """
+  An aggregated array relationship
+  """
+  notifications_aggregate("""distinct select on columns""" distinct_on: [notification_select_column!], """limit the number of rows returned""" limit: Int, """skip the first n rows. Use only with order_by""" offset: Int, """sort the rows by one or more columns""" order_by: [notification_order_by!], """filter the rows returned""" where: notification_bool_exp): notification_aggregate!
   picture: String!
   seen: Int!
   status: Boolean!
@@ -297,6 +609,7 @@ input posts_bool_exp {
   latitude: float8_comparison_exp
   longitude: float8_comparison_exp
   name_food: String_comparison_exp
+  notifications: notification_bool_exp
   picture: String_comparison_exp
   seen: Int_comparison_exp
   status: Boolean_comparison_exp
@@ -336,6 +649,7 @@ input posts_insert_input {
   latitude: float8
   longitude: float8
   name_food: String
+  notifications: notification_arr_rel_insert_input
   picture: String
   seen: Int
   status: Boolean
@@ -459,6 +773,7 @@ input posts_order_by {
   latitude: order_by
   longitude: order_by
   name_food: order_by
+  notifications_aggregate: notification_aggregate_order_by
   picture: order_by
   seen: order_by
   status: order_by
@@ -740,6 +1055,18 @@ query root
 """
 type query_root {
   """
+  fetch data from the table: "notification"
+  """
+  notification("""distinct select on columns""" distinct_on: [notification_select_column!], """limit the number of rows returned""" limit: Int, """skip the first n rows. Use only with order_by""" offset: Int, """sort the rows by one or more columns""" order_by: [notification_order_by!], """filter the rows returned""" where: notification_bool_exp): [notification!]!
+  """
+  fetch aggregated fields from the table: "notification"
+  """
+  notification_aggregate("""distinct select on columns""" distinct_on: [notification_select_column!], """limit the number of rows returned""" limit: Int, """skip the first n rows. Use only with order_by""" offset: Int, """sort the rows by one or more columns""" order_by: [notification_order_by!], """filter the rows returned""" where: notification_bool_exp): notification_aggregate!
+  """
+  fetch data from the table: "notification" using primary key columns
+  """
+  notification_by_pk(id: uuid!): notification
+  """
   fetch data from the table: "posts"
   """
   posts("""distinct select on columns""" distinct_on: [posts_select_column!], """limit the number of rows returned""" limit: Int, """skip the first n rows. Use only with order_by""" offset: Int, """sort the rows by one or more columns""" order_by: [posts_order_by!], """filter the rows returned""" where: posts_bool_exp): [posts!]!
@@ -971,6 +1298,18 @@ subscription root
 """
 type subscription_root {
   """
+  fetch data from the table: "notification"
+  """
+  notification("""distinct select on columns""" distinct_on: [notification_select_column!], """limit the number of rows returned""" limit: Int, """skip the first n rows. Use only with order_by""" offset: Int, """sort the rows by one or more columns""" order_by: [notification_order_by!], """filter the rows returned""" where: notification_bool_exp): [notification!]!
+  """
+  fetch aggregated fields from the table: "notification"
+  """
+  notification_aggregate("""distinct select on columns""" distinct_on: [notification_select_column!], """limit the number of rows returned""" limit: Int, """skip the first n rows. Use only with order_by""" offset: Int, """sort the rows by one or more columns""" order_by: [notification_order_by!], """filter the rows returned""" where: notification_bool_exp): notification_aggregate!
+  """
+  fetch data from the table: "notification" using primary key columns
+  """
+  notification_by_pk(id: uuid!): notification
+  """
   fetch data from the table: "posts"
   """
   posts("""distinct select on columns""" distinct_on: [posts_select_column!], """limit the number of rows returned""" limit: Int, """skip the first n rows. Use only with order_by""" offset: Int, """sort the rows by one or more columns""" order_by: [posts_order_by!], """filter the rows returned""" where: posts_bool_exp): [posts!]!
@@ -1034,8 +1373,32 @@ type users {
   id: uuid!
   img_profile: String
   name: String!
+  """
+  An array relationship
+  """
+  notification_users("""distinct select on columns""" distinct_on: [notification_select_column!], """limit the number of rows returned""" limit: Int, """skip the first n rows. Use only with order_by""" offset: Int, """sort the rows by one or more columns""" order_by: [notification_order_by!], """filter the rows returned""" where: notification_bool_exp): [notification!]!
+  """
+  An aggregated array relationship
+  """
+  notification_users_aggregate("""distinct select on columns""" distinct_on: [notification_select_column!], """limit the number of rows returned""" limit: Int, """skip the first n rows. Use only with order_by""" offset: Int, """sort the rows by one or more columns""" order_by: [notification_order_by!], """filter the rows returned""" where: notification_bool_exp): notification_aggregate!
+  """
+  An array relationship
+  """
+  notifications("""distinct select on columns""" distinct_on: [notification_select_column!], """limit the number of rows returned""" limit: Int, """skip the first n rows. Use only with order_by""" offset: Int, """sort the rows by one or more columns""" order_by: [notification_order_by!], """filter the rows returned""" where: notification_bool_exp): [notification!]!
+  """
+  An aggregated array relationship
+  """
+  notifications_aggregate("""distinct select on columns""" distinct_on: [notification_select_column!], """limit the number of rows returned""" limit: Int, """skip the first n rows. Use only with order_by""" offset: Int, """sort the rows by one or more columns""" order_by: [notification_order_by!], """filter the rows returned""" where: notification_bool_exp): notification_aggregate!
   password: String!
   phone_number: String!
+  """
+  An array relationship
+  """
+  posts("""distinct select on columns""" distinct_on: [posts_select_column!], """limit the number of rows returned""" limit: Int, """skip the first n rows. Use only with order_by""" offset: Int, """sort the rows by one or more columns""" order_by: [posts_order_by!], """filter the rows returned""" where: posts_bool_exp): [posts!]!
+  """
+  An aggregated array relationship
+  """
+  posts_aggregate("""distinct select on columns""" distinct_on: [posts_select_column!], """limit the number of rows returned""" limit: Int, """skip the first n rows. Use only with order_by""" offset: Int, """sort the rows by one or more columns""" order_by: [posts_order_by!], """filter the rows returned""" where: posts_bool_exp): posts_aggregate!
   rating: float8!
   """
   An object relationship
@@ -1121,8 +1484,11 @@ input users_bool_exp {
   id: uuid_comparison_exp
   img_profile: String_comparison_exp
   name: String_comparison_exp
+  notification_users: notification_bool_exp
+  notifications: notification_bool_exp
   password: String_comparison_exp
   phone_number: String_comparison_exp
+  posts: posts_bool_exp
   rating: float8_comparison_exp
   role: roles_bool_exp
   role_id: uuid_comparison_exp
@@ -1159,8 +1525,11 @@ input users_insert_input {
   id: uuid
   img_profile: String
   name: String
+  notification_users: notification_arr_rel_insert_input
+  notifications: notification_arr_rel_insert_input
   password: String
   phone_number: String
+  posts: posts_arr_rel_insert_input
   rating: float8
   role: roles_obj_rel_insert_input
   role_id: uuid
@@ -1271,8 +1640,11 @@ input users_order_by {
   id: order_by
   img_profile: order_by
   name: order_by
+  notification_users_aggregate: notification_aggregate_order_by
+  notifications_aggregate: notification_aggregate_order_by
   password: order_by
   phone_number: order_by
+  posts_aggregate: posts_aggregate_order_by
   rating: order_by
   role: roles_order_by
   role_id: order_by

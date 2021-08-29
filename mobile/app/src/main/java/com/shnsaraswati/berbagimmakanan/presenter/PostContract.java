@@ -22,11 +22,12 @@ public class PostContract {
     }
 
     public interface ViewFragmentMenuDipilih {
+        void onSuccessSendNotification();
         void onSetFailure(String message);
     }
 
     public interface MenuRecyclerView {
-        void onSuccessUpdateSeenPost(String id);
+        void onSuccessUpdateSeenPost(String id, String user_id);
 
         void onFailure(String message);
     }
@@ -44,6 +45,6 @@ public class PostContract {
 
         void onNewAddPost(String namefood, String address, String user_id, String description, double latitude, double longitude, Uri uri);
 
-        void onUpdateSeenPost(String post_id);
+        void onUpdateSeenPost(String post_id, String user_id);
     }
 }
