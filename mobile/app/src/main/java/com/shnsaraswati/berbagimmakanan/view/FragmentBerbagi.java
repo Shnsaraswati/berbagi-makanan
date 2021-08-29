@@ -176,10 +176,11 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
             public void onClick(View v) {
                 String namefood = inputnamamakanan.getText().toString();
                 String address = addresses.get(0).getAddressLine(0);
+                String description = inputdeskripsinamamakanan.getText().toString();
                 double latitude = myLocation.getLatitude();
                 double longitude = myLocation.getLongitude();
 
-                postPresenter.onNewAddPost(namefood, address, curUserID, latitude, longitude, uri);
+                postPresenter.onNewAddPost(namefood, address, description, curUserID, latitude, longitude, uri);
             }
         });
 

@@ -1,6 +1,7 @@
 package com.shnsaraswati.berbagimmakanan.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,8 +109,12 @@ public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuRecyclerVi
     }
 
     @Override
-    public void onSuccessUpdateSeenPost() {
-        fragmentTransaction.replace(R.id.fragment, new FragmentMenuDipilih(), "Berhasil");
+    public void onSuccessUpdateSeenPost(String id) {
+        FragmentMenuDipilih fragmentMenuDipilih = new FragmentMenuDipilih();
+        Bundle bundle = new Bundle();
+        bundle.putString("post_id", id);
+        fragmentMenuDipilih.setArguments(bundle);
+        fragmentTransaction.replace(R.id.fragment, fragmentMenuDipilih, "Berhasil");
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

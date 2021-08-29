@@ -62,11 +62,11 @@
 
     <TextView
         android:id="@+id/txtlokasimakanan_menudipilih"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Lokasi Makanan"
         android:fontFamily="@font/poppins_light"
+        android:text="Lokasi Makanan"
         android:textColor="@color/black"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView7"
@@ -77,11 +77,10 @@
         android:id="@+id/imageView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/ic_eye"
-        app:layout_constraintBottom_toBottomOf="@+id/txtlokasimakanan_menudipilih"
-        app:layout_constraintStart_toEndOf="@+id/txtlokasimakanan_menudipilih"
-        app:layout_constraintTop_toTopOf="@+id/txtlokasimakanan_menudipilih" />
+        app:layout_constraintStart_toStartOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
     <TextView
         android:id="@+id/txtdilihat_menudipilih"
@@ -100,15 +99,15 @@
         android:id="@+id/btnkembalikemenu"
         android:layout_width="131dp"
         android:layout_height="49dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/button_garisoren"
         android:fontFamily="@font/poppins_bold"
-        android:text="Kembali"
+        android:text="Lihat Lokasi"
         android:textAllCaps="false"
         android:textColor="@color/grey"
-        android:textSize="18dp"
+        android:textSize="15dp"
         app:layout_constraintStart_toStartOf="@+id/imageView7"
-        app:layout_constraintTop_toBottomOf="@+id/txtlokasimakanan_menudipilih" />
+        app:layout_constraintTop_toBottomOf="@+id/txtdilihat_menudipilih" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnmintamakanan"
@@ -119,7 +118,7 @@
         android:text="Minta"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="18dp"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/btnkembalikemenu"
         app:layout_constraintEnd_toEndOf="@+id/txtxdeskripsimakanan_menudipilih"
         app:layout_constraintStart_toEndOf="@+id/btnkembalikemenu"

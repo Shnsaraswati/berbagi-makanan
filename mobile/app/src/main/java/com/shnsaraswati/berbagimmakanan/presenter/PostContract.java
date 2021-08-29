@@ -21,14 +21,18 @@ public class PostContract {
         void onFailure(String message);
     }
 
+    public interface ViewFragmentMenuDipilih {
+        void onSetFailure(String message);
+    }
+
     public interface MenuRecyclerView {
-        void onSuccessUpdateSeenPost();
+        void onSuccessUpdateSeenPost(String id);
 
         void onFailure(String message);
     }
 
-    public interface Callback {
-        void onResponse(List<UseGetAllPostsQuery.Post> posts);
+    public interface Callback<T> {
+        void onResponse(List<T> posts);
 
         void onFailure(@NotNull ApolloException e);
     }
@@ -36,9 +40,10 @@ public class PostContract {
     interface Presenter {
         void onGetAllPosts(Callback callback);
 
-        void onNewAddPost(String namefood, String address, String user_id, double latitude, double longitude, Uri uri);
+        void onGetPost(String id, Callback callback);
+
+        void onNewAddPost(String namefood, String address, String user_id, String description, double latitude, double longitude, Uri uri);
 
         void onUpdateSeenPost(String post_id);
     }
-
 }

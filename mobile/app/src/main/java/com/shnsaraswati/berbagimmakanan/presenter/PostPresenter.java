@@ -21,12 +21,14 @@ import java.util.Map;
 import mutation.UseAddNewPostMutation;
 import mutation.UseUpdateSeenPostMutation;
 import query.UseGetAllPostsQuery;
+import query.UseGetPostByIdQuery;
 
 public class PostPresenter implements PostContract.Presenter {
     public static final String TAG = "PostPresenter";
 
     PostContract.ViewFragmentMenu viewFragmentMenu;
     PostContract.ViewFragmentBerbagi viewFragmentBerbagi;
+    PostContract.ViewFragmentMenuDipilih viewFragmentMenuDipilih;
     PostContract.MenuRecyclerView menuRecyclerView;
     Apollo apollo = new Apollo();
     ApolloClient apolloClient = apollo.ConnectApollo();
@@ -41,6 +43,10 @@ public class PostPresenter implements PostContract.Presenter {
 
     public PostPresenter(PostContract.MenuRecyclerView menuRecyclerView) {
         this.menuRecyclerView = menuRecyclerView;
+    }
+
+    public PostPresenter(PostContract.ViewFragmentMenuDipilih viewFragmentMenuDipilih) {
+        this.viewFragmentMenuDipilih = viewFragmentMenuDipilih;
     }
 
     @Override
@@ -64,7 +70,27 @@ public class PostPresenter implements PostContract.Presenter {
     }
 
     @Override
-    public void onNewAddPost(String namefood, String address, String user_id, double latitude, double longitude, Uri uri) {
+    public void onGetPost(String id, PostContract.Callback callback) {
+        apolloClient.query(new UseGetPostByIdQuery(id)).enqueue(new ApolloCall.Callback<UseGetPostByIdQuery.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<UseGetPostByIdQuery.Data> response) {
+                if (!response.getData().posts().isEmpty()) {
+                    List<UseGetPostByIdQuery.Post> posts = response.getData().posts();
+                    callback.onResponse(posts);
+                } else {
+                    viewFragmentMenuDipilih.onSetFailure("terjadi kesalahan");
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                viewFragmentMenuDipilih.onSetFailure("terjadi kesalahan");
+            }
+        });
+    }
+
+    @Override
+    public void onNewAddPost(String namefood, String address, String user_id, String description, double latitude, double longitude, Uri uri) {
         String uniqueTime = String.valueOf(Calendar.getInstance().getTimeInMillis());
         String img_public_id = namefood + "_" + uniqueTime;
         String imgFood = namefood + "_" + uniqueTime + ".jpg";
@@ -126,7 +152,7 @@ public class PostPresenter implements PostContract.Presenter {
             public void onResponse(@NotNull Response<UseUpdateSeenPostMutation.Data> response) {
                 if (response.getData() != null) {
                     if (response.getData().update_posts().affected_rows() > 0) {
-                        menuRecyclerView.onSuccessUpdateSeenPost();
+                        menuRecyclerView.onSuccessUpdateSeenPost(post_id);
                     } else {
                         menuRecyclerView.onFailure("Terjadi Kesalahan");
                     }

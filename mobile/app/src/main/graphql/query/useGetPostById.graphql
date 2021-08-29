@@ -1,0 +1,14 @@
+query useGetPostById($id: uuid!) {
+    posts(where: {id: {_eq: $id}}) {
+        id
+        name_food
+        seen
+        address
+        picture
+        description
+        user {
+            id
+            name
+        }
+    }
+}

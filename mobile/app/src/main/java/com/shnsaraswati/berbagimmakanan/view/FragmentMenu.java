@@ -89,7 +89,7 @@ public class FragmentMenu extends Fragment implements PostContract.ViewFragmentM
         // mengambil data semua posts
         postPresenter.onGetAllPosts(new PostContract.Callback() {
             @Override
-            public void onResponse(List<UseGetAllPostsQuery.Post> posts) {
+            public void onResponse(List posts) {
                 MenuRecyclerViewAdapter adapter = new MenuRecyclerViewAdapter(getContext(), fragmentTransaction, posts, FragmentMenu.this);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override

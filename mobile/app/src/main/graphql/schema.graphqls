@@ -198,6 +198,7 @@ type posts {
   address: String!
   created_at: timestamptz!
   deleted_at: timestamptz
+  description: String
   id: uuid!
   latitude: float8
   longitude: float8
@@ -291,6 +292,7 @@ input posts_bool_exp {
   address: String_comparison_exp
   created_at: timestamptz_comparison_exp
   deleted_at: timestamptz_comparison_exp
+  description: String_comparison_exp
   id: uuid_comparison_exp
   latitude: float8_comparison_exp
   longitude: float8_comparison_exp
@@ -329,6 +331,7 @@ input posts_insert_input {
   address: String
   created_at: timestamptz
   deleted_at: timestamptz
+  description: String
   id: uuid
   latitude: float8
   longitude: float8
@@ -348,6 +351,7 @@ type posts_max_fields {
   address: String
   created_at: timestamptz
   deleted_at: timestamptz
+  description: String
   id: uuid
   latitude: float8
   longitude: float8
@@ -365,6 +369,7 @@ input posts_max_order_by {
   address: order_by
   created_at: order_by
   deleted_at: order_by
+  description: order_by
   id: order_by
   latitude: order_by
   longitude: order_by
@@ -382,6 +387,7 @@ type posts_min_fields {
   address: String
   created_at: timestamptz
   deleted_at: timestamptz
+  description: String
   id: uuid
   latitude: float8
   longitude: float8
@@ -399,6 +405,7 @@ input posts_min_order_by {
   address: order_by
   created_at: order_by
   deleted_at: order_by
+  description: order_by
   id: order_by
   latitude: order_by
   longitude: order_by
@@ -447,6 +454,7 @@ input posts_order_by {
   address: order_by
   created_at: order_by
   deleted_at: order_by
+  description: order_by
   id: order_by
   latitude: order_by
   longitude: order_by
@@ -482,6 +490,10 @@ enum posts_select_column {
   column name
   """
   deleted_at
+  """
+  column name
+  """
+  description
   """
   column name
   """
@@ -527,6 +539,7 @@ input posts_set_input {
   address: String
   created_at: timestamptz
   deleted_at: timestamptz
+  description: String
   id: uuid
   latitude: float8
   longitude: float8
@@ -626,6 +639,10 @@ enum posts_update_column {
   column name
   """
   deleted_at
+  """
+  column name
+  """
+  description
   """
   column name
   """
