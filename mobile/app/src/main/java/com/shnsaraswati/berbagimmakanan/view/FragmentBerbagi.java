@@ -180,7 +180,7 @@ public class FragmentBerbagi extends Fragment implements PostContract.ViewFragme
                 double latitude = myLocation.getLatitude();
                 double longitude = myLocation.getLongitude();
 
-                postPresenter.onNewAddPost(namefood, address, description, curUserID, latitude, longitude, uri);
+                postPresenter.onNewAddPost(namefood, address, curUserID, description, latitude, longitude, uri);
             }
         });
 

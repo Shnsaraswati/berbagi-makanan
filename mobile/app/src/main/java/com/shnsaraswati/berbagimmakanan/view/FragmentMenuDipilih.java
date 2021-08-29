@@ -117,7 +117,8 @@ public class FragmentMenuDipilih extends Fragment implements PostContract.ViewFr
             public void onClick(View v) {
                 String keterangan = "permintaan makanan";
                 String status = "permintaan;";
-                notificationPresenter.onSendNotification(keterangan, status, user_id, user_post_id, post_id);
+                boolean seen = false;
+                notificationPresenter.onSendNotification(keterangan, status, seen, user_id, user_post_id, post_id);
             }
         });
 

@@ -1,0 +1,18 @@
+query useFetchNotificationByUserID($id: uuid!) {
+    users(where: {id: {_eq: $id}}) {
+        id
+        name
+        notification_users(where: {seen: {_eq: false}}) {
+            id
+            keterangan
+            status
+            seen
+            post_id
+            user {
+                id
+                name
+                img_profile
+            }
+        }
+    }
+}

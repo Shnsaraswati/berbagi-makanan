@@ -25,7 +25,7 @@ public class TwillioAPI {
     private final static String TAG = "TwillioAPI";
 
     private final static String ACCOUNT_SID = "ACf93c1b6d45840374aef32e6d689f8502";
-    private final static String AUTH_TOKEN = "eca44db12bd9b4f1448792d2b49cb71e";
+    private final static String AUTH_TOKEN = "43e7ca467c4f8b33e11ae1765d338d18";
 
     public void sendSMSVerification(String phonenumber, String otp) {
         String URL = "https://api.twilio.com/2010-04-01/Accounts/" + ACCOUNT_SID + "/Messages.json";

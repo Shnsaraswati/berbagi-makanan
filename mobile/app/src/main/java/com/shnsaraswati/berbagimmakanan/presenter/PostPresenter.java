@@ -111,7 +111,7 @@ public class PostPresenter implements PostContract.Presenter {
 
                     @Override
                     public void onSuccess(String requestId, Map resultData) {
-                        apolloClient.mutate(new UseAddNewPostMutation(namefood, imgFood, address, user_id, latitude, longitude)).enqueue(new ApolloCall.Callback<UseAddNewPostMutation.Data>() {
+                        apolloClient.mutate(new UseAddNewPostMutation(namefood, imgFood, address, description, user_id, latitude, longitude)).enqueue(new ApolloCall.Callback<UseAddNewPostMutation.Data>() {
                             @Override
                             public void onResponse(@NotNull Response<UseAddNewPostMutation.Data> response) {
                                 if (response.getData() != null) {

@@ -1,0 +1,5 @@
+mutation useUpdateNotification($id: uuid!) {
+    update_notification(where: {id: {_eq: $id}}, _set: {seen: true}) {
+        affected_rows
+    }
+}
