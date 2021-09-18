@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.apollographql.apollo.exception.ApolloException;
 import com.cloudinary.android.MediaManager;
+import com.shnsaraswati.berbagimmakanan.FragmentMakananDiunggah;
 import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.config.SharedPreference;
 import com.shnsaraswati.berbagimmakanan.presenter.ProfileContract;
@@ -38,7 +39,7 @@ import query.UseGetProfileByIDQuery;
 public class FragmentProfil extends Fragment implements ProfileContract.ViewFragmentProfil {
     public static final String TAG = "FragmentProfile";
 
-    TextView linkeditprofil, linkgantikatasandi, linkpenggunaterdekat, linktentangaplikasi, linktpanduan, txtnamaprofil;
+    TextView linkeditprofil, linkgantikatasandi, linkmakanandiunggah, linktentangaplikasi, linktpanduan, txtnamaprofil;
     Button btnkeluarapp;
     RatingBar ratingBar;
     CircleImageView fotoprofil;
@@ -98,7 +99,7 @@ public class FragmentProfil extends Fragment implements ProfileContract.ViewFrag
         //return inflater.inflate(R.layout.fragment_profil, container, false);
         linkeditprofil = view.findViewById(R.id.linkeditprofil);
         linkgantikatasandi = view.findViewById(R.id.linkgantikatasandi);
-        linkpenggunaterdekat = view.findViewById(R.id.linkpenggunaterdekat);
+        linkmakanandiunggah = view.findViewById(R.id.linkmakanandiunggah);
         linktentangaplikasi = view.findViewById(R.id.linktentangaplikasi);
         linktpanduan = view.findViewById(R.id.linktpanduan);
         btnkeluarapp = view.findViewById(R.id.btnkeluarapp);
@@ -163,11 +164,11 @@ public class FragmentProfil extends Fragment implements ProfileContract.ViewFrag
             }
         });
 
-        linkpenggunaterdekat.setOnClickListener(new View.OnClickListener() {
+        linkmakanandiunggah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment, new FragmentPenggunaTerdekat(), "Berhasil");
+                fragmentTransaction.replace(R.id.fragment, new FragmentMakananDiunggah(), "Berhasil");
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }

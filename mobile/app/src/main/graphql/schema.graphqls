@@ -1370,6 +1370,7 @@ columns and relationships of "users"
 type users {
   address: String!
   birth_date: date
+  count_rating: Int
   id: uuid!
   img_profile: String
   name: String!
@@ -1462,6 +1463,7 @@ input users_arr_rel_insert_input {
 aggregate avg on columns
 """
 type users_avg_fields {
+  count_rating: Float
   rating: Float
 }
 
@@ -1469,6 +1471,7 @@ type users_avg_fields {
 order by avg() on columns of table "users"
 """
 input users_avg_order_by {
+  count_rating: order_by
   rating: order_by
 }
 
@@ -1481,6 +1484,7 @@ input users_bool_exp {
   _or: [users_bool_exp]
   address: String_comparison_exp
   birth_date: date_comparison_exp
+  count_rating: Int_comparison_exp
   id: uuid_comparison_exp
   img_profile: String_comparison_exp
   name: String_comparison_exp
@@ -1513,6 +1517,7 @@ enum users_constraint {
 input type for incrementing integer column in table "users"
 """
 input users_inc_input {
+  count_rating: Int
   rating: float8
 }
 
@@ -1522,6 +1527,7 @@ input type for inserting data into table "users"
 input users_insert_input {
   address: String
   birth_date: date
+  count_rating: Int
   id: uuid
   img_profile: String
   name: String
@@ -1542,6 +1548,7 @@ aggregate max on columns
 type users_max_fields {
   address: String
   birth_date: date
+  count_rating: Int
   id: uuid
   img_profile: String
   name: String
@@ -1558,6 +1565,7 @@ order by max() on columns of table "users"
 input users_max_order_by {
   address: order_by
   birth_date: order_by
+  count_rating: order_by
   id: order_by
   img_profile: order_by
   name: order_by
@@ -1574,6 +1582,7 @@ aggregate min on columns
 type users_min_fields {
   address: String
   birth_date: date
+  count_rating: Int
   id: uuid
   img_profile: String
   name: String
@@ -1590,6 +1599,7 @@ order by min() on columns of table "users"
 input users_min_order_by {
   address: order_by
   birth_date: order_by
+  count_rating: order_by
   id: order_by
   img_profile: order_by
   name: order_by
@@ -1637,6 +1647,7 @@ ordering options when selecting data from "users"
 input users_order_by {
   address: order_by
   birth_date: order_by
+  count_rating: order_by
   id: order_by
   img_profile: order_by
   name: order_by
@@ -1670,6 +1681,10 @@ enum users_select_column {
   column name
   """
   birth_date
+  """
+  column name
+  """
+  count_rating
   """
   column name
   """
@@ -1710,6 +1725,7 @@ input type for updating data in table "users"
 input users_set_input {
   address: String
   birth_date: date
+  count_rating: Int
   id: uuid
   img_profile: String
   name: String
@@ -1724,6 +1740,7 @@ input users_set_input {
 aggregate stddev on columns
 """
 type users_stddev_fields {
+  count_rating: Float
   rating: Float
 }
 
@@ -1731,6 +1748,7 @@ type users_stddev_fields {
 order by stddev() on columns of table "users"
 """
 input users_stddev_order_by {
+  count_rating: order_by
   rating: order_by
 }
 
@@ -1738,6 +1756,7 @@ input users_stddev_order_by {
 aggregate stddev_pop on columns
 """
 type users_stddev_pop_fields {
+  count_rating: Float
   rating: Float
 }
 
@@ -1745,6 +1764,7 @@ type users_stddev_pop_fields {
 order by stddev_pop() on columns of table "users"
 """
 input users_stddev_pop_order_by {
+  count_rating: order_by
   rating: order_by
 }
 
@@ -1752,6 +1772,7 @@ input users_stddev_pop_order_by {
 aggregate stddev_samp on columns
 """
 type users_stddev_samp_fields {
+  count_rating: Float
   rating: Float
 }
 
@@ -1759,6 +1780,7 @@ type users_stddev_samp_fields {
 order by stddev_samp() on columns of table "users"
 """
 input users_stddev_samp_order_by {
+  count_rating: order_by
   rating: order_by
 }
 
@@ -1766,6 +1788,7 @@ input users_stddev_samp_order_by {
 aggregate sum on columns
 """
 type users_sum_fields {
+  count_rating: Int
   rating: float8
 }
 
@@ -1773,6 +1796,7 @@ type users_sum_fields {
 order by sum() on columns of table "users"
 """
 input users_sum_order_by {
+  count_rating: order_by
   rating: order_by
 }
 
@@ -1788,6 +1812,10 @@ enum users_update_column {
   column name
   """
   birth_date
+  """
+  column name
+  """
+  count_rating
   """
   column name
   """
@@ -1826,6 +1854,7 @@ enum users_update_column {
 aggregate var_pop on columns
 """
 type users_var_pop_fields {
+  count_rating: Float
   rating: Float
 }
 
@@ -1833,6 +1862,7 @@ type users_var_pop_fields {
 order by var_pop() on columns of table "users"
 """
 input users_var_pop_order_by {
+  count_rating: order_by
   rating: order_by
 }
 
@@ -1840,6 +1870,7 @@ input users_var_pop_order_by {
 aggregate var_samp on columns
 """
 type users_var_samp_fields {
+  count_rating: Float
   rating: Float
 }
 
@@ -1847,6 +1878,7 @@ type users_var_samp_fields {
 order by var_samp() on columns of table "users"
 """
 input users_var_samp_order_by {
+  count_rating: order_by
   rating: order_by
 }
 
@@ -1854,6 +1886,7 @@ input users_var_samp_order_by {
 aggregate variance on columns
 """
 type users_variance_fields {
+  count_rating: Float
   rating: Float
 }
 
@@ -1861,6 +1894,7 @@ type users_variance_fields {
 order by variance() on columns of table "users"
 """
 input users_variance_order_by {
+  count_rating: order_by
   rating: order_by
 }
 

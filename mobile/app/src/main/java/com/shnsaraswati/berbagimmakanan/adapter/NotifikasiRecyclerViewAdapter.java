@@ -2,6 +2,7 @@ package com.shnsaraswati.berbagimmakanan.adapter;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,10 +22,13 @@ import com.cloudinary.android.MediaManager;
 import com.shnsaraswati.berbagimmakanan.R;
 import com.shnsaraswati.berbagimmakanan.presenter.NotificationContract;
 import com.shnsaraswati.berbagimmakanan.presenter.NotificationPresenter;
+import com.shnsaraswati.berbagimmakanan.view.DialogRating;
+import com.shnsaraswati.berbagimmakanan.view.FragmentMenuDipilih;
 import com.shnsaraswati.berbagimmakanan.view.FragmentNotifikasi;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,12 +40,16 @@ public class NotifikasiRecyclerViewAdapter extends RecyclerView.Adapter<Notifika
     private final Context context;
     private List<UseFetchNotificationByUserIDQuery.User> users;
     private FragmentNotifikasi fragmentNotifikasi;
+    private final FragmentTransaction fragmentTransaction;
+    private final FragmentManager fragmentManager;
     private NotificationPresenter notificationPresenter;
 
-    public NotifikasiRecyclerViewAdapter(Context context, List<UseFetchNotificationByUserIDQuery.User> users, FragmentNotifikasi fragmentNotifikasi) {
+    public NotifikasiRecyclerViewAdapter(Context context, List<UseFetchNotificationByUserIDQuery.User> users, FragmentNotifikasi fragmentNotifikasi, FragmentTransaction fragmentTransaction, FragmentManager fragmentManager) {
         this.context = context;
         this.users = users;
         this.fragmentNotifikasi = fragmentNotifikasi;
+        this.fragmentTransaction = fragmentTransaction;
+        this.fragmentManager = fragmentManager;
         notificationPresenter = new NotificationPresenter(this);
     }
 
@@ -63,6 +72,8 @@ public class NotifikasiRecyclerViewAdapter extends RecyclerView.Adapter<Notifika
         String img_profile = users.get(0).notification_users().get(position).user().img_profile();
         String status = users.get(0).notification_users().get(position).status();
         String image = MediaManager.get().url().generate("berbagimakanan/" + img_profile);
+        float rating = ((BigDecimal) users.get(0).notification_users().get(0).user().rating()).floatValue();
+        int count_rating = users.get(0).notification_users().get(0).user().count_rating();
 
         holder.txtnamaakun_notif.setText(sender_name);
         holder.txtketerangan_notif.setText(keterangan);
@@ -95,6 +106,14 @@ public class NotifikasiRecyclerViewAdapter extends RecyclerView.Adapter<Notifika
                         @Override
                         public void run() {
                             Toast.makeText(context, "beri rating", Toast.LENGTH_LONG).show();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("user_id", to_user_id);
+                            bundle.putFloat("rating", rating);
+                            bundle.putString("notification_id", notification_id);
+                            bundle.putInt("count_rating", count_rating+1);
+                            DialogRating dialogRating = new DialogRating();
+                            dialogRating.setArguments(bundle);
+                            dialogRating.show(fragmentManager, "berikan rating");
                         }
                     });
                 }
@@ -110,7 +129,16 @@ public class NotifikasiRecyclerViewAdapter extends RecyclerView.Adapter<Notifika
                     fragmentNotifikasi.getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, "Lihat makanan", Toast.LENGTH_LONG).show();
+//                            Toast.makeText(context, "Lihat makanan", Toast.LENGTH_LONG).show();
+                            FragmentMenuDipilih fragmentMenuDipilih = new FragmentMenuDipilih();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("post_id", post_id);
+                            bundle.putString("user_post_id", user_id);
+                            bundle.putBoolean("is_detail", false);
+                            fragmentMenuDipilih.setArguments(bundle);
+                            fragmentTransaction.replace(R.id.fragment, fragmentMenuDipilih, "Berhasil");
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
                         }
                     });
                 }

@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import mutation.UseAddNoticiationMutation;
 import mutation.UseUpdateNotificationMutation;
+import mutation.UseUpdateRatingMutation;
 import query.UseFetchNotificationByUserIDQuery;
 
 public class NotificationPresenter implements NotificationContract.Presenter {
@@ -19,6 +20,7 @@ public class NotificationPresenter implements NotificationContract.Presenter {
     PostContract.ViewFragmentMenuDipilih viewFragmentMenuDipilih;
     NotificationContract.ViewFragmentNotifikasi viewFragmentNotifikasi;
     NotificationContract.NotificationRecyclerView notificationRecyclerView;
+    NotificationContract.DialogRatingView dialogRatingView;
 
 
     public NotificationPresenter(PostContract.ViewFragmentMenuDipilih viewFragmentMenuDipilih) {
@@ -31,6 +33,10 @@ public class NotificationPresenter implements NotificationContract.Presenter {
 
     public NotificationPresenter(NotificationContract.NotificationRecyclerView notificationRecyclerView) {
         this.notificationRecyclerView = notificationRecyclerView;
+    }
+
+    public NotificationPresenter(NotificationContract.DialogRatingView dialogRatingView) {
+        this.dialogRatingView = dialogRatingView;
     }
 
     @Override
@@ -127,6 +133,30 @@ public class NotificationPresenter implements NotificationContract.Presenter {
             @Override
             public void onFailure(@NotNull ApolloException e) {
                 notificationRecyclerView.onFailure("terjadi kesalahan update notifikasi");
+            }
+        });
+    }
+
+    @Override
+    public void onSendRating(String user_id, float rating, String notification_id) {
+        apolloClient.mutate(new UseUpdateRatingMutation(user_id, rating)).enqueue(new ApolloCall.Callback<UseUpdateRatingMutation.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<UseUpdateRatingMutation.Data> response) {
+                if (response.getData() != null && response.getData().update_users().affected_rows() > 0) {
+                    apolloClient.mutate(new UseUpdateNotificationMutation(notification_id)).enqueue(new ApolloCall.Callback<UseUpdateNotificationMutation.Data>() {
+                        @Override
+                        public void onResponse(@NotNull Response<UseUpdateNotificationMutation.Data> response) {
+                        }
+
+                        @Override
+                        public void onFailure(@NotNull ApolloException e) {
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
             }
         });
     }

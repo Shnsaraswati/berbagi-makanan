@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -90,6 +92,8 @@ public class FragmentNotifikasi extends Fragment implements NotificationContract
         View view = inflater.inflate(R.layout.fragment_notifikasi, container, false);
 
         recyclerView = view.findViewById(R.id.recyeclerviewNotif);
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        FragmentManager fragmentManager = getParentFragmentManager();
 
 
         String cur_id = sharedPreference.getProfileID();
@@ -97,7 +101,7 @@ public class FragmentNotifikasi extends Fragment implements NotificationContract
         notificationPresenter.onGetNotification(cur_id, new NotificationContract.Callback() {
             @Override
             public void onResponse(List results) {
-                NotifikasiRecyclerViewAdapter adapter = new NotifikasiRecyclerViewAdapter(getContext(), results, FragmentNotifikasi.this);
+                NotifikasiRecyclerViewAdapter adapter = new NotifikasiRecyclerViewAdapter(getContext(), results, FragmentNotifikasi.this, fragmentTransaction, fragmentManager);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

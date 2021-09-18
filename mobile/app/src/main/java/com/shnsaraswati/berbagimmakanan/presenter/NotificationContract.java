@@ -13,6 +13,11 @@ public class NotificationContract {
         void onFailure(String message);
     }
 
+    public interface DialogRatingView {
+        void onSuccessRating();
+        void onFailure(String message);
+    }
+
     public interface ViewFragmentNotifikasi {
         void onSetFailure(String message);
     }
@@ -28,5 +33,6 @@ public class NotificationContract {
         void onUpdateNotification(String notification_id);
         void onSendNotification(String keterangan, String status, boolean seen, String user_id, String to_user_id, String post_id);
         void onSendBackNotification(String keterangan, String status, boolean seen, String user_id, String to_user_id, String post_id, String notification_id);
+        void onSendRating(String user_id, float rating, String notification_id);
     }
 }

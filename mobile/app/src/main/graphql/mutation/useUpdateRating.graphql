@@ -1,0 +1,5 @@
+mutation useUpdateRating($id: uuid!, $rating: float8!) {
+    update_users(where: {id: {_eq: $id}}, _set: {rating: $rating}, _inc: {count_rating: 1}) {
+        affected_rows
+    }
+}

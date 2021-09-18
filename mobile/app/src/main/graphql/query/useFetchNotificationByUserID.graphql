@@ -12,6 +12,8 @@ query useFetchNotificationByUserID($id: uuid!) {
                 id
                 name
                 img_profile
+                rating
+                count_rating
             }
         }
     }

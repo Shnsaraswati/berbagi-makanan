@@ -101,6 +101,7 @@ public class FragmentMenuDipilih extends Fragment implements PostContract.ViewFr
         Bundle bundle = this.getArguments();
         String post_id = bundle.getString("post_id");
         String user_post_id = bundle.getString("user_post_id");
+        boolean isDetail = bundle.getBoolean("is_detail");
 
         txtnamaakun_menudipilih = view.findViewById(R.id.txtnamaakun_menudipilih);
         txtnamamakanan_menudipilih = view.findViewById(R.id.txtnamamakanan_menudipilih);
@@ -111,6 +112,10 @@ public class FragmentMenuDipilih extends Fragment implements PostContract.ViewFr
         btnmintamakanan = view.findViewById(R.id.btnmintamakanan);
 
         String user_id = sharedPreference.getProfileID();
+
+        if (!isDetail) {
+            btnmintamakanan.setVisibility(view.GONE);
+        }
 
         btnmintamakanan.setOnClickListener(new View.OnClickListener() {
             @Override

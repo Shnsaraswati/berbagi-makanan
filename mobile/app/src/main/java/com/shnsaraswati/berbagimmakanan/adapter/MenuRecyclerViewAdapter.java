@@ -115,6 +115,7 @@ public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuRecyclerVi
         Bundle bundle = new Bundle();
         bundle.putString("post_id", id);
         bundle.putString("user_post_id", user_id);
+        bundle.putBoolean("is_detail", true);
         fragmentMenuDipilih.setArguments(bundle);
         fragmentTransaction.replace(R.id.fragment, fragmentMenuDipilih, "Berhasil");
         fragmentTransaction.addToBackStack(null);

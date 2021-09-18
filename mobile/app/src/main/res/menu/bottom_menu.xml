@@ -6,10 +6,10 @@
         android:title="Menu"
         android:icon="@drawable/ic_menu" />
 
-    <item
-        android:id="@+id/fragmentRiwayat"
-        android:title="Riwayat"
-        android:icon="@drawable/ic_riwayat" />
+<!--    <item-->
+<!--        android:id="@+id/fragmentRiwayat"-->
+<!--        android:title="Riwayat"-->
+<!--        android:icon="@drawable/ic_riwayat" />-->
 
     <item
         android:id="@+id/fragmentBerbagi"
