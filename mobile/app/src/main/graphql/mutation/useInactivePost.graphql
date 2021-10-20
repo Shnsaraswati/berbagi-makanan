@@ -1,0 +1,5 @@
+mutation useInactivePost($id: uuid!) {
+    update_posts(where: {id: {_eq: $id}}, _set: {status: false}) {
+        affected_rows
+    }
+}

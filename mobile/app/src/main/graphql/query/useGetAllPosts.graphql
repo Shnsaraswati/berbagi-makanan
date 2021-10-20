@@ -1,5 +1,5 @@
 query useGetAllPosts {
-    posts(order_by: [{created_at: desc}]) {
+    posts(order_by: [{created_at: desc}], where: {status: {_eq: true}}) {
         id
         name_food
         seen

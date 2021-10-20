@@ -19,7 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 import mutation.UseAddNewPostMutation;
+import mutation.UseInactivePostMutation;
 import mutation.UseUpdateSeenPostMutation;
+import query.UseGetAllPostsByUserQuery;
 import query.UseGetAllPostsQuery;
 import query.UseGetPostByIdQuery;
 
@@ -30,6 +32,8 @@ public class PostPresenter implements PostContract.Presenter {
     PostContract.ViewFragmentBerbagi viewFragmentBerbagi;
     PostContract.ViewFragmentMenuDipilih viewFragmentMenuDipilih;
     PostContract.MenuRecyclerView menuRecyclerView;
+    PostContract.ViewFragmentStatusMenu viewFragmentStatusMenu;
+    PostContract.StatusMakananRecyclerView statusMakananRecyclerView;
     Apollo apollo = new Apollo();
     ApolloClient apolloClient = apollo.ConnectApollo();
 
@@ -49,6 +53,14 @@ public class PostPresenter implements PostContract.Presenter {
         this.viewFragmentMenuDipilih = viewFragmentMenuDipilih;
     }
 
+    public PostPresenter(PostContract.ViewFragmentStatusMenu viewFragmentStatusMenu) {
+        this.viewFragmentStatusMenu = viewFragmentStatusMenu;
+    }
+
+    public PostPresenter(PostContract.StatusMakananRecyclerView statusMakananRecyclerView) {
+        this.statusMakananRecyclerView = statusMakananRecyclerView;
+    }
+
     @Override
     public void onGetAllPosts(PostContract.Callback callback) {
         apolloClient.query(new UseGetAllPostsQuery()).enqueue(new ApolloCall.Callback<UseGetAllPostsQuery.Data>() {
@@ -59,6 +71,26 @@ public class PostPresenter implements PostContract.Presenter {
                     callback.onResponse(posts);
                 } else {
                     viewFragmentMenu.onSetFailure("tidak ada data posts");
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                callback.onFailure(e);
+            }
+        });
+    }
+
+    @Override
+    public void onGetAllPostsByUser(String user_id, PostContract.Callback callback) {
+        apolloClient.query(new UseGetAllPostsByUserQuery(user_id)).enqueue(new ApolloCall.Callback<UseGetAllPostsByUserQuery.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<UseGetAllPostsByUserQuery.Data> response) {
+                if (!response.getData().posts().isEmpty()) {
+                    List<UseGetAllPostsByUserQuery.Post> posts = response.getData().posts();
+                    callback.onResponse(posts);
+                } else {
+                    viewFragmentStatusMenu.onSetFailure("tidak ada data posts");
                 }
             }
 
@@ -164,6 +196,28 @@ public class PostPresenter implements PostContract.Presenter {
             @Override
             public void onFailure(@NotNull ApolloException e) {
                 menuRecyclerView.onFailure("Terjadi Kesalahan");
+            }
+        });
+    }
+
+    public void onInactivePost(String post_id) {
+        apolloClient.mutate(new UseInactivePostMutation(post_id)).enqueue(new ApolloCall.Callback<UseInactivePostMutation.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<UseInactivePostMutation.Data> response) {
+                if (response.getData() != null) {
+                    if (response.getData().update_posts().affected_rows() > 0) {
+                       viewFragmentStatusMenu.onSetSuccess("Makanan berhasil di hapus");
+                    } else {
+                        viewFragmentStatusMenu.onSetFailure("gagal menghapus makanan");
+                    }
+                } else {
+                    viewFragmentStatusMenu.onSetFailure("Terjadi Kesalahan graphql");
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                viewFragmentStatusMenu.onSetFailure("Terjadi kesalahan");
             }
         });
     }

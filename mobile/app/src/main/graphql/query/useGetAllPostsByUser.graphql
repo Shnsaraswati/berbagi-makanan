@@ -1,0 +1,9 @@
+query useGetAllPostsByUser($user_id: uuid!) {
+    posts(order_by: [{created_at: desc}], where: {_and: [{user_id: {_eq: $user_id}, status: {_eq: true}}]}) {
+        id
+        name_food
+        seen
+        address
+        picture
+    }
+}

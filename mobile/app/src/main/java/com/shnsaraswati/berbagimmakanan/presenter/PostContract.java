@@ -26,10 +26,20 @@ public class PostContract {
         void onSetFailure(String message);
     }
 
+    public interface ViewFragmentStatusMenu {
+        void onSetSuccess(String message);
+        void onSetFailure(String message);
+    }
+
     public interface MenuRecyclerView {
         void onSuccessUpdateSeenPost(String id, String user_id);
 
         void onFailure(String message);
+    }
+
+    public interface StatusMakananRecyclerView {
+        void OnSuccess();
+        void onFailure();
     }
 
     public interface Callback<T> {
@@ -40,6 +50,8 @@ public class PostContract {
 
     interface Presenter {
         void onGetAllPosts(Callback callback);
+
+        void onGetAllPostsByUser(String user_id, Callback callback);
 
         void onGetPost(String id, Callback callback);
 

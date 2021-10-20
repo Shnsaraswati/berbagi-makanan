@@ -168,7 +168,7 @@ public class FragmentProfil extends Fragment implements ProfileContract.ViewFrag
             @Override
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment, new FragmentMakananDiunggah(), "Berhasil");
+                fragmentTransaction.replace(R.id.fragment, new FragmentStatusMenu(), "Berhasil");
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
